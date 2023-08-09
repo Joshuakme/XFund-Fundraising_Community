@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1006287107908",
+    "project_id": "xfund-89b19",
+    "storage_bucket": "xfund-89b19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006287107908:android:9f4c175452b185c00a0911",
+        "android_client_info": {
+          "package_name": "com.example.xfund"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006287107908-sq6d6j4voiqjrtbbikoibmruj6p090tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_DbC3WpZq0SDIQ7wVQCmBxknBiFbVvDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006287107908-sq6d6j4voiqjrtbbikoibmruj6p090tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
