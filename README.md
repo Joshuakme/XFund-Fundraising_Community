@@ -1,4 +1,4 @@
-# XFund-Fundraising_Community
+# XFund - Fundraising Community
 
 ## Description
 Not yet...
