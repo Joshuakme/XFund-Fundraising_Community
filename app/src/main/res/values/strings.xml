@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">XFund</string>
+
+    <!--  User-related Strings  -->
+    <string name="user_display_name">Joshua</string>
+</resources>

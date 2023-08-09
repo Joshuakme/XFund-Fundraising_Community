@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Accent Color  -->
+    <color name="accent_primary_100">#FEEFEF</color>    <!-- Gradient Red 100 -->
+    <color name="accent_primary_200">#FFCDCF</color>    <!-- Gradient Red 200 -->
+    <color name="accent_primary_300">#F86B70</color>    <!-- Gradient Red 300 -->
+    <color name="accent_secondary">#8677DF</color>      <!-- Gradient Purple  -->
+
+    <!-- Neutral Color  -->
+    <color name="gray_100">#F9FAFD</color>
+    <color name="gray_200">#DADFE6</color>
+    <color name="gray_300">#B3BDCB</color>
+    <color name="gray_400">#7689A2</color>
+
+</resources>
