@@ -3,4 +3,6 @@
 
     <!--  User-related Strings  -->
     <string name="user_display_name">Joshua</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Home Fragment</string>
 </resources>
