@@ -15,4 +15,6 @@
     <color name="gray_300">#B3BDCB</color>
     <color name="gray_400">#7689A2</color>
 
+    <color name="divider">#D8D6D6</color>
+
 </resources>

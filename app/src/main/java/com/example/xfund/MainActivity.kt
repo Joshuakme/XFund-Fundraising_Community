@@ -2,20 +2,37 @@ package com.example.xfund
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.example.xfund.adapter.CommunityItemAdapter
+import com.example.xfund.data.CommunityDatasource
 import com.example.xfund.screens.navigation.CommunityFragment
 import com.example.xfund.screens.navigation.HomeFragment
 import com.example.xfund.screens.navigation.ProfileFragment
 import com.example.xfund.screens.navigation.ProjectsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.xfund.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 //    private lateinit var database: DatabaseReference
-        lateinit var bottomNav : BottomNavigationView
+    lateinit var bottomNav : BottomNavigationView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+//        // Initialize data.
+//        val myDataset = CommunityDatasource().loadCommunities()
+//
+//        val recyclerView = findViewById<RecyclerView>(R.id.CommunityRecycleView)
+//        recyclerView.adapter = CommunityItemAdapter(this, myDataset)
+//
+//        // Use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        recyclerView.setHasFixedSize(true)
 
         loadFragment(HomeFragment())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
@@ -46,15 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    fun writeNewUser(userId: String, name: String, email: String) {
-//        database = Firebase.database.reference
-//
-//        val user = User(name, email)
-//
-//        database.child("users").child(userId).setValue(user)
-//    }
-
-    fun loadFragment(fragment: Fragment){
+    private fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)
         transaction.commit()
