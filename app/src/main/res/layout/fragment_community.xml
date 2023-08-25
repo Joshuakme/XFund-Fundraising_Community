@@ -19,10 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="30dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/screen_title_community"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

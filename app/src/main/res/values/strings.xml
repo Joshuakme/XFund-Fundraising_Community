@@ -13,7 +13,7 @@
 
     <!--  Testing Strings  -->
     <string name="community_item_1_title">I am strong.</string>
-    <string name="community_item_1_desc">Please help me!Lorem Ipsum, this is a description, yes don\'t doubt. Yuppp, this is a description. Just to display this is a long description.</string>
+    <string name="community_item_1_desc">Please help me! Lorem Ipsum, this is a description, yes don\'t doubt. Yuppp, this is a description. Just to display this is a long description.</string>
     <string name="community_item_1_date">23-Aug-2023</string>
 
     <string name="affirmation1">I am strong.</string>
