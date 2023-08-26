@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+
 //        // Initialize data.
 //        val myDataset = CommunityDatasource().loadCommunities()
 //
@@ -34,33 +35,50 @@ class MainActivity : AppCompatActivity() {
 //        // in content do not change the layout size of the RecyclerView
 //        recyclerView.setHasFixedSize(true)
 
+        // First Load Screen
         loadFragment(HomeFragment())
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
+
+        // Initialize Bottom Nav Item Badges
+        setNavItemBadge(R.id.profile)
+        setNavItemBadge(R.id.community)
+
+        // Event Listener -> BottomNav Items
+        bottomNav.setOnItemSelectedListener {item ->
+            when (item.itemId) {
                 R.id.home -> {
                     loadFragment(HomeFragment())
+                    removeNavItemBadgeOnClick(item.itemId)
                     true
                 }
 
                 R.id.projects -> {
                     loadFragment(ProjectsFragment())
+                    removeNavItemBadgeOnClick(item.itemId)
                     true
                 }
 
                 R.id.community -> {
                     loadFragment(CommunityFragment())
+
+                    removeNavItemBadgeOnClick(item.itemId)
+
                     true
                 }
 
                 R.id.profile -> {
                     loadFragment(ProfileFragment())
+                    removeNavItemBadgeOnClick(item.itemId)
                     true
                 }
 
                 else -> {false}
             }
         }
+
+
+
+
     }
 
     private fun loadFragment(fragment: Fragment){
@@ -68,4 +86,21 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.container,fragment)
         transaction.commit()
     }
+
+    private fun setNavItemBadge(menuItemId : Int) {
+        var badge = bottomNav.getOrCreateBadge(menuItemId)
+        badge.isVisible = true
+        // An icon only badge will be displayed unless a number is set:
+        //badge.number = 99
+    }
+
+    private fun removeNavItemBadgeOnClick(menuItemId : Int) {
+        // Item Badge
+        val homeBadgeDrawable = bottomNav.getBadge(menuItemId)
+        if (homeBadgeDrawable != null) {
+            homeBadgeDrawable.isVisible = false
+            homeBadgeDrawable.clearNumber()
+        }
+    }
+
 }

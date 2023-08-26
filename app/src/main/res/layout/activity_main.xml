@@ -3,6 +3,7 @@
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,20 +11,27 @@ xmlns:tools="http://schemas.android.com/tools">
 
         <FrameLayout
             android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottomNav" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_above="@+id/bottomNav"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             android:scrollIndicators="left"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
+            app:itemTextAppearanceActive="@style/BottomNavigationViewActiveTextStyle"
+            app:itemTextAppearanceInactive="@style/BottomNavigationViewInactiveTextStyle"
             app:menu="@menu/nav_menu" />
 
 

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/home"
-        android:icon="@drawable/baseline_home_24"
-        android:title="Home" />
+        android:icon="@drawable/baseline_home"
+        android:title="Home"
+        />
     <item
         android:id="@+id/projects"
-        android:icon="@drawable/baseline_favorite_24"
+        android:icon="@drawable/baseline_favorite"
         android:title="Project" />
     <item
         android:id="@+id/community"
-        android:icon="@drawable/baseline_groups_24"
+        android:icon="@drawable/baseline_groups"
         android:title="Community" />
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/baseline_account_circle_24"
+        android:icon="@drawable/baseline_account_circle"
         android:title="Profile" />
 </menu>
