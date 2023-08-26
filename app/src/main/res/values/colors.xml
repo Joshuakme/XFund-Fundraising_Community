@@ -18,4 +18,7 @@
 
     <color name="divider">#D8D6D6</color>
 
+    <!--  SplashScreen Screen  -->
+    <color name="splash_background">#FEEFEF</color>
+
 </resources>

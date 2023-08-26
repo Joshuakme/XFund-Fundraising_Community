@@ -13,6 +13,7 @@ import com.example.xfund.screens.navigation.ProfileFragment
 import com.example.xfund.screens.navigation.ProjectsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.xfund.databinding.ActivityMainBinding
+import com.example.xfund.screens.SplashFragment
 
 class MainActivity : AppCompatActivity() {
 //    private lateinit var database: DatabaseReference
@@ -36,8 +37,9 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView.setHasFixedSize(true)
 
         // First Load Screen
-        loadFragment(HomeFragment())
-        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        loadFragment(SplashFragment())
+        //loadFragment(HomeFragment())
+        bottomNav = binding.bottomNav
 
         // Initialize Bottom Nav Item Badges
         setNavItemBadge(R.id.profile)
@@ -85,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)
         transaction.commit()
+
     }
 
     private fun setNavItemBadge(menuItemId : Int) {
