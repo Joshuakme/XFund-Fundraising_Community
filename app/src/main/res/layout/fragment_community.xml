@@ -11,19 +11,73 @@
         tools:context=".screens.navigation.CommunityFragment" >
 
 
-        <!-- TODO: Update blank fragment layout -->
+        <!--        <TextView-->
+<!--            android:id="@+id/textView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginTop="128dp"-->
+<!--            android:text=""-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
 
         <TextView
             android:id="@+id/TitleCommunity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="98dp"
+            android:layout_height="32dp"
             android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center"
             android:text="@string/screen_title_community"
+            android:textColor="@color/black"
             android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/CommunityRecycleView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/AddButtonLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:background="@drawable/rounded_edge"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/CommunityRecycleView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/AddIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#002B2020"
+                android:contentDescription="Add Discussion"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_add_24"
+                app:tint="@color/material_dynamic_neutral20" />
+
+            <TextView
+                android:id="@+id/AddNewDiscussionBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/add_new_discussion_btn_txt"
+                android:textColor="@color/material_dynamic_neutral20"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/AddIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/CommunityRecycleView"
