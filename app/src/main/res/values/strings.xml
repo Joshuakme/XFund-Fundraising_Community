@@ -36,6 +36,6 @@
     <string name="tags_label_txt">Tags</string>
     <string name="tags_hint_txt">Add up to 5 tags to describe what your question is about.</string>
     <string name="add_discussion_submit_button">Submit</string>
-    <string name="add_new_discussion_btn_txt">Add New</string>
+    <string name="add_new_discussion_btn_txt">Add</string>
 
 </resources>

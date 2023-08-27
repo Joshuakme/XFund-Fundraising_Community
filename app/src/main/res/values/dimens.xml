@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="screen_width_margin">16dp</dimen>
-    <dimen name="form_screen_horizontal_margin">36dp</dimen>
+    <dimen name="screen_width_margin">24dp</dimen>
+    <dimen name="form_screen_horizontal_margin">40dp</dimen>
     <!-- Community: Add Discussion -->
     <dimen name="add_discussion_submit_button_radius">8dp</dimen>
+    <dimen name="form_input_title">18sp</dimen>
+    <dimen name="form_input_value">16sp</dimen>
 </resources>
