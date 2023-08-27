@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="3dp"
     tools:context=".screens.community.AddDiscussionFragment">
 
 
@@ -69,6 +70,7 @@
         android:layout_marginStart="@dimen/form_screen_horizontal_margin"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat_semibold"
+        android:paddingStart="3dp"
         android:text="@string/desc_label_txt"
         android:textColor="@color/black"
         android:textSize="@dimen/form_input_title"
@@ -101,6 +103,7 @@
         android:layout_marginStart="@dimen/form_screen_horizontal_margin"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat_semibold"
+        android:paddingStart="3dp"
         android:text="@string/tags_label_txt"
         android:textColor="@color/black"
         android:textSize="@dimen/form_input_title"
