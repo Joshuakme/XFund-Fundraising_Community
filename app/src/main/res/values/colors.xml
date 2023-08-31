@@ -20,5 +20,6 @@
 
     <!--  SplashScreen Screen  -->
     <color name="splash_background">#FEEFEF</color>
+    <color name="light_gray">#DCDCDC</color>
 
 </resources>
