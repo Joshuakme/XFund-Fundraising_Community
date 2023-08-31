@@ -3,6 +3,39 @@
 
     <!--  User-related Strings  -->
     <string name="user_display_name">Joshua</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Home Fragment</string>
+
+    <!-- Fragment Title -->
+    <string name="screen_title_home">Home</string>
+    <string name="screen_title_community">Community</string>
+    <string name="screen_title_projects">Projects</string>
+    <string name="screen_title_profile">Profile</string>
+
+
+    <!--  Testing Strings  -->
+    <string name="community_item_1_title">I am strong.</string>
+    <string name="community_item_1_desc">Please help me! Lorem Ipsum, this is a description, yes don\'t doubt. Yuppp, this is a description. Just to display this is a long description.</string>
+    <string name="community_item_1_date">23-Aug-2023</string>
+
+    <string name="affirmation1">I am strong.</string>
+    <string name="affirmation2">I believe in myself.</string>
+    <string name="affirmation3">Each day is a new opportunity to grow and be a better version of myself.</string>
+    <string name="affirmation4">Every challenge in my life is an opportunity to learn from.</string>
+    <string name="affirmation5">I have so much to be grateful for.</string>
+    <string name="affirmation6">Good things are always coming into my life.</string>
+    <string name="affirmation7">New opportunities await me at every turn.</string>
+    <string name="affirmation8">I have the courage to follow my heart.</string>
+    <string name="affirmation9">Things will unfold at precisely the right time.</string>
+    <string name="affirmation10">I will be present in all the moments that this day brings.</string>
+
+    <!-- Community: Add Discussion -->
+    <string name="title_label_txt">Title</string>
+    <string name="title_hint_txt">e.g. Do you prefer donate via subscription or one-time payment?</string>
+    <string name="fragment_title_community">Add Discussion</string>
+    <string name="desc_label_txt">Description</string>
+    <string name="desc_hint_txt">Introduce the problem and expand on what you put in the title. Minimum 20 characters.</string>
+    <string name="tags_label_txt">Tags</string>
+    <string name="tags_hint_txt">Add up to 5 tags to describe what your question is about.</string>
+    <string name="add_discussion_submit_button">Submit</string>
+    <string name="add_new_discussion_btn_txt">Add</string>
+
 </resources>
