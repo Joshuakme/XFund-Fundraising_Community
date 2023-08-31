@@ -1,14 +1,327 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.navigation.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/screen_title_home" />
+        tools:context=".screens.navigation.HomeFragment">
 
-</FrameLayout>
+        <!-- TODO: Update blank fragment layout -->
+
+        <TextView
+            android:id="@+id/WelcomeUserTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/welcome_user_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/screen_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/NotificationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="Notification"
+            android:cropToPadding="true"
+            android:padding="0dp"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/baseline_notifications_none_24"
+            android:translationX="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/material_dynamic_neutral40" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/SearchBarCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="22dp"
+            android:clipToPadding="true"
+            android:padding="0dp"
+            app:cardBackgroundColor="@color/gray_100"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardPreventCornerOverlap="false"
+            app:contentPadding="-4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/SearchBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:queryHint="@string/search_query_hint"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/Category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:baselineAligned="true"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SearchBarCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CatNatureBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/CatNatureBtnIcon"
+                    android:layout_width="@dimen/category_btn_dimens"
+                    android:layout_height="@dimen/category_btn_dimens"
+                    android:background="@drawable/circle_icon"
+                    android:contentDescription="@string/category_label_nature"
+                    android:src="@drawable/outline_forest_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/CatNatureBtnTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="center"
+                    android:text="@string/category_label_nature"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textSize="@dimen/category_btn_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CatNatureBtnIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CatTechBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/CatTechBtnIcon"
+                    android:layout_width="@dimen/category_btn_dimens"
+                    android:layout_height="@dimen/category_btn_dimens"
+                    android:background="@drawable/circle_icon"
+                    android:contentDescription="@string/category_label_tech"
+                    android:src="@drawable/outline_settings_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/CatTechBtnTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/category_label_tech"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textSize="@dimen/category_btn_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CatTechBtnIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CatFoodBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/CatFoodBtnIcon"
+                    android:layout_width="@dimen/category_btn_dimens"
+                    android:layout_height="@dimen/category_btn_dimens"
+                    android:background="@drawable/circle_icon"
+                    android:contentDescription="@string/category_label_food"
+                    android:src="@drawable/outline_food_bank_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/CatFoodBtnTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/category_label_food"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textSize="@dimen/category_btn_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CatFoodBtnIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CatOtherBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/CatOtherBtnIcon"
+                    android:layout_width="@dimen/category_btn_dimens"
+                    android:layout_height="@dimen/category_btn_dimens"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_icon"
+                    android:contentDescription="@string/category_label_other"
+                    android:src="@drawable/outline_more_horiz_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/CatOtherBtnTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/category_label_other"
+                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textSize="@dimen/category_btn_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CatOtherBtnIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/News"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Category">
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/PFTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/home_popular_fundraising_title"
+            android:textColor="@color/material_dynamic_neutral30"
+            android:textSize="@dimen/search_txt_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/News" />
+
+        <ImageButton
+            android:id="@+id/PFNextBtn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="4dp"
+            android:background="#00FFFFFF"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="next"
+            android:cropToPadding="true"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:src="@drawable/baseline_arrow_forward_24"
+            android:translationY="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/PopularFundraising"
+            app:layout_constraintStart_toEndOf="@+id/PFTitle" />
+
+        <LinearLayout
+            android:id="@+id/PopularFundraising"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PFTitle">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/PFCard1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/screen_width_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/screen_width_margin"
+                android:clipToPadding="true"
+                android:padding="0dp"
+                app:cardBackgroundColor="@color/gray_100"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="-4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/orphan_care_icon" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+
+
+        <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="16dp"-->
+    <!--        android:layout_marginStart="@dimen/screen_width_margin"-->
+    <!--        android:layout_marginTop="284dp"-->
+    <!--        android:layout_marginEnd="@dimen/screen_width_margin"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/SearchBtn">-->
+
+    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            app:cardCornerRadius="@dimen/card_radius"-->
+    <!--            app:cardUseCompatPadding="true" />-->
+    <!--    </LinearLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

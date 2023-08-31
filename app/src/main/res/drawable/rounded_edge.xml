@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
         android:color="@color/accent_primary_100">
-
     </solid>
     <stroke
         android:width="0dp"

@@ -3,22 +3,11 @@ package com.example.xfund
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.xfund.adapter.CommunityItemAdapter
-import com.example.xfund.data.CommunityDatasource
-import com.example.xfund.screens.navigation.CommunityFragment
-import com.example.xfund.screens.navigation.HomeFragment
-import com.example.xfund.screens.navigation.ProfileFragment
-import com.example.xfund.screens.navigation.ProjectsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.xfund.databinding.ActivityMainBinding
-import com.example.xfund.screens.SplashFragment
 
 class MainActivity : AppCompatActivity() {
 //    private lateinit var database: DatabaseReference
