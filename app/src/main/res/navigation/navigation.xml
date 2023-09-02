@@ -6,11 +6,6 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.xfund.screens.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
-    <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.xfund.screens.navigation.HomeFragment"
         android:label="fragment_home"
@@ -33,7 +28,7 @@
             android:id="@+id/action_communityFragment_to_addDiscussionFragment"
             app:destination="@id/addDiscussionFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
             app:popUpTo="@id/communityFragment"
             app:popUpToInclusive="false" />
     </fragment>
