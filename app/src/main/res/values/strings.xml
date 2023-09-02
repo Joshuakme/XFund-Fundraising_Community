@@ -10,6 +10,9 @@
     <string name="screen_title_projects">Projects</string>
     <string name="screen_title_profile">Profile</string>
 
+    <!--  Form Helper  -->
+    <string name="form_field_required">Required</string>
+
 
     <!--  Testing Strings  -->
     <string name="community_item_1_title">I am strong.</string>
@@ -40,12 +43,12 @@
 
 
     <!-- Community: Add Discussion -->
-    <string name="title_label_txt">Title</string>
-    <string name="title_hint_txt">e.g. Do you prefer donate via subscription or one-time payment?</string>
     <string name="fragment_title_community">Add Discussion</string>
-    <string name="desc_label_txt">Description</string>
+    <string name="title_label_txt">Title*</string>
+    <string name="title_hint_txt">e.g. Do you prefer donate via subscription or one-time payment?</string>
+    <string name="desc_label_txt">Description*</string>
     <string name="desc_hint_txt">Introduce the problem and expand on what you put in the title. Minimum 20 characters.</string>
-    <string name="tags_label_txt">Tags</string>
+    <string name="tags_label_txt">Tags (optional)</string>
     <string name="tags_hint_txt">Add up to 5 tags to describe what your question is about.</string>
     <string name="add_discussion_submit_button">Submit</string>
     <string name="add_new_discussion_btn_txt">Add</string>

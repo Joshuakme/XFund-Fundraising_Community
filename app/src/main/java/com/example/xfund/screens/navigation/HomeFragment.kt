@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.xfund.R
 import com.example.xfund.databinding.FragmentHomeBinding
-import kotlin.math.absoluteValue
 
 
 class HomeFragment : Fragment() {

@@ -8,9 +8,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.xfund.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 //    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
     lateinit var bottomNav : BottomNavigationView
     lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -20,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        // Initialize Firebase
+        auth = Firebase.auth
 
 //        // Initialize data.
 //        val myDataset = CommunityDatasource().loadCommunities()
@@ -74,6 +80,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onStart() {
+        super.onStart()
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            reload()
+        }
+    }
+
     private fun setNavItemBadge(menuItemId : Int) {
         var badge = bottomNav.getOrCreateBadge(menuItemId)
         badge.isVisible = true
@@ -90,4 +106,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun reload() {
+        finish();
+        startActivity(intent);
+    }
 }
