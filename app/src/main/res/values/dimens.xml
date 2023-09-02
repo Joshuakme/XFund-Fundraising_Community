@@ -2,8 +2,24 @@
 <resources>
     <dimen name="screen_width_margin">24dp</dimen>
     <dimen name="form_screen_horizontal_margin">40dp</dimen>
+    <dimen name="button_radius">8dp</dimen>
+    <dimen name="screen_title">22sp</dimen>
+
+    <!-- Common: Card View -->
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+
+    <!-- Home Fragment -->
+    <dimen name="section_title">18sp</dimen>
+    <dimen name="search_txt_size">18sp</dimen>
+    <dimen name="category_btn_label">13sp</dimen>
+    <dimen name="category_btn_dimens">50dp</dimen>
+
     <!-- Community: Add Discussion -->
-    <dimen name="add_discussion_submit_button_radius">8dp</dimen>
     <dimen name="form_input_title">18sp</dimen>
     <dimen name="form_input_value">16sp</dimen>
+
+
+
+
 </resources>
