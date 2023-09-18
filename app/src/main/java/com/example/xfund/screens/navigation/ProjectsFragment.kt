@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SearchView
 import com.example.xfund.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +37,25 @@ class ProjectsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_projects, container, false)
+        val view = inflater.inflate(R.layout.fragment_projects, container, false)
+
+        val searchView = view.findViewById<SearchView>(R.id.ProjectSearch)
+
+        // Set a listener to handle search queries
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Handle search query submission here
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Handle search query text changes here
+                return true
+            }
+        })
+
+
+        return view
     }
 
     companion object {
