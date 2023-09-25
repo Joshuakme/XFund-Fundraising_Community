@@ -17,7 +17,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/welcome_user_title"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/screen_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -215,21 +215,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/News"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/NewsViewPager"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
-            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category">
-
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/Category"/>
 
         <TextView
             android:id="@+id/PFTitle"
@@ -240,10 +235,10 @@
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/home_popular_fundraising_title"
-            android:textColor="@color/material_dynamic_neutral30"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/search_txt_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@+id/NewsViewPager" />
 
         <ImageButton
             android:id="@+id/PFNextBtn"
@@ -272,8 +267,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/PFTitle"/>
-
-
 
 
         <!--    <LinearLayout-->

@@ -44,7 +44,7 @@ class CommunityItemAdapter(private val context: Context, private val dataset: Li
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
-        holder.textView.text =  context.resources.getString(item.resId)
+//        val item = dataset[position]
+//        holder.textView.text =  context.resources.getString(item.title)
     }
 }

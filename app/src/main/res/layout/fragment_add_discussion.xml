@@ -31,7 +31,7 @@
             android:layout_marginTop="22dp"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/fragment_title_community"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
