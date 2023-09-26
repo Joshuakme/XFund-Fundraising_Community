@@ -21,6 +21,9 @@
     <dimen name="form_input_value">16sp</dimen>
     <dimen name="profile_font_size">32dp</dimen>
     <dimen name="profile_font">25dp</dimen>
+    <dimen name="chip_vertical_height">1dp</dimen>
+
+
 
 
 </resources>

@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
 import com.example.xfund.adapter.CommunityItemAdapter
-import com.example.xfund.adapter.ImageSliderAdapter
 import com.example.xfund.model.CommunityDiscussion
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Date
@@ -39,14 +38,23 @@ class CommunityFragment : Fragment() {
         // Variable
         val communityRecycler: RecyclerView = view.findViewById(R.id.CommunityRecycleView)
         discussionList = listOf(
-            CommunityDiscussion("author1", "title1", "desc1", listOf("babi", "ayam"),
-                Date(2023, 12, 31, 10, 55, 33)),
-            CommunityDiscussion("author2", "title2", "desc question 2", listOf("superman", "sinchan"),
-                Date(2023, 1, 2, 15, 55, 33))
+            CommunityDiscussion("Emily Johnson",
+                "Crowdfunding Campaign for Local School Renovation",
+                "Let's discuss strategies and ideas for launching a crowdfunding campaign to raise funds for renovating our local school. We need your input on how to reach our fundraising goal!",
+                listOf("Education", "Crowdfunding", "Renovation", "Community", "School"),
+                Date(2023, 7, 12, 14, 43, 23)),
+            CommunityDiscussion("David Anderson", "Nonprofit Gala Event Planning",
+                "Join the discussion on planning a nonprofit gala event to raise funds for a local charity. Share your expertise on event logistics, fundraising ideas, and securing sponsorships.",
+                listOf("Nonprofit", "Gala", "Fundraising Event", "Charity", "Sponsorships"),
+                Date(2023, 5, 2, 8, 5, 33)),
+            CommunityDiscussion("Sarah Williams", "Online Fundraising Platforms Comparison",
+                "Let's compare different online fundraising platforms like GoFundMe, Kickstarter, and Indiegogo. Share your experiences and recommendations for various fundraising campaigns.",
+                listOf("Fundraising Platforms", "Online Fundraising", "Crowdfunding", "Comparison", "Recommendations"),
+                Date(2023, 1, 27, 23, 0, 33))
         )
 
         // RecyclerView
-        val adapter = CommunityItemAdapter(discussionList)
+        val adapter = CommunityItemAdapter(requireContext(), discussionList, parentFragmentManager)
         communityRecycler.adapter = adapter
 
         // view.findViewById<TextView>(R.id.textView).text = android.os.Build.VERSION.SDK_INT.toString()
@@ -56,8 +64,8 @@ class CommunityFragment : Fragment() {
             findNavController().navigate(R.id.action_communityFragment_to_addDiscussionFragment)
         }
 
-        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
 
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         if (bottomNav != null) {
             bottomNav.visibility = View.VISIBLE
         }
