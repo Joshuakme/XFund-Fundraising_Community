@@ -1,6 +1,7 @@
 package com.example.xfund.screens.user
 
-import android.content.Intent
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.xfund.R
 import com.example.xfund.databinding.FragmentRegisterBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var sharedPref: SharedPreferences
 
 
     override fun onCreateView(
@@ -49,40 +52,67 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvInsertFood.setOnClickListener {
-            // You can navigate to another fragment or activity here
-            // Example: navigate to another fragment
+        // can navigate to another fragment or activity here
+        // Example: navigate to another fragment
+        //Navigate From Register Fragment to Home Fragment
+        binding.RegisterBackBtn.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
+        //Navigate From Register Fragment to Login Fragment
+        binding.tvLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
         binding.btnRegister.setOnClickListener {
-            val email = binding.textInputEmail.editText.toString()
-            val password = binding.textInputPassword.editText.toString()
-            val confirmPassword = binding.textInputConPassword.editText.toString()
+            val email = binding.textInputEmail.editText?.text.toString()
+            val password = binding.textInputPassword.editText?.text.toString()
+            val confirmPassword = binding.textInputConPassword.editText?.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 if (password == confirmPassword) {
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(requireActivity()) { task ->
                             if (task.isSuccessful) {
+                                val user = auth.currentUser
+
+                                sharedPref = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+                                // Save Login Status (True) in Shared Preference
+                                val editor = sharedPref.edit()
+                                editor.putBoolean("IsLogin", true)
+                                editor.apply()
+
+                                // Set Toast Message
+                                Toast.makeText(
+                                    requireContext(), "Registered Successful", Toast.LENGTH_SHORT).show()
+
                                 findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
 
-                            } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    task.exception.toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                // Show the bottom navigation
+                                val bottomNav =
+                                    activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+                                if (bottomNav != null) {
+                                    bottomNav.visibility = View.VISIBLE
+                                }
                             }
                         }
+                        .addOnFailureListener(requireActivity()) {
+                            Toast.makeText(
+                                requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+                        }
                 } else {
-                    Toast.makeText(requireContext(), "Password is not matching!", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Password is not matching!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
-                Toast.makeText(requireContext(), "Empty Fields are not Allowed!", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(
+                    requireContext(),
+                    "Empty Fields are not Allowed!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -105,13 +135,11 @@ class RegisterFragment : Fragment() {
                         Toast.LENGTH_SHORT,
                     ).show()
                     //updateUI(null)
-
-
                 }
             }
         // [END create_user_with_email]
     }
 
-    private fun reload() {
+    fun reload() {
     }
 }
