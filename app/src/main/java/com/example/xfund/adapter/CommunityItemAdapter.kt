@@ -9,42 +9,41 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
 import com.example.xfund.model.CommunityDiscussion
 
-/**
- * Adapter for the [RecyclerView] in [CommunityFragment]. Displays [CommunityDiscussion] data object.
- */
-class CommunityItemAdapter(private val context: Context, private val dataset: List<CommunityDiscussion>) : RecyclerView.Adapter<CommunityItemAdapter.ItemViewHolder>() {
+class CommunityItemAdapter(private val itemList: List<CommunityDiscussion>) : RecyclerView.Adapter<CommunityItemAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder.
-    // Each data item is just an Affirmation object.
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.community_item_title)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.community_list_item,
+            parent, false)
+        return ViewHolder(itemView)
     }
 
-    /**
-     * Create new views (invoked by the layout manager)
-     */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        // create a new view
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.community_list_item, parent, false)
-
-        return ItemViewHolder(adapterLayout)
-    }
-
-    /**
-     * Return the size of your dataset (invoked by the layout manager)
-     */
     override fun getItemCount(): Int {
-        return dataset.size
+        return itemList.size
     }
 
-    /**
-     * Replace the contents of a view (invoked by the layout manager)
-     */
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
-        holder.textView.text =  context.resources.getString(item.resId)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Get element from your dataset at this position and replace the
+        // contents of the view with that element
+        val currentItem = itemList[position]
+        holder.title.text = currentItem.title
+        holder.desc.text = currentItem.desc
+        holder.date.text = currentItem.createdOn.day.toString() + "-" +
+                            currentItem.createdOn.month.toString() + "-" +
+                            currentItem.createdOn.year.toString()
     }
+
+    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+
+        lateinit var title: TextView
+        lateinit var desc : TextView
+        lateinit var date: TextView
+
+        init {
+            // Define click listener for the ViewHolder's View
+            title  = itemView.findViewById(R.id.community_item_title)
+            desc  = itemView.findViewById(R.id.community_item_desc)
+            date  = itemView.findViewById(R.id.community_item_date)
+        }
+    }
+
 }

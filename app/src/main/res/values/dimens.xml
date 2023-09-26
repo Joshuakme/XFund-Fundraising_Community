@@ -14,6 +14,7 @@
     <dimen name="search_txt_size">18sp</dimen>
     <dimen name="category_btn_label">13sp</dimen>
     <dimen name="category_btn_dimens">50dp</dimen>
+    <dimen name="news_height">150dp</dimen>
 
     <!-- Community: Add Discussion -->
     <dimen name="form_input_title">18sp</dimen>
