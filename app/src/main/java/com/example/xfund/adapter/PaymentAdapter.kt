@@ -13,38 +13,36 @@ import com.example.xfund.model.PaymentMethod
 /**
  * Adapter for the [RecyclerView] in [PaymentMethod]. Displays [PaymentMethod] data object.
  */
-class PaymentAdapter(private val context: Context, private val dataset: List<PaymentMethod>) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
+class PaymentAdapter(private val context: Context, paymentModelArrayList: ArrayList<PaymentMethod>) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder.
-    // Each data item is just an Affirmation object.
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.community_item_title)
-    }
+    private val paymentModelArrayList: ArrayList<PaymentMethod>
 
-    /**
-     * Create new views (invoked by the layout manager)
-     */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentAdapter.ItemViewHolder {
         // create a new view
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.community_list_item, parent, false)
+        val paymentView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.cardview_payment_method, parent, false)
 
-        return ItemViewHolder(adapterLayout)
+        return ItemViewHolder(paymentView)
     }
 
-    /**
-     * Return the size of your dataset (invoked by the layout manager)
-     */
+    override fun onBindViewHolder(holder: PaymentAdapter.ItemViewHolder, position: Int) {
+        val model = paymentModelArrayList[position]
+        holder.cardName.text  = model.cardName
+        holder.cardNo.text  = model.cardName
+    }
+
     override fun getItemCount(): Int {
-        return dataset.size
+        return paymentModelArrayList.size
     }
 
-    /**
-     * Replace the contents of a view (invoked by the layout manager)
-     */
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
+    class ItemViewHolder(paymentView: View) : RecyclerView.ViewHolder(paymentView) {
+        val cardName: TextView = paymentView.findViewById(R.id.savedCardName)
+        val cardNo: TextView = paymentView.findViewById(R.id.savedCardNo)
+
     }
+
+    init{
+        this.paymentModelArrayList = paymentModelArrayList
+    }
+
 }

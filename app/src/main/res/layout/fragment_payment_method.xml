@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.community.AddDiscussionFragment">
+        tools:context=".screens.PaymentMethodFragment">
 
         <ImageView
             android:id="@+id/backBtn"
@@ -85,18 +85,12 @@
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:hint="@string/payment_cardNo_input"
             android:outlineProvider="none"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeColor="@color/accent_primary_300"
-            app:boxStrokeErrorColor="@color/accent_primary_400"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/paymentMethodSpinner"
             app:placeholderText="@string/payment_cardNo_example">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -109,9 +103,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintEnd_toStartOf="@+id/cardCvvInput"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,10 +124,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeColor="@color/accent_primary_400"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cardExpiryInput"
@@ -159,7 +146,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:layout_marginBottom="24dp"
-            android:text="Button"
+            android:text="@string/payment_addPay_txt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

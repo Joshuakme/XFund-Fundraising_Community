@@ -44,23 +44,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/backBtn" />
 
-        <EditText
-            android:id="@+id/donationAmount"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="@dimen/screen_width_margin"
-            android:autoText="false"
-            android:editable="false"
-            android:ems="10"
-            android:hint="@string/donation_sample_amount"
-            android:inputType="number"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/donationLabel" />
-
         <TextView
             android:id="@+id/thankTxt"
             android:layout_width="wrap_content"
@@ -71,7 +54,7 @@
             android:text="@string/donation_thank_you_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/donationAmount" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
         <TextView
             android:id="@+id/savedCardTxt"
@@ -167,6 +150,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/savedCardView" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donationLabel">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/payment_donation_sample" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

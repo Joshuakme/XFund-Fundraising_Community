@@ -85,6 +85,9 @@
     <string name="payment_thankDesc_txt">Thank you so much for your donation.\nYour generosity means everything to us and to the community we serve.</string>
     <string name="payment_share_txt">Please share it with your friends to help us reach larger heart.</string>
     <string name="payment_shareIt_txt">Share with friends</string>
+    <string name="payment_donation_sample">10</string>
+    <string name="payment_back_btn">Back to main menu</string>
+    <string name="payment_addPay_txt">Add Method</string>
 
 
 </resources>
