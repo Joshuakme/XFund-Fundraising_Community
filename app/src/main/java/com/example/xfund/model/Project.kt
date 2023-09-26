@@ -5,14 +5,16 @@ import com.example.xfund.User
 import java.util.Date
 
 data class Project(
-    val projectName: String,
-    val projectStartDate: Date,
-    val projectEndDate: Date,
-    val fundingTarget: Int,
-    var collectedFund: Int,
-    val NumOfSupporter: Int,
-    val about: String,
-    val backerList: MutableList<User>,
-    val newsList: MutableList<News>
+    val name: String,
+    val star_date: Date,
+    val end_date: Date,
+    val fund_target: Int,
+    var fund_collected: Int,
+    val description: String/*,
+    val backer_list: MutableList<User>,
+    val news_list: MutableList<News>*/
 ) {
+
+
+
 }
