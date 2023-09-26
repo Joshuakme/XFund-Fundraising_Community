@@ -41,7 +41,6 @@
     <string name="category_label_other">Other</string>
 
 
-
     <!-- Community: Add Discussion -->
     <string name="fragment_title_community">Add Discussion</string>
     <string name="title_label_txt">Title*</string>
@@ -53,6 +52,39 @@
     <string name="add_discussion_submit_button">Submit</string>
     <string name="add_new_discussion_btn_txt">Add</string>
 
+    <!-- Payment: Donation -->
+    <string-array name="cardTypes">
+        <item>AliPay</item>
+        <item>ApplePay</item>
+        <item>GooglePay</item>
+        <item>PayPal</item>
+        <item>Master Card</item>
+        <item>Visa Card</item>
+    </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="payment_title">One-time payment</string>
+    <string name="payment_donation_label">Enter the donation amount</string>
+    <string name="donation_sample_amount">RM 10</string>
+    <string name="back_button">Click to direct previous activity/fragment</string>
+    <string name="donation_thank_you_txt">Thank you for your support</string>
+    <string name="payment_saved_card_label">Saved Cards</string>
+    <string name="payment_change_card_link"><u>Change Card</u></string>
+    <string name="payment_donate_btn">Donate</string>
+    <string name="saved_card_name">MasterCard</string>
+    <string name="saved_card_no">Master-1234</string>
+    <string name="payment_method_title">Payment Method</string>
+    <string name="payment_method_header">Saved payment method</string>
+    <string name="payment_method_header_new">Add Payment Method</string>
+    <string name="payment_cardNo_input">Card Number</string>
+    <string name="payment_cardNo_example">1234 5678 9876 5432</string>
+    <string name="payment_expiry_input">Expiry Date</string>
+    <string name="payment_cvv_input">CVV</string>
+    <string name="payment_expiry_sample">MM/YY</string>
+    <string name="payment_cvv_sample">3 digit</string>
+    <string name="payment_thank_txt">Thank You!</string>
+    <string name="payment_thankDesc_txt">Thank you so much for your donation.\nYour generosity means everything to us and to the community we serve.</string>
+    <string name="payment_share_txt">Please share it with your friends to help us reach larger heart.</string>
+    <string name="payment_shareIt_txt">Share with friends</string>
 
 
 </resources>

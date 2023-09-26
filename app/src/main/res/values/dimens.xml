@@ -19,7 +19,11 @@
     <dimen name="form_input_title">18sp</dimen>
     <dimen name="form_input_value">16sp</dimen>
 
-
+    <!-- Payment -->
+    <dimen name="payment_method_width">92dp</dimen>
+    <dimen name="payment_method_height">63dp</dimen>
+    <dimen name="payment_header">18dp</dimen>
+    <dimen name="payment_button_height">60dp</dimen>
 
 
 </resources>
