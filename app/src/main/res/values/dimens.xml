@@ -19,8 +19,8 @@
     <!-- Community: Add Discussion -->
     <dimen name="form_input_title">18sp</dimen>
     <dimen name="form_input_value">16sp</dimen>
-
-
+    <dimen name="profile_font_size">32dp</dimen>
+    <dimen name="profile_font">25dp</dimen>
 
 
 </resources>

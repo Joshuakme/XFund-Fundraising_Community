@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-
-        tools:targetApi="23">
+        tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,8 +20,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
 
         <meta-data
@@ -30,17 +27,7 @@
             android:resource="@array/preloaded_fonts" />
     </application>
 
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <!-- Include the host attribute if you want your app to respond
-                 only to URLs with your app's domain. -->
-            <data android:scheme="https" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent>
-    </queries>
-
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>
