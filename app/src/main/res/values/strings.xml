@@ -41,7 +41,6 @@
     <string name="category_label_other">Other</string>
 
 
-
     <!-- Community: Add Discussion -->
     <string name="fragment_title_community">Add Discussion</string>
     <string name="title_label_txt">Title*</string>
@@ -53,6 +52,11 @@
     <string name="add_discussion_submit_button">Submit</string>
     <string name="add_new_discussion_btn_txt">Add</string>
 
+
+    <!-- Project: project_list_card_cell -->
+    <string name="add_percentage_behind">%s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

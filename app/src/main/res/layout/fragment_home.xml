@@ -38,7 +38,7 @@
             android:translationX="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/material_dynamic_neutral40" />
+            app:tint="@color/gray_800" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/SearchBarCard"
@@ -107,7 +107,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="center"
                     android:text="@string/category_label_nature"
-                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColor="@color/gray_800"
                     android:textSize="@dimen/category_btn_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +140,7 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/category_label_tech"
-                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColor="@color/gray_800"
                     android:textSize="@dimen/category_btn_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +173,7 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/category_label_food"
-                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColor="@color/gray_800"
                     android:textSize="@dimen/category_btn_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +207,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/category_label_other"
-                    android:textColor="@color/material_dynamic_neutral30"
+                    android:textColor="@color/gray_800"
                     android:textSize="@dimen/category_btn_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -240,7 +240,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/home_popular_fundraising_title"
-            android:textColor="@color/material_dynamic_neutral30"
+            android:textColor="@color/gray_800"
             android:textSize="@dimen/search_txt_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/News" />
@@ -288,7 +288,7 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toBottomOf="@+id/SearchBtn">-->
 
-    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--        <com.google.android.aial.card.MaterialCardView-->
     <!--            android:layout_width="wrap_content"-->
     <!--            android:layout_height="wrap_content"-->
     <!--            app:cardCornerRadius="@dimen/card_radius"-->

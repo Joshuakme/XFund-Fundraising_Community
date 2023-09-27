@@ -15,6 +15,7 @@
     <color name="gray_200">#DADFE6</color>
     <color name="gray_300">#B3BDCB</color>
     <color name="gray_400">#7689A2</color>
+    <color name="gray_800">#454749</color>
 
     <color name="divider">#D8D6D6</color>
     <color name="button_disabled_bg">#EAEAEA</color>

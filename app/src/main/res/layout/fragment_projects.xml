@@ -1,117 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     tools:context=".screens.navigation.ProjectsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray_100">
 
-        <TextView
-            android:id="@+id/ProjectTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/screen_title_projects"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <SearchView
-            android:id="@+id/ProjectSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/searchview_background"
-            android:inputType="text|textAutoCorrect"
-            android:queryHint="Enter a project "
-            android:iconifiedByDefault="false"
-            android:queryBackground="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProjectTitle" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/TopPart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/ProjectSearch">
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/ProjectActivityButton"
-                style="@style/ProjectButton"
-                android:text="Activity" />
+            <TextView
+                android:id="@+id/ProjectTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/screen_title_projects"
+                android:textColor="@color/black"
+                android:textSize="@dimen/screen_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <SearchView
+                android:id="@+id/ProjectSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:iconifiedByDefault="false"
+                android:inputType="text|textAutoCorrect"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="Enter the project name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProjectTitle" />
 
-            <Button
-                android:id="@+id/ProjectJoinButton"
-                style="@style/ProjectButton"
-                android:text="Joint" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/ProjectCompletedButton"
-                style="@style/ProjectButton"
-                android:text="Completed" />
-
-        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ProjectRecycleView"
             android:layout_width="match_parent"
-            android:layout_height="517dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/gray_200"
+            android:layout_height="0dp"
+            android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/card_cell">
+            app:layout_constraintTop_toBottomOf="@id/TopPart"
+            tools:listitem="@layout/projects_list_card_cell">
 
-
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/ProjectCardView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginLeft="25dp"-->
-<!--                android:layout_marginTop="25dp"-->
-<!--                android:layout_marginRight="25dp"-->
-<!--                android:layout_marginBottom="25dp"-->
-<!--                card_view:cardCornerRadius="4dp">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/CardImage"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="200dp"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_margin="10dp" />-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="30dp"-->
-<!--                    android:layout_marginBottom="20dp"-->
-<!--                    android:text="Project Title \nProject Desc"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold" />-->
-
-<!--            </androidx.cardview.widget.CardView>-->
         </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</layout>

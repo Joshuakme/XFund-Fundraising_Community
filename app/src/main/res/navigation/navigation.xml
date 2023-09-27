@@ -19,7 +19,11 @@
         android:id="@+id/projectsFragment"
         android:name="com.example.xfund.screens.navigation.ProjectsFragment"
         android:label="fragment_projects"
-        tools:layout="@layout/fragment_projects" />
+        tools:layout="@layout/fragment_projects" >
+        <action
+            android:id="@+id/action_projectsFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.example.xfund.screens.navigation.CommunityFragment"
@@ -46,6 +50,15 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectDetailFragment"
+        android:name="com.example.xfund.screens.project.ProjectDetailFragment"
+        android:label="fragment_project_detail"
+        tools:layout="@layout/fragment_project_detail" >
+        <action
+            android:id="@+id/action_projectDetailFragment_to_projectsFragment"
+            app:destination="@id/projectsFragment" />
     </fragment>
 
 </navigation>
