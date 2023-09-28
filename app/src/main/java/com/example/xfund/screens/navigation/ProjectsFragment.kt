@@ -5,14 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
 import com.example.xfund.adapter.ProjectItemAdapter
 import com.example.xfund.databinding.FragmentProjectsBinding
-//import com.example.xfund.model.PROJECT_NAME_EXTRA
 import com.example.xfund.model.Project
 import com.google.firebase.database.DatabaseReference
 import java.util.Date
@@ -27,50 +29,77 @@ class ProjectsFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_projects,container,false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_projects, container, false
+        )
 
-        var recyclerView : RecyclerView = binding.ProjectRecycleView
+
+        val recyclerView: RecyclerView = binding.ProjectRecycleView
 
         val itemList = listOf(
-            Project(R.drawable.baseline_account_circle,"hello world", Date(2028,2,11), Date(2029,2,11), 10000, 1000, "Hellow" ),
-            Project(R.drawable.baseline_favorite_24,"no hello", Date(2028,2,11), Date(2029,2,11), 10000, 5000, "Hellow" ))
+            Project(
+                R.drawable.baseline_account_circle,
+                "hello world",
+                Date(2028, 2, 11),
+                Date(2029, 2, 11),
+                10000,
+                1000,
+                "Hellow"
+            ),
+            Project(
+                R.drawable.baseline_favorite_24,
+                "no hello",
+                Date(2028, 2, 11),
+                Date(2029, 2, 11),
+                10000,
+                5000,
+                "Hellow"
+            )
+        )
         val adapter = ProjectItemAdapter(itemList)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
-        val searchView = binding.ProjectSearch
+        // Set an onClickListener for the items in your RecyclerView
+        adapter.setOnClickListener(object : ProjectItemAdapter.OnClickListener {
+            override fun onClick(position: Int, model: Project) {
+                // Create a bundle to pass data to ProjectDetailFragment if needed
+                val bundle = Bundle()
+                // You can put any data you want to pass here, e.g., model information
 
-
-
-        // Set a listener to handle search queries
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle search query submission here
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Handle search query text changes here
-                return true
+                // Navigate to the ProjectDetailFragment using the action
+                findNavController().navigate(R.id.action_projectsFragment_to_projectDetailFragment, bundle)
             }
         })
 
-/*        binding.ProjectRecycleView.setOnClickListener{
+        // Search Elements
+        val searchBar: androidx.appcompat.widget.SearchView = binding.ProjectSearch
+        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
+        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
+
+        searchIcon.setColorFilter(
+            ContextCompat.getColor(requireContext(), R.color.gray_300),
+            android.graphics.PorterDuff.Mode.SRC_IN
+        )
+        txtSearch.setHint(R.string.search_query_hint)
+        txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+
+
+        /*        binding.ProjectRecycleView.setOnClickListener{
             findNavController().navigate(R.id.action_projectsFragment_to_projectDetailFragment)
         }*/
-
 
 
         return binding.root
     }
 
-    /*override fun onClick(project: Project) {
-        val intent = Intent(requireContext(), ProjectDetailFragment::class.java)
-        intent.putExtra(PROJECT_NAME_EXTRA, project.name)
-        startActivity(intent)
-    }*/
+    companion object{
+        val NEXT_SCREEN="details_screen"
+    }
+
+
 
 
 }

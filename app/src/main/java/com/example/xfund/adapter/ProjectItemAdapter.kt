@@ -1,18 +1,14 @@
 package com.example.xfund.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xfund.R
 import com.example.xfund.databinding.ProjectsListCardCellBinding
 import com.example.xfund.model.Project
 
 class ProjectItemAdapter(private val itemList: List<Project>) :
     RecyclerView.Adapter<ProjectItemAdapter.ViewHolder>() {
+    private var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,9 +23,27 @@ class ProjectItemAdapter(private val itemList: List<Project>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = itemList[position]
         holder.bind(currentItem)
+
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, currentItem)
+            }
+        }
     }
 
-    inner class ViewHolder(private val binding: ProjectsListCardCellBinding) :
+    // A function to bind the onclickListener.
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    // onClickListener Interface
+    interface OnClickListener {
+        fun onClick(position: Int, model: Project)
+    }
+
+    inner class ViewHolder(
+        private val binding: ProjectsListCardCellBinding/*,
+        listener: onCardClickListener*/) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(project: Project) {

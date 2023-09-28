@@ -6,6 +6,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ProjectDetailFragmentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,7 +20,7 @@
             android:contentDescription="project image" />
 
         <ImageButton
-            android:id="@+id/backButton"
+            android:id="@+id/ProjectDetailBackButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="@dimen/screen_width_margin"
