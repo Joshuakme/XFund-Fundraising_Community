@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -134,11 +135,11 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
 
-        if (intent.resolveActivity(requireActivity().packageManager) != null) {
+        if(URLUtil.isValidUrl(url)) {
             startActivity(intent)
         } else {
-            // Handle the case where a web browser app is not available
-            Toast.makeText(requireContext(), "Web browser not found.", Toast.LENGTH_SHORT).show()
+            // Handle the case of an invalid URL
+            Toast.makeText(requireContext(), "Invalid URL.", Toast.LENGTH_SHORT).show()
         }
     }
 }
