@@ -2,12 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".screens.navigation.HomeFragment">
-
-        <!-- TODO: Update blank fragment layout -->
 
         <TextView
             android:id="@+id/WelcomeUserTxt"
@@ -215,21 +214,38 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/News"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/NewsImageSlider"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="120dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:contentDescription="News List"
             android:orientation="horizontal"
+            android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category">
+            app:layout_constraintTop_toBottomOf="@+id/Category" />
 
-
-        </LinearLayout>
+        <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+            android:id="@+id/DotsIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:dampingRatio="0.5"
+            app:dotsColor="@android:color/darker_gray"
+            app:dotsCornerRadius="20dp"
+            app:dotsSize="8dp"
+            app:dotsSpacing="6dp"
+            app:dotsStrokeWidth="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NewsImageSlider"
+            app:selectedDotColor="@color/md_theme_light_primary"
+            app:stiffness="300" />
 
         <TextView
             android:id="@+id/PFTitle"
@@ -243,7 +259,7 @@
             android:textColor="@color/material_dynamic_neutral30"
             android:textSize="@dimen/search_txt_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@id/DotsIndicator" />
 
         <ImageButton
             android:id="@+id/PFNextBtn"
@@ -271,29 +287,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PFTitle"/>
-
-
+            app:layout_constraintTop_toBottomOf="@+id/PFTitle" />
 
 
         <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="16dp"-->
-    <!--        android:layout_marginStart="@dimen/screen_width_margin"-->
-    <!--        android:layout_marginTop="284dp"-->
-    <!--        android:layout_marginEnd="@dimen/screen_width_margin"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/SearchBtn">-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="16dp"-->
+        <!--        android:layout_marginStart="@dimen/screen_width_margin"-->
+        <!--        android:layout_marginTop="284dp"-->
+        <!--        android:layout_marginEnd="@dimen/screen_width_margin"-->
+        <!--        android:orientation="horizontal"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintHorizontal_bias="0.0"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/SearchBtn">-->
 
-    <!--        <com.google.android.material.card.MaterialCardView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            app:cardCornerRadius="@dimen/card_radius"-->
-    <!--            app:cardUseCompatPadding="true" />-->
-    <!--    </LinearLayout>-->
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:cardCornerRadius="@dimen/card_radius"-->
+        <!--            app:cardUseCompatPadding="true" />-->
+        <!--    </LinearLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

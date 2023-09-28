@@ -14,12 +14,24 @@
     <dimen name="search_txt_size">18sp</dimen>
     <dimen name="category_btn_label">13sp</dimen>
     <dimen name="category_btn_dimens">50dp</dimen>
+    <dimen name="news_height">150dp</dimen>
 
     <!-- Community: Add Discussion -->
     <dimen name="form_input_title">18sp</dimen>
     <dimen name="form_input_value">16sp</dimen>
+
     <dimen name="profile_font_size">32dp</dimen>
-    <dimen name="profile_font">18dp</dimen>
+    <dimen name="profile_font">25dp</dimen>
+    <dimen name="chip_vertical_height">1dp</dimen>
+
+
+
+    <!-- Payment -->
+    <dimen name="payment_method_width">92dp</dimen>
+    <dimen name="payment_method_height">63dp</dimen>
+    <dimen name="payment_header">18sp</dimen>
+    <dimen name="payment_button_height">60dp</dimen>
+
 
 
 </resources>

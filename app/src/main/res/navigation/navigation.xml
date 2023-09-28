@@ -41,6 +41,26 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popUpTo="@id/communityFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_communityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+            <argument
+                android:name="title"
+                app:argType="string" />
+            <argument
+                android:name="desc"
+                app:argType="string" />
+            <argument
+                android:name="date"
+                app:argType="string" />
+            <argument
+                android:name="author"
+                app:argType="string" />
+            <argument
+                android:name="tags"
+                app:argType="string[]" />
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/addDiscussionFragment"
@@ -95,4 +115,14 @@
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/discussionDetailFragment"
+        android:name="com.example.xfund.screens.community.DiscussionDetailFragment"
+        android:label="fragment_discussion_detail"
+        tools:layout="@layout/fragment_discussion_detail" >
+        <action
+            android:id="@+id/action_discussionDetailFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
+    </fragment>
+
 </navigation>
