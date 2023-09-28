@@ -111,9 +111,9 @@ class LoginFragment : Fragment() {
                         val user = auth.currentUser
 
                         // Save Login Status (True) in Shared Preference
-                        val editor = sharedPref.edit()
-                        editor.putBoolean("IsLogin", true)
-                        editor.apply()
+                        val editor = sharedPref?.edit()
+                        editor?.putBoolean("IsLogin", true)
+                        editor?.apply()
 
                         // Set Toast Message
                         Toast.makeText(
@@ -198,7 +198,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun isEmpty(etText: EditText): Boolean {
-        return if (etText.text.toString().trim { it <= ' ' }.length > 0) false else true
+        return etText.text.toString().trim { it <= ' ' }.length <= 0
     }
 
     private fun checkEmailFormat(email: String): Boolean {

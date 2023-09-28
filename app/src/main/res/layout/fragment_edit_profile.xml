@@ -16,22 +16,35 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toTopOf="@+id/textInputEditUsername"
-            app:layout_constraintEnd_toStartOf="@+id/EditIcon"
+            app:layout_constraintEnd_toStartOf="@+id/MaterialEditImg"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:shapeAppearanceOverlay="@drawable/baseline_account_circle"
             app:srcCompat="@drawable/baseline_account_circle_24" />
 
-        <ImageView
-            android:id="@+id/EditIcon"
-            android:layout_width="34dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/MaterialEditImg"
+            android:layout_width="38dp"
             android:layout_height="39dp"
-            android:layout_marginEnd="135dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/rounded_edge"
+            android:layout_marginLeft="-42dp"
+            android:layout_marginBottom="48dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintBottom_toTopOf="@+id/textInputEditUsername"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_edit_button" />
+            app:layout_constraintStart_toEndOf="@+id/EditImage">
+
+            <ImageView
+                android:id="@+id/EditIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_edge"
+                android:padding="7dp"
+                android:scaleX="1"
+                android:scaleY="1"
+                app:srcCompat="@drawable/ic_edit_button" />
+        </com.google.android.material.card.MaterialCardView>
+
 
         <TextView
             android:id="@+id/textView4"
