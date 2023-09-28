@@ -48,9 +48,9 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
         // ELEMENTS IN FRAGMENT
         // Search Elements
-        val searchBar : SearchView = binding.SearchBar
-        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
-        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
+//        val searchBar : SearchView = binding.SearchBar
+//        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
+//        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
         // Image Slider Elements
         val newsViewPager: ViewPager = binding.NewsImageSlider
         val dotsIndicator = binding.DotsIndicator
@@ -59,9 +59,9 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
 
         // Search Bar
-        searchIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_300),android.graphics.PorterDuff.Mode.SRC_IN)
-        txtSearch.setHint(R.string.search_query_hint)
-        txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+//        searchIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_300),android.graphics.PorterDuff.Mode.SRC_IN)
+//        txtSearch.setHint(R.string.search_query_hint)
+//        txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
         //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
 
         // Image Slider

@@ -39,32 +39,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/material_dynamic_neutral40" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/SearchBarCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="22dp"
-            android:clipToPadding="true"
-            android:padding="0dp"
-            app:cardBackgroundColor="@color/gray_100"
-            app:cardCornerRadius="@dimen/card_radius"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardPreventCornerOverlap="false"
-            app:contentPadding="-4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/SearchBarCard"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/screen_width_margin"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:layout_marginEnd="22dp"-->
+<!--            android:clipToPadding="true"-->
+<!--            android:padding="0dp"-->
+<!--            app:cardBackgroundColor="@color/gray_100"-->
+<!--            app:cardCornerRadius="@dimen/card_radius"-->
+<!--            app:cardElevation="@dimen/card_elevation"-->
+<!--            app:cardPreventCornerOverlap="false"-->
+<!--            app:contentPadding="-4dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">-->
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/SearchBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:queryHint="@string/search_query_hint"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@android:color/transparent" />
-        </com.google.android.material.card.MaterialCardView>
+<!--            <androidx.appcompat.widget.SearchView-->
+<!--                android:id="@+id/SearchBar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:queryHint="@string/search_query_hint"-->
+<!--                app:iconifiedByDefault="false"-->
+<!--                app:queryBackground="@android:color/transparent" />-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
         <LinearLayout
             android:id="@+id/Category"
@@ -78,7 +78,7 @@
             android:weightSum="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SearchBarCard">
+            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/CatNatureBtn"
@@ -214,20 +214,27 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/NewsImageSlider"
+        <androidx.cardview.widget.CardView
+            android:id="@id/NewsImageSliderCard"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
-            android:contentDescription="News List"
-            android:orientation="horizontal"
-            android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category" />
+            app:layout_constraintTop_toBottomOf="@+id/Category">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/NewsImageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:contentDescription="News List"
+                android:elevation="8dp"
+                android:orientation="horizontal" />
+        </androidx.cardview.widget.CardView>
 
         <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
             android:id="@+id/DotsIndicator"
@@ -243,7 +250,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/NewsImageSlider"
+            app:layout_constraintTop_toBottomOf="@+id/NewsImageSliderCard"
             app:selectedDotColor="@color/md_theme_light_primary"
             app:stiffness="300" />
 
