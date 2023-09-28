@@ -40,7 +40,7 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //'Register now' clicked
+        //'Register' clicked
         loginBinding.tvRegisterAcc.setOnClickListener() {
             //navigate to registration page
             val intent = Intent(this, RegisterAccount::class.java)
