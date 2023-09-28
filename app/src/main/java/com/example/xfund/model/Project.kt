@@ -1,6 +1,5 @@
 package com.example.xfund.model
 
-import com.example.xfund.User
 import java.util.Date
 
 data class Project(

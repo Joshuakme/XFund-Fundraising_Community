@@ -15,11 +15,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.xfund.R
 import com.example.xfund.adapter.ImageSliderAdapter
 import com.example.xfund.databinding.FragmentHomeBinding
 import com.example.xfund.model.NewsModel
+import com.example.xfund.viewModel.UserViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -56,6 +58,9 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         val dotsIndicator = binding.DotsIndicator
         databaseReference = FirebaseDatabase.getInstance().getReference("news") // Initialize Firebase and reference to your news items node
         databaseReference.child("news").get()
+        // User Element
+        val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+
 
 
         // Search Bar
@@ -83,6 +88,19 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         adapter.setOnItemClickListener(this) // Set the click listener
         newsViewPager.adapter = adapter
         dotsIndicator.attachTo(newsViewPager)
+
+
+        // Welcome Text
+        // Displaying User detail
+        userViewModel.currentUser.observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                binding.WelcomeUserTxt.text = "Hi, " + user.displayName.toString()
+            } else {
+                // User is not signed in
+                binding.WelcomeUserTxt.text = "Welcome"
+            }
+        }
+        binding.WelcomeUserTxt.text =
 
 
         //val newsDB = db.collection("news")
