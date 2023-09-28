@@ -1,6 +1,6 @@
 package com.example.xfund.model
 
-import java.util.Date
+import java.time.LocalDateTime
 
 
 data class CommunityDiscussion(
@@ -8,6 +8,6 @@ data class CommunityDiscussion(
     val title: String,
     val desc: String,
     val tags: List<String>,
-    val createdOn: Date
+    val createdOn: LocalDateTime
 ) {
 }

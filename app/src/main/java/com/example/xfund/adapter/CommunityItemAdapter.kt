@@ -2,23 +2,26 @@ package com.example.xfund.adapter
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.os.Build
 import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
 import com.example.xfund.model.CommunityDiscussion
-import com.example.xfund.screens.community.DiscussionDetailFragment
-import com.example.xfund.screens.navigation.CommunityFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import com.example.xfund.screens.navigation.CommunityFragmentDirections
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
-class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDiscussion>, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<CommunityItemAdapter.ViewHolder>() {
+class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDiscussion>, private val navController: NavController) : RecyclerView.Adapter<CommunityItemAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.community_list_item,
@@ -30,6 +33,7 @@ class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDis
         return itemList.size
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -38,7 +42,8 @@ class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDis
 
         // Set data to the view
         holder.title.text = currentItem.title
-        holder.date.text = SimpleDateFormat("yyyy-MM-dd").format(currentItem.createdOn)
+        val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        holder.date.text = currentItem.createdOn.format(dateFormat)
         for (tag in currentItem.tags) {
             holder.tags.addView(Chip(context).apply {
                 text = tag
@@ -47,6 +52,7 @@ class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDis
                 textSize = 12.0f
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
                 chipStartPadding = 1.0f
+                isClickable = false
                 chipEndPadding = 1.0f
                 chipBackgroundColor = ColorStateList.valueOf(
                     ContextCompat.getColor(context, R.color.md_theme_light_inversePrimary))
@@ -55,13 +61,16 @@ class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDis
         holder.author.text = currentItem.author
 
         holder.discussionItem.setOnClickListener {
-            val fragment = DiscussionDetailFragment()
-            fragment.displayDiscussionDetails(currentItem)
-            fragmentManager.beginTransaction()
-                .replace(R.id.CommunityConstraintLayout, fragment)
-                .addToBackStack(null)
-                .commit()
 
+            // Navigate to FragmentB when item is clicked
+            val action = CommunityFragmentDirections.actionCommunityFragmentToDiscussionDetailFragment (
+                currentItem.title,
+                currentItem.desc,
+                currentItem.createdOn.format(dateFormat),
+                currentItem.author,
+                currentItem.tags.toTypedArray(),
+            )
+            navController.navigate(action)
         }
 
 

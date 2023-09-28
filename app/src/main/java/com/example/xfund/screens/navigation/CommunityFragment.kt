@@ -1,18 +1,23 @@
 package com.example.xfund.screens.navigation
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
 import com.example.xfund.adapter.CommunityItemAdapter
 import com.example.xfund.model.CommunityDiscussion
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.Date
 
 class CommunityFragment : Fragment() {
@@ -27,6 +32,7 @@ class CommunityFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,19 +48,20 @@ class CommunityFragment : Fragment() {
                 "Crowdfunding Campaign for Local School Renovation",
                 "Let's discuss strategies and ideas for launching a crowdfunding campaign to raise funds for renovating our local school. We need your input on how to reach our fundraising goal!",
                 listOf("Education", "Crowdfunding", "Renovation", "Community", "School"),
-                Date(2023, 7, 12, 14, 43, 23)),
+                LocalDateTime.of(2022, 7, 12, 14, 43, 23)),
             CommunityDiscussion("David Anderson", "Nonprofit Gala Event Planning",
                 "Join the discussion on planning a nonprofit gala event to raise funds for a local charity. Share your expertise on event logistics, fundraising ideas, and securing sponsorships.",
                 listOf("Nonprofit", "Gala", "Fundraising Event", "Charity", "Sponsorships"),
-                Date(2023, 5, 2, 8, 5, 33)),
+                LocalDateTime.of(2021, 5, 2, 8, 5, 33)),
             CommunityDiscussion("Sarah Williams", "Online Fundraising Platforms Comparison",
                 "Let's compare different online fundraising platforms like GoFundMe, Kickstarter, and Indiegogo. Share your experiences and recommendations for various fundraising campaigns.",
                 listOf("Fundraising Platforms", "Online Fundraising", "Crowdfunding", "Comparison", "Recommendations"),
-                Date(2023, 1, 27, 23, 0, 33))
+                LocalDateTime.of(2023, 1, 27, 23, 0, 33))
         )
 
         // RecyclerView
-        val adapter = CommunityItemAdapter(requireContext(), discussionList, parentFragmentManager)
+        val navController = NavHostFragment.findNavController(this)
+        val adapter = CommunityItemAdapter(requireContext(), discussionList, navController)
         communityRecycler.adapter = adapter
 
         // view.findViewById<TextView>(R.id.textView).text = android.os.Build.VERSION.SDK_INT.toString()
