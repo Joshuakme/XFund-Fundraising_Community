@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.xfund.screens.navigation.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_payment"
+            app:destination="@id/payment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.xfund.screens.navigation.ProfileFragment"
@@ -85,5 +89,32 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/payment"
+        android:name="com.example.xfund.Payment"
+        android:label="Payment" >
+        <action
+            android:id="@+id/action_payment_to_paymentSuccessFragment"
+            app:destination="@id/paymentSuccessFragment" />
+        <action
+            android:id="@+id/action_payment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.example.xfund.PaymentMethodFragment"
+        android:label="PaymentMethodFragment" >
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_addPaymentMethodFragment"
+            app:destination="@id/addPaymentMethodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentSuccessFragment"
+        android:name="com.example.xfund.PaymentSuccessFragment"
+        android:label="PaymentSuccessFragment" />
+    <fragment
+        android:id="@+id/addPaymentMethodFragment"
+        android:name="com.example.xfund.AddPaymentMethodFragment"
+        android:label="AddPaymentMethodFragment" />
 
 </navigation>

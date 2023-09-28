@@ -10,9 +10,6 @@ import com.example.xfund.R
 import com.example.xfund.model.CommunityDiscussion
 import com.example.xfund.model.PaymentMethod
 
-/**
- * Adapter for the [RecyclerView] in [PaymentMethod]. Displays [PaymentMethod] data object.
- */
 class PaymentAdapter(private val context: Context, paymentModelArrayList: ArrayList<PaymentMethod>) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
 
     private val paymentModelArrayList: ArrayList<PaymentMethod>
@@ -21,14 +18,13 @@ class PaymentAdapter(private val context: Context, paymentModelArrayList: ArrayL
         // create a new view
         val paymentView = LayoutInflater.from(parent.context)
             .inflate(R.layout.cardview_payment_method, parent, false)
-
         return ItemViewHolder(paymentView)
     }
 
     override fun onBindViewHolder(holder: PaymentAdapter.ItemViewHolder, position: Int) {
         val model = paymentModelArrayList[position]
         holder.cardName.text  = model.cardName
-        holder.cardNo.text  = model.cardName
+        holder.cardNo.text  = model.cardNo
     }
 
     override fun getItemCount(): Int {
@@ -38,7 +34,6 @@ class PaymentAdapter(private val context: Context, paymentModelArrayList: ArrayL
     class ItemViewHolder(paymentView: View) : RecyclerView.ViewHolder(paymentView) {
         val cardName: TextView = paymentView.findViewById(R.id.savedCardName)
         val cardNo: TextView = paymentView.findViewById(R.id.savedCardNo)
-
     }
 
     init{

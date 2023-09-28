@@ -5,49 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.adapter.PaymentAdapter
+import com.example.xfund.databinding.FragmentPaymentMethodBinding
 import com.example.xfund.model.PaymentMethod
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PaymentMethodFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PaymentMethodFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentPaymentMethodBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_payment_method, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_payment_method,
+            container,
+            false
+        )
 
-        val paymentMethodRV = view.findViewById<RecyclerView>(R.id.savedCardList)
+        val addPaymentCardBtn: CardView = binding.addPaymentCard
+        val addPaymentWalletBtn: CardView = binding.addPaymentWallet
+
+        addPaymentCardBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
+        }
+        addPaymentWalletBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
+        }
+
+        // Inflate the layout for this fragment
+        val paymentMethodRV = binding.savedCardList
 
         val paymentModelArrayList: ArrayList<PaymentMethod> = ArrayList<PaymentMethod>()
-        paymentModelArrayList.add(PaymentMethod("Master Card Ecas", "1234567887654321"))
-        paymentModelArrayList.add(PaymentMethod("Visa Card Joshua", "1234567890987654"))
-        paymentModelArrayList.add(PaymentMethod("Apple Pay Kyeze", "9999999999999999"))
-        paymentModelArrayList.add(PaymentMethod("Samsung Pay LoongKok", "6666666666666666"))
+
+        paymentModelArrayList.add(PaymentMethod("Master Card Ecas", "1234567887654321", "08/31", "123"))
+        paymentModelArrayList.add(PaymentMethod("Joshhhh Card", "9999999999999999", "09/31", "567"))
 
         val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList)
 
@@ -59,26 +56,7 @@ class PaymentMethodFragment : Fragment() {
         paymentMethodRV.layoutManager = linearLayoutManager
         paymentMethodRV.adapter = paymentAdapter
 
-        return view
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PaymentMethodFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PaymentMethodFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

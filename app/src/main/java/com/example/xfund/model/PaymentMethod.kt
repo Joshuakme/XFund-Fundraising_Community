@@ -4,7 +4,10 @@ import java.net.URL
 import java.util.Date
 
 data class PaymentMethod(
-    val cardName: String,
-    val cardNo: String
-) {
+    var cardName: String,
+    var cardNo: String,
+    var cardExpiry: String,
+    var cardCvv: String
+){
+
 }

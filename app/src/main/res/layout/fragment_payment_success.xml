@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         tools:context=".screens.community.AddDiscussionFragment">
 
-    <!-- TODO: Update payment fragment layout -->
+        <!-- TODO: Update payment fragment layout -->
 
         <ImageView
             android:id="@+id/imageView"
@@ -132,7 +132,7 @@
         <Button
             android:id="@+id/button2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/payment_button_height"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"

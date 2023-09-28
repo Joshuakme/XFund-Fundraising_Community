@@ -74,6 +74,7 @@
             android:layout_marginTop="240dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:clickable="true"
+            android:focusable="auto"
             android:padding="8dp"
             android:text="@string/payment_change_card_link"
             android:textColor="@color/accent_primary_300"
@@ -159,15 +160,19 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/donationLabel">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/donateAmountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="@string/payment_donation_sample" />
+                android:hint="@string/donation_sample_amount"
+                android:inputType="number"
+                android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

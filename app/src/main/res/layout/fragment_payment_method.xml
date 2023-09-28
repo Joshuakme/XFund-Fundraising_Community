@@ -45,10 +45,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/savedCardList"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_height="360dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/savedMethodHeader" />
 
@@ -57,100 +59,88 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="24dp"
             android:text="@string/payment_method_header_new"
             android:textSize="@dimen/payment_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/savedCardList" />
 
-        <Spinner
-            android:id="@+id/paymentMethodSpinner"
-            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/addPaymentCard"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paymentMethodHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/paymentMethodHeader">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cardNoInput"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="@dimen/screen_width_margin"
-            android:hint="@string/payment_cardNo_input"
-            android:outlineProvider="none"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paymentMethodSpinner"
-            app:placeholderText="@string/payment_cardNo_example">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cardExpiryInput"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <ImageView
+                    android:id="@+id/paymentCardImg"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/payment_card" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/payment_add_card_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/paymentCardImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/addPaymentWallet"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/cardCvvInput"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardNoInput"
-            app:placeholderText="@string/payment_expiry_sample">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/payment_expiry_input"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cardCvvInput"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cardExpiryInput"
-            app:layout_constraintTop_toBottomOf="@+id/cardNoInput"
-            app:placeholderText="@string/payment_cvv_sample">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/payment_cvv_input"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/payment_button_height"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="@dimen/screen_width_margin"
-            android:layout_marginBottom="24dp"
-            android:text="@string/payment_addPay_txt"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardExpiryInput" />
+            app:layout_constraintTop_toBottomOf="@+id/addPaymentCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/paymentWalletImg"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/payment_digital_wallet" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/payment_add_wallet_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/paymentWalletImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
