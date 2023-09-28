@@ -22,6 +22,7 @@ import com.example.xfund.util.FirebaseHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -34,7 +35,7 @@ import kotlin.reflect.typeOf
 class CommunityFragment : Fragment() {
     // private var _binding: CommunityFragmentBinding ? = null
     private lateinit var addDiscussionButton : LinearLayout
-    private var discussionList: List<CommunityDiscussion> = emptyList()
+    private lateinit var discussionList: List<CommunityDiscussion>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +57,10 @@ class CommunityFragment : Fragment() {
         val firebaseHelper = FirebaseHelper()
 
         // Fetch data from Firebase
-        // Access a Cloud Firestore instance from your Activity
         val db = Firebase.firestore     // Firestore
-//        val db = FirebaseFirestore.getInstance()
-
 
         db.collection("discussions")
+            .orderBy("createdOn", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener {
                 discussionList = createCommunityDiscussions(it)
@@ -74,25 +73,6 @@ class CommunityFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Toast.makeText(context, exception.toString(), Toast.LENGTH_SHORT).show()
             }
-
-
-
-        // Initializing list for Community RecyclerView
-//        discussionList = listOf(
-//            CommunityDiscussion("Emily Johnson",
-//                "Crowdfunding Campaign for Local School Renovation",
-//                "Let's discuss strategies and ideas for launching a crowdfunding campaign to raise funds for renovating our local school. We need your input on how to reach our fundraising goal!",
-//                listOf("Education", "Crowdfunding", "Renovation", "Community", "School"),
-//                LocalDateTime.of(2022, 7, 12, 14, 43, 23)),
-//            CommunityDiscussion("David Anderson", "Nonprofit Gala Event Planning",
-//                "Join the discussion on planning a nonprofit gala event to raise funds for a local charity. Share your expertise on event logistics, fundraising ideas, and securing sponsorships.",
-//                listOf("Nonprofit", "Gala", "Fundraising Event", "Charity", "Sponsorships"),
-//                LocalDateTime.of(2021, 5, 2, 8, 5, 33)),
-//            CommunityDiscussion("Sarah Williams", "Online Fundraising Platforms Comparison",
-//                "Let's compare different online fundraising platforms like GoFundMe, Kickstarter, and Indiegogo. Share your experiences and recommendations for various fundraising campaigns.",
-//                listOf("Fundraising Platforms", "Online Fundraising", "Crowdfunding", "Comparison", "Recommendations"),
-//                LocalDateTime.of(2023, 1, 27, 23, 0, 33))
-//        )
 
         // Event Listeners
         // view.findViewById<TextView>(R.id.textView).text = android.os.Build.VERSION.SDK_INT.toString()
@@ -136,3 +116,22 @@ class CommunityFragment : Fragment() {
         return communityDiscussions.toList()
     }
 }
+
+
+
+// Initializing list for Community RecyclerView
+//        discussionList = listOf(
+//            CommunityDiscussion("Emily Johnson",
+//                "Crowdfunding Campaign for Local School Renovation",
+//                "Let's discuss strategies and ideas for launching a crowdfunding campaign to raise funds for renovating our local school. We need your input on how to reach our fundraising goal!",
+//                listOf("Education", "Crowdfunding", "Renovation", "Community", "School"),
+//                LocalDateTime.of(2022, 7, 12, 14, 43, 23)),
+//            CommunityDiscussion("David Anderson", "Nonprofit Gala Event Planning",
+//                "Join the discussion on planning a nonprofit gala event to raise funds for a local charity. Share your expertise on event logistics, fundraising ideas, and securing sponsorships.",
+//                listOf("Nonprofit", "Gala", "Fundraising Event", "Charity", "Sponsorships"),
+//                LocalDateTime.of(2021, 5, 2, 8, 5, 33)),
+//            CommunityDiscussion("Sarah Williams", "Online Fundraising Platforms Comparison",
+//                "Let's compare different online fundraising platforms like GoFundMe, Kickstarter, and Indiegogo. Share your experiences and recommendations for various fundraising campaigns.",
+//                listOf("Fundraising Platforms", "Online Fundraising", "Crowdfunding", "Comparison", "Recommendations"),
+//                LocalDateTime.of(2023, 1, 27, 23, 0, 33))
+//        )

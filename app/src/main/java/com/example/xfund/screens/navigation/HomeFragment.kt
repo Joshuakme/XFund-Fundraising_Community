@@ -71,19 +71,8 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
         // Image Slider
         // Create a list of NewsModel objects
-        newsList = listOf(
-            NewsModel("Minister: Drone fundraising campaign raises \$1 million within hourss",
-            "Ukraine's \"Operation Unity\" drone fundraising campaign, led by Digital Transformation Minister Mykhailo Fedorov, achieved an impressive milestone by raising over \$1 million within hours of its launch on August 14th. The campaign aims to gather a total of \$6.36 million to procure 10,000 drones for the Ukrainian armed forces, with attractive prizes for donors, including platinum cards and meetings with campaign ambassadors.",
-            "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98",
-            "https://news.yahoo.com/minister-drone-fundraising-campaign-raises-143115749.html"),
-            NewsModel("Man raises money for Wildfish with seven marathons",
-                "Man raises money for Wildfish with seven marathons",
-                "https://ichef.bbci.co.uk/news/976/cpsprodpb/834C/production/_131221633_capture.jpg2.jpg.webp",
-                "https://www.bbc.com/news/uk-england-bristol-66881357"),
-            NewsModel("title 3", "desc 3", "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98", ""),
-            NewsModel("title 4", "desc 4", "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98", ""))
+        newsList = initNewsList()
 
-        //val adapter = ImageSliderAdapter(requireContext(), emptyList())
         val adapter = ImageSliderAdapter(requireContext(), newsList)
         adapter.setOnItemClickListener(this) // Set the click listener
         newsViewPager.adapter = adapter
@@ -100,45 +89,8 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
                 binding.WelcomeUserTxt.text = "Welcome"
             }
         }
-        binding.WelcomeUserTxt.text =
 
 
-        //val newsDB = db.collection("news")
-
-
-        // Set up a ValueEventListener to listen for changes in the database
-//        databaseReference.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val newsList = mutableListOf<NewsModel>()
-//
-//                for (postSnapshot in dataSnapshot.children) {
-//                    val newsItem = postSnapshot.getValue(NewsModel::class.java)
-//                    newsItem?.let { newsList.add(it) }
-//
-//                    if (newsItem != null) {
-//                        Log.d("News Title: ", newsItem.title)
-//                    }
-//                    if (newsItem != null) {
-//                        Log.d("News Desc: ", newsItem.description)
-//                    }
-//                    if (newsItem != null) {
-//                        Log.d("News ImgUrl: ", newsItem.imageUrl)
-//                    }
-//                    if (newsItem != null) {
-//                        Log.d("News NewsUrl: ", newsItem.newsUrl)
-//                    }
-//                }
-//
-//                // Update the adapter with the new data
-//                imageSliderAdapter.updateData(newsList)
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Handle error
-//                // Getting Post failed, log a message
-//                Log.w("loadPost:onCancelled", databaseError.toException())
-//            }
-//        })
 
         // Inflate the layout for this fragment
         return binding.root
@@ -159,5 +111,19 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
             // Handle the case of an invalid URL
             Toast.makeText(requireContext(), "Invalid URL.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun initNewsList():List<NewsModel> {
+        return listOf(
+            NewsModel("Minister: Drone fundraising campaign raises \$1 million within hourss",
+                "Ukraine's \"Operation Unity\" drone fundraising campaign, led by Digital Transformation Minister Mykhailo Fedorov, achieved an impressive milestone by raising over \$1 million within hours of its launch on August 14th. The campaign aims to gather a total of \$6.36 million to procure 10,000 drones for the Ukrainian armed forces, with attractive prizes for donors, including platinum cards and meetings with campaign ambassadors.",
+                "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98",
+                "https://news.yahoo.com/minister-drone-fundraising-campaign-raises-143115749.html"),
+            NewsModel("Man raises money for Wildfish with seven marathons",
+                "Man raises money for Wildfish with seven marathons",
+                "https://ichef.bbci.co.uk/news/976/cpsprodpb/834C/production/_131221633_capture.jpg2.jpg.webp",
+                "https://www.bbc.com/news/uk-england-bristol-66881357"),
+            NewsModel("title 3", "desc 3", "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98", ""),
+            NewsModel("title 4", "desc 4", "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98", ""))
     }
 }

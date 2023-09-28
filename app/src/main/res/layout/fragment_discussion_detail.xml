@@ -91,7 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="496dp"
         android:layout_marginStart="@dimen/screen_width_margin"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="@dimen/screen_width_margin"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,8 +115,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Comment 1" />
+                android:layout_height="match_parent" />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
