@@ -57,15 +57,15 @@
                     app:layout_constraintEnd_toEndOf="@+id/ProjectAdminCardImage"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/ProjectAdminCardEditButtonImage"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/EditButtonColor"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icon_edit_50"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ProjectAdminCardEditButtonImage"-->
+<!--                        android:layout_width="24dp"-->
+<!--                        android:layout_height="24dp"-->
+<!--                        android:layout_marginEnd="5dp"-->
+<!--                        app:tint="@color/EditButtonColor"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/icon_edit_50"/>-->
 
                     <TextView
                         android:id="@+id/ProjectAdminCardEditButtonText"
@@ -93,15 +93,15 @@
                     app:layout_constraintEnd_toEndOf="@+id/ProjectAdminCardImage"
                     app:layout_constraintTop_toBottomOf="@id/ProjectAdminCardEditButton">
 
-                    <ImageView
-                        android:id="@+id/ProjectAdminCardDeleteButtonImage"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/DeleteButtonColor"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icons_delete_30"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ProjectAdminCardDeleteButtonImage"-->
+<!--                        android:layout_width="24dp"-->
+<!--                        android:layout_height="24dp"-->
+<!--                        android:layout_marginEnd="5dp"-->
+<!--                        app:tint="@color/DeleteButtonColor"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/icons_delete_30"/>-->
 
                     <TextView
                         android:id="@+id/ProjectAdminCardDeleteButtonText"
