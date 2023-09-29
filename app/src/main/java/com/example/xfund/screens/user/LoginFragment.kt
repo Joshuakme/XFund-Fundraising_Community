@@ -1,5 +1,6 @@
 package com.example.xfund.screens.user
 
+import UserViewModel
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.xfund.R
 import com.example.xfund.databinding.FragmentLoginBinding
@@ -31,6 +33,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
         get() = _binding!!
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var userViewModel : UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,6 +103,10 @@ class LoginFragment : Fragment() {
                 builder.setTitle("Loading")
                 builder.show()
 
+                // After successful login
+                val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                userViewModel.setUser(FirebaseAuth.getInstance().currentUser)
+
                 auth.signInWithEmailAndPassword(
                     emailEditText.text.toString(),
                     passwordEditText.text.toString()
@@ -110,10 +117,15 @@ class LoginFragment : Fragment() {
 
                         val user = auth.currentUser
 
+                        userViewModel.setUser(user)
+
                         // Save Login Status (True) in Shared Preference
                         val editor = sharedPref?.edit()
                         editor?.putBoolean("IsLogin", true)
                         editor?.apply()
+
+                        // Set UserViewModel
+
 
                         // Set Toast Message
                         Toast.makeText(
@@ -215,6 +227,8 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
 
 

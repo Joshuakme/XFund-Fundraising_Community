@@ -111,7 +111,7 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(
                     requireContext(),
                     "Empty Fields are not Allowed!",
-                    Toast.LENGTH_SHORT
+                  Toast.LENGTH_SHORT
                 ).show()
             }
         }
