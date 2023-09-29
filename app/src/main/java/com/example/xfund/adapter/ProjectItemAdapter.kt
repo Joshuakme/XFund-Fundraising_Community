@@ -1,6 +1,7 @@
 package com.example.xfund.adapter
 
 import android.content.Context
+
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,15 +28,13 @@ class ProjectItemAdapter(
         return itemList.size
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = itemList[position]
         holder.bind(currentItem)
 
         holder.itemView.setOnClickListener {
-            /*if (onClickListener != null) {
-                onClickListener!!.onClick(position, currentItem)
-            }*/
 
             // Navigate to FragmentB when item is clicked
             val action = ProjectsFragmentDirections

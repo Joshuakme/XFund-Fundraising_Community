@@ -1,5 +1,6 @@
 package com.example.xfund
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize Firebase
         auth = Firebase.auth
+
 
 //        // Initialize data.
 //        val myDataset = CommunityDatasource().loadCommunities()

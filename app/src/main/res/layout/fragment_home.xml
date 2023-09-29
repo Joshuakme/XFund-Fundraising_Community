@@ -2,12 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="userViewModel"
+            type="com.example.xfund.viewModel.UserViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".screens.navigation.HomeFragment">
-
-        <!-- TODO: Update blank fragment layout -->
 
         <TextView
             android:id="@+id/WelcomeUserTxt"
@@ -16,7 +21,6 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/welcome_user_title"
             android:textColor="@color/black"
             android:textSize="@dimen/screen_title"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,32 +44,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/gray_800" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/SearchBarCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="22dp"
-            android:clipToPadding="true"
-            android:padding="0dp"
-            app:cardBackgroundColor="@color/gray_100"
-            app:cardCornerRadius="@dimen/card_radius"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardPreventCornerOverlap="false"
-            app:contentPadding="-4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/SearchBarCard"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/screen_width_margin"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:layout_marginEnd="22dp"-->
+<!--            android:clipToPadding="true"-->
+<!--            android:padding="0dp"-->
+<!--            app:cardBackgroundColor="@color/gray_100"-->
+<!--            app:cardCornerRadius="@dimen/card_radius"-->
+<!--            app:cardElevation="@dimen/card_elevation"-->
+<!--            app:cardPreventCornerOverlap="false"-->
+<!--            app:contentPadding="-4dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">-->
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/SearchBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:queryHint="@string/search_query_hint"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@android:color/transparent" />
-        </com.google.android.material.card.MaterialCardView>
+<!--            <androidx.appcompat.widget.SearchView-->
+<!--                android:id="@+id/SearchBar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:queryHint="@string/search_query_hint"-->
+<!--                app:iconifiedByDefault="false"-->
+<!--                app:queryBackground="@android:color/transparent" />-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
         <LinearLayout
             android:id="@+id/Category"
@@ -79,7 +83,7 @@
             android:weightSum="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SearchBarCard">
+            app:layout_constraintTop_toBottomOf="@+id/WelcomeUserTxt">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/CatNatureBtn"
@@ -215,35 +219,75 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/News"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
+
+        <TextView
+            android:id="@+id/NewsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/home_news_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_section_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Category" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@id/NewsImageSliderCard"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
-            android:orientation="horizontal"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category">
+            app:layout_constraintTop_toBottomOf="@+id/NewsTitle">
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/NewsImageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-        </LinearLayout>
+                android:contentDescription="News List"
+                android:elevation="8dp"
+                android:orientation="horizontal" />
+        </androidx.cardview.widget.CardView>
+
+        <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+            android:id="@+id/DotsIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:dampingRatio="0.5"
+            app:dotsColor="@android:color/darker_gray"
+            app:dotsCornerRadius="20dp"
+            app:dotsSize="8dp"
+            app:dotsSpacing="6dp"
+            app:dotsStrokeWidth="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NewsImageSliderCard"
+            app:selectedDotColor="@color/md_theme_light_primary"
+            app:stiffness="300" />
 
         <TextView
             android:id="@+id/PFTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/home_popular_fundraising_title"
-            android:textColor="@color/gray_800"
-            android:textSize="@dimen/search_txt_size"
+            android:textColor="@color/material_dynamic_neutral30"
+            android:textSize="@dimen/home_section_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@id/DotsIndicator" />
 
         <ImageButton
             android:id="@+id/PFNextBtn"
@@ -271,29 +315,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PFTitle"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/PFTitle" />
 
 
 
         <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="16dp"-->
-    <!--        android:layout_marginStart="@dimen/screen_width_margin"-->
-    <!--        android:layout_marginTop="284dp"-->
-    <!--        android:layout_marginEnd="@dimen/screen_width_margin"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/SearchBtn">-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="16dp"-->
+        <!--        android:layout_marginStart="@dimen/screen_width_margin"-->
+        <!--        android:layout_marginTop="284dp"-->
+        <!--        android:layout_marginEnd="@dimen/screen_width_margin"-->
+        <!--        android:orientation="horizontal"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintHorizontal_bias="0.0"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/SearchBtn">-->
 
-    <!--        <com.google.android.aial.card.MaterialCardView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            app:cardCornerRadius="@dimen/card_radius"-->
-    <!--            app:cardUseCompatPadding="true" />-->
-    <!--    </LinearLayout>-->
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:cardCornerRadius="@dimen/card_radius"-->
+        <!--            app:cardUseCompatPadding="true" />-->
+        <!--    </LinearLayout>-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

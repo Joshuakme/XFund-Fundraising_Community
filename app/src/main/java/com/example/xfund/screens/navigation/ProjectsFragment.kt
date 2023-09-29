@@ -31,7 +31,6 @@ class ProjectsFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_projects, container, false
@@ -65,18 +64,7 @@ class ProjectsFragment : Fragment(){
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        /*// Set an onClickListener for the items in your RecyclerView
-        adapter.setOnClickListener(object : ProjectItemAdapter.OnClickListener {
-            override fun onClick(position: Int, model: Project) {
-                // Create a bundle to pass data to ProjectDetailFragment if needed
-                val bundle = Bundle()
-                // You can put any data you want to pass here, e.g., model information
-
-
-                // Navigate to the ProjectDetailFragment using the action
-                findNavController().navigate(R.id.action_projectsFragment_to_projectDetailFragment, bundle)
-            }
-        })*/
+      
 
         // Search Elements
         val searchBar: androidx.appcompat.widget.SearchView = binding.ProjectSearch

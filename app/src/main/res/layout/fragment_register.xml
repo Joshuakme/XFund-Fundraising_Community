@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Registration">
+
+        <ImageView
+            android:id="@+id/LogoRegister"
+            android:layout_width="181dp"
+            android:layout_height="188dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.032"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/TextRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LogoRegister" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RegisterEmail"
+            app:layout_constraintTop_toBottomOf="@+id/TextRegister">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tfRegisterEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="email"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                app:helperText = "Required"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="319dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RegisterPassword"
+            app:layout_constraintTop_toBottomOf="@+id/textInputEmail"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tfRegisterPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                app:helperText = "Required"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="375dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputConPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/LogoConPassword"
+            app:layout_constraintTop_toBottomOf="@+id/textInputPassword"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tfRegisterConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                app:helperText = "Required"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="431dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_button"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputConPassword"
+            app:layout_constraintVertical_bias="0.347" />
+
+        <TextView
+            android:id="@+id/tvHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.373"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Log in"
+            android:textColor="#485BFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvHaveAccount"
+            app:layout_constraintStart_toEndOf="@+id/tvHaveAccount"
+            app:layout_constraintTop_toTopOf="@+id/tvHaveAccount" />
+
+        <!--        app:srcCompat="@drawable/logo_profile_black" />-->
+
+        <ImageView
+            android:id="@+id/RegisterEmail"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="10dp"
+            app:tint="@color/button_disabled_txt"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputEmail"
+            app:layout_constraintEnd_toStartOf="@+id/textInputEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_email" />
+
+        <ImageView
+            android:id="@+id/RegisterPassword"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="6dp"
+            app:tint="@color/button_disabled_txt"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputPassword"
+            app:layout_constraintEnd_toStartOf="@+id/textInputPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputEmail"
+            app:srcCompat="@drawable/ic_password" />
+
+        <ImageView
+            android:id="@+id/LogoConPassword"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            app:tint="@color/button_disabled_txt"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputConPassword"
+            app:layout_constraintEnd_toStartOf="@+id/textInputConPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputConPassword"
+            app:srcCompat="@drawable/ic_password" />
+
+        <ProgressBar
+            android:id="@+id/progressBarRegistration"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/RegisterBackBtn"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

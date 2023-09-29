@@ -6,6 +6,7 @@ import java.util.Date
 
 
 data class Project(
+
     val cover: Int,
     val name: String,
     val start_date: Date,

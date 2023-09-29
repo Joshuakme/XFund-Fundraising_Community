@@ -14,7 +14,17 @@
         android:id="@+id/profileFragment"
         android:name="com.example.xfund.screens.navigation.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/projectsFragment"
         android:name="com.example.xfund.screens.navigation.ProjectsFragment"
@@ -39,6 +49,26 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popUpTo="@id/communityFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_communityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+            <argument
+                android:name="title"
+                app:argType="string" />
+            <argument
+                android:name="desc"
+                app:argType="string" />
+            <argument
+                android:name="date"
+                app:argType="string" />
+            <argument
+                android:name="author"
+                app:argType="string" />
+            <argument
+                android:name="tags"
+                app:argType="string[]" />
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/addDiscussionFragment"

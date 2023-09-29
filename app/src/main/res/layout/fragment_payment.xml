@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.community.AddDiscussionFragment">
+
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/baseline_chevron_left_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/paymentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:text="@string/payment_title"
+            android:textSize="@dimen/screen_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/donationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="48dp"
+            android:text="@string/payment_donation_label"
+            android:textSize="@dimen/payment_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backBtn" />
+
+        <TextView
+            android:id="@+id/thankTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:text="@string/donation_thank_you_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+        <TextView
+            android:id="@+id/savedCardTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="250dp"
+            android:text="@string/payment_saved_card_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thankTxt" />
+
+        <TextView
+            android:id="@+id/changeCardTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="240dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:clickable="true"
+            android:padding="8dp"
+            android:text="@string/payment_change_card_link"
+            android:textColor="@color/accent_primary_300"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thankTxt" />
+
+        <!-- A CardView that contains a TextView -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/savedCardView"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/savedCardTxt">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="@dimen/card_elevation">
+
+                <TextView
+                    android:id="@+id/savedCardName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/saved_card_name"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/savedCardImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/savedCardNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/saved_card_no"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/savedCardImg"
+                    app:layout_constraintTop_toBottomOf="@+id/savedCardName" />
+
+                <ImageView
+                    android:id="@+id/savedCardImg"
+                    android:layout_width="@dimen/payment_method_width"
+                    android:layout_height="@dimen/payment_method_height"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/payment_mastercard"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/donateBtn"
+            style="Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/payment_button_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:text="@string/payment_donate_btn"
+            app:cornerRadius="@dimen/button_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/savedCardView" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donationLabel">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/payment_donation_sample" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
