@@ -88,5 +88,8 @@
     <string name="home_news_title">News</string>
     <string name="detail_discussion_comment_title">Comment</string>
 
+    <!-- Project: project_list_card_cell -->
+    <string name="add_percentage_behind">%s</string>
+
 
 </resources>

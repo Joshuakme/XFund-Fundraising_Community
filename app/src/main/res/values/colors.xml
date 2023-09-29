@@ -15,6 +15,7 @@
     <color name="gray_200">#DADFE6</color>
     <color name="gray_300">#B3BDCB</color>
     <color name="gray_400">#7689A2</color>
+    <color name="gray_800">#454749</color>
 
     <color name="divider">#D8D6D6</color>
     <color name="button_disabled_bg">#EAEAEA</color>
@@ -24,6 +25,13 @@
     <!--  SplashScreen Screen  -->
     <color name="splash_background">#FEEFEF</color>
     <color name="light_gray">#DCDCDC</color>
+
+    <!-- Project Admin Screen Colors -->
+    <color name="AddButton">#2E3133</color>
+    <color name="EditButtonColor">#4CAF50</color>
+    <color name="EditButtonBackgroundColor">#C8E6C9</color>
+    <color name="DeleteButtonColor">#FF3B30</color>
+    <color name="DeleteButtonBackgroundColor">#FF9999</color>
 
 
 
