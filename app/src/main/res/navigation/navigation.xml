@@ -29,7 +29,15 @@
         android:id="@+id/projectsFragment"
         android:name="com.example.xfund.screens.navigation.ProjectsFragment"
         android:label="fragment_projects"
-        tools:layout="@layout/fragment_projects" />
+        tools:layout="@layout/fragment_projects" >
+        <action
+            android:id="@+id/action_projectsFragment_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment">
+            <argument
+                android:name="project"
+                app:argType="com.example.xfund.model.Project" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.example.xfund.screens.navigation.CommunityFragment"
@@ -78,51 +86,47 @@
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/forgotPasswordFragment"
-        android:name="com.example.xfund.screens.user.ForgotPasswordFragment"
-        android:label="ForgotPasswordFragment" >
+        android:id="@+id/projectDetailFragment"
+        android:name="com.example.xfund.screens.project.ProjectDetailFragment"
+        android:label="fragment_project_detail"
+        tools:layout="@layout/fragment_project_detail" >
         <action
-            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_projectDetailFragment_to_projectsFragment"
+            app:destination="@id/projectsFragment" />
+        <action
+            android:id="@+id/action_projectDetailFragment_to_adminProjectFragment"
+            app:destination="@id/adminProjectFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.xfund.screens.user.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
+        android:id="@+id/adminProjectFragment"
+        android:name="com.example.xfund.screens.project.AdminProjectFragment"
+        android:label="fragment_admin_project"
+        tools:layout="@layout/fragment_admin_project" >
         android:id="@+id/editProfileFragment"
         android:name="com.example.xfund.screens.user.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.xfund.screens.user.LoginFragment"
         android:label="LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            android:id="@+id/action_adminProjectFragment_to_editProjectFragment"
+            app:destination="@id/editProjectFragment" />
     </fragment>
     <fragment
-        android:id="@+id/discussionDetailFragment"
-        android:name="com.example.xfund.screens.community.DiscussionDetailFragment"
-        android:label="fragment_discussion_detail"
-        tools:layout="@layout/fragment_discussion_detail" >
+        android:id="@+id/editProjectFragment"
+        android:name="com.example.xfund.screens.project.EditProjectFragment"
+        android:label="EditProjectFragment" >
         <action
-            android:id="@+id/action_discussionDetailFragment_to_communityFragment"
-            app:destination="@id/communityFragment" />
+            android:id="@+id/action_editProjectFragment_to_adminProjectFragment"
+            app:destination="@id/adminProjectFragment" />
     </fragment>
 
 </navigation>

@@ -89,5 +89,8 @@
     <string name="posted_discussion_edit_button">Edit</string>
     <string name="fragment_title_posted_community">Posted Discussions</string>
 
+    <!-- Project: project_list_card_cell -->
+    <string name="add_percentage_behind">%s</string>
+
 
 </resources>

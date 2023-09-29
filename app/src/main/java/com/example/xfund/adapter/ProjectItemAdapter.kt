@@ -1,51 +1,68 @@
 package com.example.xfund.adapter
 
 import android.content.Context
+
+import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xfund.R
+import com.example.xfund.databinding.ProjectsListCardCellBinding
 import com.example.xfund.model.Project
+import com.example.xfund.screens.navigation.ProjectsFragmentDirections
 
-
-class ProjectItemAdapter(private val itemList : List<Project>) : RecyclerView.Adapter<ProjectItemAdapter.ViewHolder>() {
+class ProjectItemAdapter(
+    val context: Context, private val itemList: List<Project>, private val navController: NavController) :
+    RecyclerView.Adapter<ProjectItemAdapter.ViewHolder>() {
+    /*private var onClickListener: OnClickListener? = null*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.projects_list_card_cell,
-        parent, false)
-        return ViewHolder(itemView)
-
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ProjectsListCardCellBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return itemList.size
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
         val currentItem = itemList[position]
-        holder.name.text = currentItem.name
-        holder.description.text = currentItem.description
-    }
+        holder.bind(currentItem)
 
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+        holder.itemView.setOnClickListener {
 
-        val name: TextView
-        val description : TextView
-
-        init {
-            // Define click listener for the ViewHolder's View
-            name  = itemView.findViewById(R.id.CardTitle)
-            description = itemView.findViewById(R.id.CardDesc)
+            // Navigate to FragmentB when item is clicked
+            val action = ProjectsFragmentDirections
+                .actionProjectsFragmentToProjectDetailFragment(
+                    currentItem)
+            Log.d("ProjectItemAdapter", "Current item: $currentItem")
+            navController.navigate(action)
         }
     }
 
+    /*// A function to bind the onclickListener.
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    // onClickListener Interface
+    interface OnClickListener {
+        fun onClick(position: Int, model: Project)
+    }*/
+
+    inner class ViewHolder(
+        private val binding: ProjectsListCardCellBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(project: Project) {
+            binding.project = project
+            // Ensure data binding updates immediately
+            binding.executePendingBindings()
+        }
+    }
 }
-
-
-

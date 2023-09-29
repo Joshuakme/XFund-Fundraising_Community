@@ -1,5 +1,3 @@
-package com.example.xfund.viewModel
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,5 +15,5 @@ class UserViewModel : ViewModel() {
 
     fun setUser(user: FirebaseUser?) {
         _currentUser.value = user
-    }
+        }
 }

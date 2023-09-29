@@ -1,6 +1,8 @@
 package com.example.xfund.screens.navigation
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -36,6 +38,8 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
     private lateinit var databaseReference: DatabaseReference
     private val db = FirebaseFirestore.getInstance()
     private lateinit var newsList: List<NewsModel>
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +53,8 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         )
 
         // ELEMENTS IN FRAGMENT
+        sharedPreferences =
+            requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         // Search Elements
 //        val searchBar : SearchView = binding.SearchBar
 //        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
@@ -56,7 +62,8 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         // Image Slider Elements
         val newsViewPager: ViewPager = binding.NewsImageSlider
         val dotsIndicator = binding.DotsIndicator
-        databaseReference = FirebaseDatabase.getInstance().getReference("news") // Initialize Firebase and reference to your news items node
+        databaseReference = FirebaseDatabase.getInstance()
+            .getReference("news") // Initialize Firebase and reference to your news items node
         databaseReference.child("news").get()
         // User Element
         val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
@@ -68,6 +75,28 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 //        txtSearch.setHint(R.string.search_query_hint)
 //        txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
         //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
+
+        // SharedPreference - Login
+        val isFirstTime = sharedPreferences?.getBoolean("IsFirstTime", true)
+        val editor = sharedPreferences?.edit()
+
+
+        if (isFirstTime == true) {
+            // set login status to false if first time use app
+            editor?.putBoolean("IsLogin", false)
+            editor?.putBoolean("IsFirstTime", false)
+            editor?.apply()
+        }
+
+
+            // Search Bar
+            //searchIcon.setColorFilter(
+            //    ContextCompat.getColor(requireContext(), R.color.gray_300),
+            //    android.graphics.PorterDuff.Mode.SRC_IN
+            //)
+            //txtSearch.setHint(R.string.search_query_hint)
+            //txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+            //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
 
         // Image Slider
         // Create a list of NewsModel objects
