@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".screens.project.ProjectDetailFragment">
 
+
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ProjectDetailFragmentLayout"
@@ -11,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/projectImage"
+            android:id="@+id/projectDetailImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,10 +43,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/projectImage">
+            app:layout_constraintTop_toBottomOf="@+id/projectDetailImage">
 
             <TextView
-                android:id="@+id/projectName"
+                android:id="@+id/projectDetailName"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:text="project name"
@@ -65,25 +66,25 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/projectName">
+                app:layout_constraintTop_toBottomOf="@+id/projectDetailName">
 
                 <TextView
-                    android:id="@+id/projectFundCollected"
+                    android:id="@+id/projectDetailFundCollected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="RM 700"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/CardProgressBar" />
+                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar" />
 
                 <TextView
-                    android:id="@+id/projectFundFrom"
+                    android:id="@+id/projectDetailFundFrom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text=" FROM "
-                    app:layout_constraintStart_toEndOf="@id/projectFundCollected"
-                    app:layout_constraintBottom_toTopOf="@id/CardProgressBar" />
+                    app:layout_constraintStart_toEndOf="@id/projectDetailFundCollected"
+                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar" />
 
                 <TextView
                     android:id="@+id/projectFundTarget"
@@ -91,17 +92,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="RM 1200"
-                    app:layout_constraintStart_toEndOf="@id/projectFundFrom"
-                    app:layout_constraintBottom_toTopOf="@id/CardProgressBar"  />
+                    app:layout_constraintStart_toEndOf="@id/projectDetailFundFrom"
+                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"  />
 
                 <TextView
-                    android:id="@+id/percentageValue"
+                    android:id="@+id/projectDetailPercentageValue"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="40"
                     android:textSize="35sp"
                     android:textColor="@color/design_default_color_primary"
-                    app:layout_constraintBottom_toTopOf="@+id/CardProgressBar"
+                    app:layout_constraintBottom_toTopOf="@+id/ProjectDetailCardProgressBar"
                     app:layout_constraintEnd_toStartOf="@id/percentageSymbol2"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,13 +114,13 @@
                     android:text="%"
                     android:textSize="35sp"
                     android:textColor="@color/design_default_color_primary"
-                    app:layout_constraintBottom_toTopOf="@+id/CardProgressBar"
+                    app:layout_constraintBottom_toTopOf="@+id/ProjectDetailCardProgressBar"
                     app:layout_constraintEnd_toEndOf="@id/Constraint2"
                     app:layout_constraintTop_toTopOf="parent"/>
 
 
                 <ProgressBar
-                    android:id="@+id/CardProgressBar"
+                    android:id="@+id/ProjectDetailCardProgressBar"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,10 +128,9 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:max="100"
-                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/percentageValue" />
+                    app:layout_constraintTop_toBottomOf="@id/projectDetailPercentageValue" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -138,21 +138,32 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/ProjectDetailDescription"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:padding="10dp"
-            android:text="TextView"
             android:background="@color/gray_100"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/ProjectDetailShareButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contraintOne" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/ProjectDetailShareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ProjectDetailDonateButton"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/ProjectDetailDonateButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -161,18 +172,9 @@
             android:text="Donate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button2" />
+            app:layout_constraintStart_toEndOf="@+id/ProjectDetailShareButton" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
-            app:layout_constraintStart_toStartOf="parent" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

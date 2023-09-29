@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screens.navigation.ProjectsFragment">
+    tools:context=".screens.project.AdminProjectFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +33,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <LinearLayout
+                android:id="@+id/ProjectAddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/screen_width_margin"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/rounded_edge"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="9dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="9dp"
+                app:layout_constraintBottom_toTopOf="@+id/ProjectSearch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/ProjectAddButtonIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="#002B2020"
+                    android:contentDescription="Add Discussion"
+                    android:scaleType="center"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/baseline_add_24"
+                    app:tint="@color/AddButton" />
+
+                <TextView
+                    android:id="@+id/ProjectAddButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/add_new_discussion_btn_txt"
+                    android:textColor="@color/AddButton"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/AddIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/ProjectSearch"
                 android:layout_width="0dp"
@@ -59,7 +104,7 @@
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TopPart"
-            tools:listitem="@layout/projects_list_card_cell">
+            tools:listitem="@layout/project_admin_list_card_cell">
 
         </androidx.recyclerview.widget.RecyclerView>
 

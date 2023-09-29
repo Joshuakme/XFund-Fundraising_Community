@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
@@ -18,6 +18,9 @@ import com.example.xfund.databinding.FragmentProjectsBinding
 import com.example.xfund.model.Project
 import com.google.firebase.database.DatabaseReference
 import java.util.Date
+
+
+
 
 
 class ProjectsFragment : Fragment(){
@@ -57,22 +60,23 @@ class ProjectsFragment : Fragment(){
                 "Hellow"
             )
         )
-        val adapter = ProjectItemAdapter(itemList)
+        val navController = NavHostFragment.findNavController(this)
+        val adapter = ProjectItemAdapter(requireContext(), itemList, navController)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
-        // Set an onClickListener for the items in your RecyclerView
+        /*// Set an onClickListener for the items in your RecyclerView
         adapter.setOnClickListener(object : ProjectItemAdapter.OnClickListener {
             override fun onClick(position: Int, model: Project) {
                 // Create a bundle to pass data to ProjectDetailFragment if needed
                 val bundle = Bundle()
                 // You can put any data you want to pass here, e.g., model information
 
+
                 // Navigate to the ProjectDetailFragment using the action
                 findNavController().navigate(R.id.action_projectsFragment_to_projectDetailFragment, bundle)
             }
-        })
+        })*/
 
         // Search Elements
         val searchBar: androidx.appcompat.widget.SearchView = binding.ProjectSearch
@@ -94,12 +98,5 @@ class ProjectsFragment : Fragment(){
 
         return binding.root
     }
-
-    companion object{
-        val NEXT_SCREEN="details_screen"
-    }
-
-
-
 
 }

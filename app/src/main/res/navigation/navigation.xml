@@ -22,7 +22,11 @@
         tools:layout="@layout/fragment_projects" >
         <action
             android:id="@+id/action_projectsFragment_to_projectDetailFragment"
-            app:destination="@id/projectDetailFragment" />
+            app:destination="@id/projectDetailFragment">
+            <argument
+                android:name="project"
+                app:argType="com.example.xfund.model.Project" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/communityFragment"
@@ -59,6 +63,26 @@
         <action
             android:id="@+id/action_projectDetailFragment_to_projectsFragment"
             app:destination="@id/projectsFragment" />
+        <action
+            android:id="@+id/action_projectDetailFragment_to_adminProjectFragment"
+            app:destination="@id/adminProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminProjectFragment"
+        android:name="com.example.xfund.screens.project.AdminProjectFragment"
+        android:label="fragment_admin_project"
+        tools:layout="@layout/fragment_admin_project" >
+        <action
+            android:id="@+id/action_adminProjectFragment_to_editProjectFragment"
+            app:destination="@id/editProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProjectFragment"
+        android:name="com.example.xfund.screens.project.EditProjectFragment"
+        android:label="EditProjectFragment" >
+        <action
+            android:id="@+id/action_editProjectFragment_to_adminProjectFragment"
+            app:destination="@id/adminProjectFragment" />
     </fragment>
 
 </navigation>
