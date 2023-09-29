@@ -51,20 +51,4 @@ class DiscussionDetailFragment : Fragment() {
 
         return binding.root
     }
-
-
-    companion object {
-        fun newInstance(title: String, desc: String, tags: List<String>, author: String, date: Date): DiscussionDetailFragment {
-            val fragment = DiscussionDetailFragment()
-            val args = Bundle()
-            args.putString("TITLE", title)
-            args.putString("DESC", desc)
-            args.putStringArrayList("TAGS", ArrayList(tags))
-            args.putString("AUTHOR", author)
-            args.putString("DATE", SimpleDateFormat("yyyy-MM-dd").format(date))
-
-            fragment.arguments = args
-            return fragment
-        }
-    }
 }

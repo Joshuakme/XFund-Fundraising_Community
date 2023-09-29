@@ -66,8 +66,6 @@ class AddDiscussionFragment : Fragment() {
         submitButton = binding.submitButton
 
 
-
-
         // Hide bottom nav when load this page
         if (bottomNav != null) {
             bottomNav.visibility = View.GONE

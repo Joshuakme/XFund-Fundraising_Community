@@ -20,7 +20,6 @@
     <string name="community_item_1_date">23-Aug-2023</string>
 
 
-
     <!-- Home Fragment -->
     <string name="welcome_user_title">Hi, %s</string>
     <string name="search_query_hint">Enter the project name</string>
@@ -87,6 +86,8 @@
     <string name="payment_addPay_txt">Add Method</string>
     <string name="home_news_title">News</string>
     <string name="detail_discussion_comment_title">Comment</string>
+    <string name="posted_discussion_edit_button">Edit</string>
+    <string name="fragment_title_posted_community">Posted Discussions</string>
 
 
 </resources>

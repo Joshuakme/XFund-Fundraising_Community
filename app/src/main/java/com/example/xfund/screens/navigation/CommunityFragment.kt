@@ -54,7 +54,6 @@ class CommunityFragment : Fragment() {
 
         // Variable
         val communityRecycler: RecyclerView = view.findViewById(R.id.CommunityRecycleView)
-        val firebaseHelper = FirebaseHelper()
 
         // Fetch data from Firebase
         val db = Firebase.firestore     // Firestore
