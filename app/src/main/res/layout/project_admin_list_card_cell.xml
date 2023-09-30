@@ -9,15 +9,15 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/ProjectAdminCardView"
+        android:id="@+id/projectAdminCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="20dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         app:cardCornerRadius="16dp"
         app:cardElevation="7dp">
 
@@ -27,100 +27,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
                 <ImageView
-                    android:id="@+id/ProjectAdminCardImage"
+                    android:id="@+id/projectAdminCardImage"
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
                     android:contentDescription="cover"
                     android:scaleType="centerCrop"
                     android:src="@{project.cover}"
+                    android:clickable="false"
+                    android:focusable="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:id="@+id/ProjectAdminCardEditButton"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    android:paddingTop="9dp"
-                    android:paddingEnd="18dp"
-                    android:paddingBottom="9dp"
-                    android:background="@color/EditButtonBackgroundColor"
-                    app:layout_constraintEnd_toEndOf="@+id/ProjectAdminCardImage"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/ProjectAdminCardEditButtonImage"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/EditButtonColor"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icon_edit_50"/>
-
-                    <TextView
-                        android:id="@+id/ProjectAdminCardEditButtonText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Edit"
-                        android:textColor="@color/EditButtonColor"
-                        android:textSize="18sp"
-                        app:layout_constraintStart_toEndOf="@+id/ProjectAdminCardEditButtonImage"
-                        app:layout_constraintTop_toTopOf="parent"  />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ProjectAdminCardDeleteButton"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    android:paddingTop="9dp"
-                    android:paddingEnd="18dp"
-                    android:paddingBottom="9dp"
-                    android:background="@color/DeleteButtonBackgroundColor"
-                    app:layout_constraintEnd_toEndOf="@+id/ProjectAdminCardImage"
-                    app:layout_constraintTop_toBottomOf="@id/ProjectAdminCardEditButton">
-
-                    <ImageView
-                        android:id="@+id/ProjectAdminCardDeleteButtonImage"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="5dp"
-                        app:tint="@color/DeleteButtonColor"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icons_delete_30"/>
-
-                    <TextView
-                        android:id="@+id/ProjectAdminCardDeleteButtonText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Delete"
-                        android:textColor="@color/DeleteButtonColor"
-                        android:textSize="18sp"
-                        app:layout_constraintStart_toEndOf="@+id/ProjectAdminCardDeleteButtonImage"
-                        app:layout_constraintTop_toTopOf="parent"  />
-
-                </LinearLayout>
-
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
             <View
@@ -130,7 +49,7 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/CardTitle"
+                android:id="@+id/cardTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -139,10 +58,12 @@
                 android:text="@{project.name}"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:clickable="false"
+                android:focusable="false"/>
 
             <TextView
-                android:id="@+id/CardDesc"
+                android:id="@+id/cardDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -150,43 +71,84 @@
                 android:gravity="start"
                 android:lines="2"
                 android:text="@{project.description}"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textColor="@color/gray_400"
+                android:textSize="12sp"
+                android:clickable="false"
+                android:focusable="false"/>
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/CardProgressBarText"
+                    android:id="@+id/cardProgressBarText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:textSize="30sp"
-                    android:text="@{@string/add_percentage_behind(project.percentageValue)}"
-                    android:textColor="@color/design_default_color_primary" />
+                    android:textSize="20sp"
+                    android:text="@{project.percentageValue}"
+                    android:textColor="@color/progressBarColor"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/percentageSymbol"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:clickable="false"
+                    android:focusable="false"/>
 
                 <TextView
                     android:id="@+id/percentageSymbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:text="%"
-                    android:textColor="@color/design_default_color_primary"/>
+                    android:textColor="@color/progressBarColor"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toEndOf="@id/cardProgressBarText"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:clickable="false"
+                    android:focusable="false"/>
+
+                <ImageView
+                    android:id="@+id/projectAdminCardEditButtonImage"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
+                    app:tint="@color/gray_400"
+                    app:layout_constraintEnd_toStartOf="@id/projectAdminCardDeleteButtonImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icon_edit_50"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <ImageView
+                    android:id="@+id/projectAdminCardDeleteButtonImage"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
+                    app:tint="@color/deleteButtonColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icons_delete_30"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ProgressBar
-                android:id="@+id/CardProgressBar"
+                android:id="@+id/cardProgressBar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,7 +157,9 @@
                 android:layout_marginBottom="10dp"
                 android:max="100"
                 android:progress="@{project.percentage}"
-                android:progressTint="@color/design_default_color_primary"/>
+                android:progressTint="@color/progressBarColor"
+                android:clickable="false"
+                android:focusable="false"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

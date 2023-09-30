@@ -12,13 +12,13 @@
 
     <!--  Form Helper  -->
     <string name="form_field_required">Required</string>
+    <string name="required_more_than_50_characters">Required (More than 50 characters)</string>
 
 
     <!--  Testing Strings  -->
     <string name="community_item_1_title">I am strong.</string>
     <string name="community_item_1_desc">Please help me! Lorem Ipsum, this is a description, yes don\'t doubt. Yuppp, this is a description. Just to display this is a long description.</string>
     <string name="community_item_1_date">23-Aug-2023</string>
-
 
 
     <!-- Home Fragment -->
@@ -88,8 +88,28 @@
     <string name="home_news_title">News</string>
     <string name="detail_discussion_comment_title">Comment</string>
 
+
     <!-- Project: project_list_card_cell -->
     <string name="add_percentage_behind">%s</string>
+    <string name="MoneyPatternForProject">RM %s %.2f</string>
+    <string name="double_format">RM%s</string>
 
+    <!-- Project: fragment_project_detail -->
+    <string name="project_detail_from"> from </string>
+    <string name="project_detail_collected">Collected: </string>
+    <string name="project_detail_donate">Donate</string>
+
+    <!-- Project: fragment_admin_project -->
+    <string name="admin_project_add">Add</string>
+
+    <!-- Project: fragment_edit_project -->
+    <string name="edit_project_fragment_title">Edit Project</string>
+    <string name="edit_project_name">Name*</string>
+    <string name="edit_project_desc">Description*</string>
+    <string name="edit_project_cancel">Cancel</string>
+    <string name="edit_project_update">Update</string>
+
+    <!-- Project: fragment_add_project -->
+    <string name="add_project_fragment_title">Add Project</string>
 
 </resources>
