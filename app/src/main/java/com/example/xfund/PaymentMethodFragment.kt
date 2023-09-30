@@ -1,21 +1,26 @@
 package com.example.xfund
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.adapter.PaymentAdapter
 import com.example.xfund.databinding.FragmentPaymentMethodBinding
 import com.example.xfund.model.PaymentMethod
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 
 class PaymentMethodFragment : Fragment() {
     private lateinit var binding: FragmentPaymentMethodBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +46,24 @@ class PaymentMethodFragment : Fragment() {
         // Inflate the layout for this fragment
         val paymentMethodRV = binding.savedCardList
 
-        val paymentModelArrayList: ArrayList<PaymentMethod> = ArrayList<PaymentMethod>()
+        var paymentModelArrayList: ArrayList<PaymentMethod>
 
-        paymentModelArrayList.add(PaymentMethod("Master Card Ecas", "1234567887654321", "08/31", "123"))
-        paymentModelArrayList.add(PaymentMethod("Joshhhh Card", "9999999999999999", "09/31", "567"))
+        val db = Firebase.firestore
 
-        val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList)
+        db.collection("Payment Method Collection")
+            .get()
+            .addOnSuccessListener { result ->
+                    paymentModelArrayList = createPaymentMethods(result)
+
+                    //Adapter
+                    val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList)
+                    paymentMethodRV.adapter = paymentAdapter
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, exception.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+
 
         // Below line is for setting a layout manager for our recycler view.
         // Here, we are creating a vertical list, so we will provide orientation as vertical.
@@ -54,9 +71,24 @@ class PaymentMethodFragment : Fragment() {
 
         // In the next two lines, we are setting the layout manager and adapter for our recycler view.
         paymentMethodRV.layoutManager = linearLayoutManager
-        paymentMethodRV.adapter = paymentAdapter
+
 
         return binding.root
     }
 
+    private fun createPaymentMethods(querySnapshot: QuerySnapshot): ArrayList<PaymentMethod> {
+        val paymentMethodList = mutableListOf<PaymentMethod>()
+
+        for (document in querySnapshot.documents) {
+            val cardName = document.getString("cardName") ?: ""
+            val cardNo = document.getString("cardNo") ?: ""
+            val cardExpiry = document.getString("cardExpiry") ?: ""
+            val cardCvv = document.getString("cardCvv")?: ""
+
+            val paymentMethod = PaymentMethod(cardName, cardNo, cardExpiry, cardCvv)
+            paymentMethodList.add(paymentMethod)
+        }
+
+        return ArrayList(paymentMethodList)
+    }
 }
