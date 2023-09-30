@@ -1,18 +1,17 @@
 package com.example.xfund.screens.project
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.xfund.R
 import com.example.xfund.databinding.FragmentProjectDetailBinding
 import com.example.xfund.model.Project
-import java.text.SimpleDateFormat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class ProjectDetailFragment : Fragment() {
@@ -28,7 +27,7 @@ class ProjectDetailFragment : Fragment() {
         // Retrieve the project object from arguments
         val project = arguments?.getParcelable<Project>("project")
 
-        // Now you can access the properties of the Project object
+        // Access the properties of the Project object
         val cover = project?.cover
         val name = project?.name
         val startDate = project?.start_date
@@ -41,19 +40,38 @@ class ProjectDetailFragment : Fragment() {
         val txtName = binding.projectDetailName
         val txtDesc = binding.ProjectDetailDescription
         val progressBarView = binding.ProjectDetailCardProgressBar
+        val txtFundCollected = binding.projectDetailFundCollected
+        val txtFundTarget = binding.projectFundTarget
 
 
-        // Set Values
+        // Load image using Glide
+        Glide.with(binding.projectDetailImage.context)
+            .load(cover)
+            .centerCrop()
+            .into(binding.projectDetailImage)
+
+        // Set Values into the xml
         txtName.text = name
         txtDesc.text = description
+        //Make it into RM "fundCollected".00 form
+        val formattedText = getString(R.string.MoneyPatternForProject, "", fundCollected)
+        val formattedText2 = getString(R.string.MoneyPatternForProject, "", fundTarget)
+        txtFundCollected.text = formattedText
+        txtFundTarget.text = formattedText2
 
+
+
+        //ProgressBar Calculation
         var progressBar = ((fundCollected ?: 0).toFloat() / (fundTarget ?: 1).toFloat() * 100).toInt()
         binding.projectDetailPercentageValue.text = progressBar.toString()
-
-
-        // Set the calculated progress value to the ProgressBar
         progressBarView.progress = progressBar
 
+
+        // Hide bottom nav when load this page
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        if (bottomNav != null) {
+            bottomNav.visibility = View.GONE
+        }
 
 
         binding.ProjectDetailBackButton.setOnClickListener{
