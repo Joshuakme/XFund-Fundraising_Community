@@ -1,18 +1,24 @@
 package com.example.xfund.screens.navigation
 
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.xfund.R
 import com.example.xfund.viewModel.UserViewModel
+import com.google.android.gms.common.internal.BaseGmsClient.SignOutCallbacks
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -61,23 +67,12 @@ class ProfileFragment : Fragment() {
 
             // Event Listeners
             signOutBtn.setOnClickListener {
-                auth.signOut()
+                val messageSignOut : String = "Are you sure want to sign out?"
+                showSignOutAccountDialog(messageSignOut)
 
-                //save to preference file / sharedPreference
-                val editor = sharedPreferences.edit()
-                editor.putBoolean("IsLogin", false)
-                editor.commit()
-
-                // Display Message
-                Toast.makeText(
-                    context,
-                    "Signed Out",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                // Navigate to Home Page
-                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
+
+
 
             //Click the 'Account" in Profile Fragment, it will link to Edit Profile Fragment
             view.findViewById<MaterialCardView>(R.id.profileCard).setOnClickListener {
@@ -91,4 +86,46 @@ class ProfileFragment : Fragment() {
 
         return view
     }
+
+    private fun showSignOutAccountDialog(messageSignOut: String?){
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.signout_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val tvMessageSignOut: TextView = dialog.findViewById(R.id.tvMessageSignOut)
+        val btnSignOut : Button = dialog.findViewById(R.id.btnSignOut)
+        val btnCancelSignOut : Button = dialog.findViewById(R.id.btnCancelSignOut)
+
+        tvMessageSignOut.text = messageSignOut
+
+        btnSignOut.setOnClickListener{
+            auth.signOut()
+
+            //save to preference file / sharedPreference
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("IsLogin", false)
+            editor.commit()
+
+            // Display Message
+            Toast.makeText(
+                context,
+                "Signed Out",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            // Navigate to Home Page
+            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+
+            dialog.dismiss()
+        }
+
+        btnCancelSignOut.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
 }

@@ -99,9 +99,9 @@ class EditProfileFragment : Fragment() {
 
         // Delete Account
         binding.DeleteAccount.setOnClickListener{
-           val message : String? = "Are you sure want to delete account?"
-           showDeleteAccountDialog(message)
-       }
+            val message : String? = "Are you sure want to delete account?"
+            showDeleteAccountDialog(message)
+        }
         // Edit Image
         binding.EditIcon.setOnClickListener {
             pickImage.launch("image/*")
@@ -127,7 +127,7 @@ class EditProfileFragment : Fragment() {
             }
             .addOnFailureListener { exception ->
                 // Handle upload failure.
-                }
+            }
     }
 
 
@@ -139,12 +139,12 @@ class EditProfileFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)
-        val btnYes : Button = dialog.findViewById(R.id.btnYes)
-        val btnNo : Button = dialog.findViewById(R.id.btnNo)
+        val btnDelete : Button = dialog.findViewById(R.id.btnDelete)
+        val btnCancel : Button = dialog.findViewById(R.id.btnCancel)
 
         tvMessage.text = message
 
-        btnYes.setOnClickListener{
+        btnDelete.setOnClickListener{
             Toast.makeText(requireContext(), "Account Successfully Deleted", Toast.LENGTH_SHORT).show()
 
 
@@ -169,7 +169,7 @@ class EditProfileFragment : Fragment() {
             dialog.dismiss()
         }
 
-        btnNo.setOnClickListener{
+        btnCancel.setOnClickListener{
             dialog.dismiss()
         }
 
