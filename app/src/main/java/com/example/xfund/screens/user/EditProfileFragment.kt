@@ -73,7 +73,7 @@ class EditProfileFragment : Fragment() {
         val emailTxt = binding.tfEditEmail
         val passwordTxt = binding.tfEditPassword
 
-        // Check if logged ind
+        // Check if logged in
         val isLogin: Boolean = sharedPreferences?.getBoolean("IsLogin", false) == true
 
         if(isLogin && FirebaseAuth.getInstance().currentUser != null) {
@@ -94,8 +94,9 @@ class EditProfileFragment : Fragment() {
 
         // EVENT LISTENERS
         binding.btnSave.setOnClickListener {
-            updateUserDetail(binding.tfEditUsername.text.toString())
+            uri?.let { it1 -> updateUserDetail(binding.tfEditUsername.text.toString(), it1) }
         }
+
         // Delete Account
         binding.DeleteAccount.setOnClickListener{
            val message : String? = "Are you sure want to delete account?"
@@ -175,13 +176,13 @@ class EditProfileFragment : Fragment() {
         dialog.show()
     }
 
-    private fun updateUserDetail(displayName: String) {
+    private fun updateUserDetail(displayName: String, imageUri: Uri) {
         // Upload photo to firebase
         //uploadProfileImageToFirebaseStorage(imageUri)
-        lateinit var imageUri: Uri
+
 
         val profileUpdates = UserProfileChangeRequest.Builder()
-            //.setPhotoUri(imageUri)
+            .setPhotoUri(imageUri)
             .setDisplayName(displayName)
             .build()
 

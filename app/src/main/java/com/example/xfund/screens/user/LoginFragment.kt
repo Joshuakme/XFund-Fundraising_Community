@@ -104,9 +104,6 @@ class LoginFragment : Fragment() {
                 builder.show()
 
                 // After successful login
-                val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-                userViewModel.setUser(FirebaseAuth.getInstance().currentUser)
-
                 auth.signInWithEmailAndPassword(
                     emailEditText.text.toString(),
                     passwordEditText.text.toString()
@@ -117,15 +114,14 @@ class LoginFragment : Fragment() {
 
                         val user = auth.currentUser
 
-                        userViewModel.setUser(user)
+                        // Set UserViewModel
+                        val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                        userViewModel.setUser(FirebaseAuth.getInstance().currentUser)
 
                         // Save Login Status (True) in Shared Preference
                         val editor = sharedPref?.edit()
                         editor?.putBoolean("IsLogin", true)
                         editor?.apply()
-
-                        // Set UserViewModel
-
 
                         // Set Toast Message
                         Toast.makeText(
