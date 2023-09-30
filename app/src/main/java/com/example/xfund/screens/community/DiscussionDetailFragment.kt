@@ -25,10 +25,15 @@ class DiscussionDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_discussion_detail, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // Variable Declaration
         val txtTitle = binding.discussionTitle
         val txtDesc = binding.discussionDescription
-        val tagsChipGroup = binding.detailTagChipGroup
         val txtAuthor = binding.discussionAuthor
         val txtDate = binding.discussionDate
         val backBtn = binding.backButton
@@ -37,7 +42,6 @@ class DiscussionDetailFragment : Fragment() {
         // Set Values
         txtTitle.text = arguments?.getString("title")
         txtDesc.text = arguments?.getString("desc")
-        val tagList = arguments?.getStringArrayList("tags")
         txtAuthor.text = arguments?.getString("author")
         txtDate.text = arguments?.getString("date")
 
@@ -47,8 +51,5 @@ class DiscussionDetailFragment : Fragment() {
         backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_discussionDetailFragment_to_communityFragment)
         }
-
-
-        return binding.root
     }
 }

@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_viewPostedCommunityFragment"
+            app:destination="@id/viewPostedCommunityFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"
@@ -68,6 +71,9 @@
                 android:name="tags"
                 app:argType="string[]" />
         </action>
+        <action
+            android:id="@+id/action_communityFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
 
     </fragment>
     <fragment
@@ -164,6 +170,62 @@
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPostedCommunityFragment"
+        android:name="com.example.xfund.screens.community.ViewPostedCommunityFragment"
+        android:label="fragment_view_posted_community"
+        tools:layout="@layout/fragment_view_posted_community" >
+        <action
+            android:id="@+id/action_viewPostedCommunityFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_viewPostedCommunityFragment_to_editDiscussionFragment"
+            app:destination="@id/editDiscussionFragment" >
+            <argument
+                android:name="discussionId"
+                app:argType="string" />
+            <argument
+                android:name="title"
+                app:argType="string" />
+            <argument
+                android:name="desc"
+                app:argType="string" />
+            <argument
+                android:name="tags"
+                app:argType="string[]" />
+            <argument
+                android:name="date"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_viewPostedCommunityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+            <argument
+                android:name="title"
+                app:argType="string" />
+            <argument
+                android:name="desc"
+                app:argType="string" />
+            <argument
+                android:name="date"
+                app:argType="string" />
+            <argument
+                android:name="author"
+                app:argType="string" />
+            <argument
+                android:name="tags"
+                app:argType="string[]" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/editDiscussionFragment"
+        android:name="com.example.xfund.screens.community.EditDiscussionFragment"
+        android:label="fragment_edit_discussion"
+        tools:layout="@layout/fragment_edit_discussion" >
+        <action
+            android:id="@+id/action_editDiscussionFragment_to_viewPostedCommunityFragment"
+            app:destination="@id/viewPostedCommunityFragment" />
     </fragment>
 
 </navigation>

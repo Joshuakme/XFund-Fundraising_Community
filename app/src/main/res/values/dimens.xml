@@ -9,6 +9,10 @@
     <dimen name="card_radius">8dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
 
+    <!--  Common: Dialog View  -->
+    <dimen name="dialog_card_radius">8dp</dimen>
+    <dimen name="dialog_card_elevation">8dp</dimen>
+
     <!-- Home Fragment -->
     <dimen name="section_title">18sp</dimen>
     <dimen name="search_txt_size">18sp</dimen>
@@ -20,10 +24,11 @@
     <!-- Community: Add Discussion -->
     <dimen name="form_input_title">18sp</dimen>
     <dimen name="form_input_value">16sp</dimen>
-
-    <dimen name="profile_font_size">32dp</dimen>
-    <dimen name="profile_font">25dp</dimen>
     <dimen name="chip_vertical_height">1dp</dimen>
+
+    <!--  Profile Fragment  -->
+    <dimen name="profile_menu_text">18dp</dimen>
+    <dimen name="profile_menu_height">45dp</dimen>
 
 
 

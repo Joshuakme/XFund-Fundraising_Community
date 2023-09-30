@@ -6,13 +6,12 @@
         <type value="QUICK_BOOT_TARGET" />
         <deviceKey>
           <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="RFCW20JSTGY" />
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\kohmi\.android\avd\Pixel_3_API_27.avd" />
           </Key>
         </deviceKey>
       </Target>
-    </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-09-28T16:05:51.940789700Z" />
-
+    </targetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2023-09-30T15:50:34.743346200Z" />
   </component>
 </project>

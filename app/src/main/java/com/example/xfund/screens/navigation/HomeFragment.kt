@@ -5,16 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,57 +19,29 @@ import com.example.xfund.adapter.ImageSliderAdapter
 import com.example.xfund.databinding.FragmentHomeBinding
 import com.example.xfund.model.NewsModel
 import com.example.xfund.viewModel.UserViewModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date
 
 
 class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var databaseReference: DatabaseReference
-    private val db = FirebaseFirestore.getInstance()
     private lateinit var newsList: List<NewsModel>
     private lateinit var sharedPreferences: SharedPreferences
-
+    private lateinit var currentUserViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_home,
-            container,
-            false
-        )
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container,false)
 
         // ELEMENTS IN FRAGMENT
         sharedPreferences =
             requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-        // Search Elements
-//        val searchBar : SearchView = binding.SearchBar
-//        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
-//        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
-        // Image Slider Elements
-        val newsViewPager: ViewPager = binding.NewsImageSlider
-        val dotsIndicator = binding.DotsIndicator
-        databaseReference = FirebaseDatabase.getInstance()
-            .getReference("news") // Initialize Firebase and reference to your news items node
-        databaseReference.child("news").get()
         // User Element
-        val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        currentUserViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
 
-
-
-        // Search Bar
-//        searchIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_300),android.graphics.PorterDuff.Mode.SRC_IN)
-//        txtSearch.setHint(R.string.search_query_hint)
-//        txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
-        //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
 
         // SharedPreference - Login
         val isFirstTime = sharedPreferences?.getBoolean("IsFirstTime", true)
@@ -88,15 +55,31 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
             editor?.apply()
         }
 
+        // Inflate the layout for this fragment
+        return binding.root
+    }
 
-            // Search Bar
-            //searchIcon.setColorFilter(
-            //    ContextCompat.getColor(requireContext(), R.color.gray_300),
-            //    android.graphics.PorterDuff.Mode.SRC_IN
-            //)
-            //txtSearch.setHint(R.string.search_query_hint)
-            //txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
-            //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // ELEMENTS IN FRAGMENT
+        // Search Elements
+//        val searchBar : SearchView = binding.SearchBar
+//        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
+//        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
+        // Image Slider Elements
+        val newsViewPager: ViewPager = binding.NewsImageSlider
+        val dotsIndicator = binding.DotsIndicator
+
+
+        // Search Bar
+        //searchIcon.setColorFilter(
+        //    ContextCompat.getColor(requireContext(), R.color.gray_300),
+        //    android.graphics.PorterDuff.Mode.SRC_IN
+        //)
+        //txtSearch.setHint(R.string.search_query_hint)
+        //txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+        //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
 
         // Image Slider
         // Create a list of NewsModel objects
@@ -110,7 +93,7 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
         // Welcome Text
         // Displaying User detail
-        userViewModel.currentUser.observe(viewLifecycleOwner) { user ->
+        currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 binding.WelcomeUserTxt.text = "Hi, " + user.displayName.toString()
             } else {
@@ -118,11 +101,6 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
                 binding.WelcomeUserTxt.text = "Welcome"
             }
         }
-
-
-
-        // Inflate the layout for this fragment
-        return binding.root
     }
 
     override fun onItemClick(position: Int) {

@@ -29,17 +29,7 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
 
-//        // Initialize data.
-//        val myDataset = CommunityDatasource().loadCommunities()
-//
-//        val recyclerView = findViewById<RecyclerView>(R.id.CommunityRecycleView)
-//        recyclerView.adapter = CommunityItemAdapter(this, myDataset)
-//
-//        // Use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-//        recyclerView.setHasFixedSize(true)
-
-
+        // Initialize data.
         bottomNav = binding.bottomNav
         val navHostFragment = supportFragmentManager.findFragmentById(binding.myNavHostFragment.id) as NavHostFragment
         navController = navHostFragment.navController
@@ -82,16 +72,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            reload()
-        }
-    }
-
     private fun setNavItemBadge(menuItemId : Int) {
         var badge = bottomNav.getOrCreateBadge(menuItemId)
         badge.isVisible = true
@@ -106,10 +86,5 @@ class MainActivity : AppCompatActivity() {
             homeBadgeDrawable.isVisible = false
             homeBadgeDrawable.clearNumber()
         }
-    }
-
-    private fun reload() {
-        finish();
-        startActivity(intent);
     }
 }

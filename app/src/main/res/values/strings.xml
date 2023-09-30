@@ -91,6 +91,8 @@
 
     <!-- Project: project_list_card_cell -->
     <string name="add_percentage_behind">%s</string>
+    <string name="fragment_title_edit_discussion">Edit Discussion</string>
+    <string name="edit_discussion_update_button">Update</string>
 
 
 </resources>

@@ -37,7 +37,7 @@ class AddDiscussionFragment : Fragment() {
     private val discussionTagsList: MutableList<String> = mutableListOf()
     lateinit var submitButton: MaterialButton
     private val db = Firebase.firestore     // Firestore
-    val user = Firebase.auth.currentUser
+
     // State Variables
     var isTitleValid: Boolean = false
     var isDescValid: Boolean = false
@@ -79,7 +79,7 @@ class AddDiscussionFragment : Fragment() {
         // Set submit button default as inactive (disabled)
         setBtnDisabled()
 
-        // Event Listeners
+        // EVENT LISTENERS
         titleEditText.addTextChangedListener {
             isTitleValid = titleEditText.text?.isNotEmpty() == true && titleEditText.text?.isNotBlank()!! && titleEditText.length() >= 15
 
@@ -100,7 +100,6 @@ class AddDiscussionFragment : Fragment() {
             }
         }
 
-
         submitButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val desc = descEditText.text.toString()
@@ -112,9 +111,7 @@ class AddDiscussionFragment : Fragment() {
             writeNewDiscussion(title, desc, tags)
         }
 
-
         entryChip()
-
 
         return binding.root
     }
@@ -181,18 +178,15 @@ class AddDiscussionFragment : Fragment() {
     }
 
     private fun writeNewDiscussion(title: String, desc: String, tags: MutableList<String>) {
-        var userName: String
-        if(user != null) {
-            userName = ""
-        } else {
-            userName = user?.displayName.toString()
-        }
+        val user = Firebase.auth.currentUser
+
+        var author: String = user?.uid ?: ""
 
         val newDiscussion = hashMapOf(
             "title" to title,
             "desc" to desc,
             "tags" to tags,
-            "author" to userName,
+            "author" to author,
             "createdOn" to FieldValue.serverTimestamp()
         )
 
@@ -205,6 +199,7 @@ class AddDiscussionFragment : Fragment() {
                 // Clear input field
                 resetForm()
                 Snackbar.make(this.binding.submitButton, "Discussion added successfully!", Snackbar.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_addDiscussionFragment_to_communityFragment)
             }
             .addOnFailureListener {
                 // Write failed

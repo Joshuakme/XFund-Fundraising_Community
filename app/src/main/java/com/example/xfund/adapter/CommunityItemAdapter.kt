@@ -10,18 +10,33 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isNotEmpty
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
 import com.example.xfund.model.CommunityDiscussion
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
 import com.example.xfund.screens.navigation.CommunityFragmentDirections
-import java.text.SimpleDateFormat
+import com.example.xfund.util.FirebaseHelper
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.format.DateTimeFormatter
 
-class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDiscussion>, private val navController: NavController) : RecyclerView.Adapter<CommunityItemAdapter.ViewHolder>() {
+class CommunityItemAdapter(
+    val context: Context,
+    private val itemList: List<CommunityDiscussion>,
+    private val navController: NavController
+) : RecyclerView.Adapter<CommunityItemAdapter.ViewHolder>() {
+
+    private val usernameMap = mutableMapOf<String, String>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.community_list_item,
@@ -35,45 +50,42 @@ class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDis
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
         val currentItem = itemList[position]
-
 
         // Set data to the view
         holder.title.text = currentItem.title
+        // Date
         val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         holder.date.text = currentItem.createdOn.format(dateFormat)
+        // Tags
         for (tag in currentItem.tags) {
-            holder.tags.addView(Chip(context).apply {
-                text = tag
-                setTextColor(ColorStateList.valueOf(
-                    ContextCompat.getColor(context, R.color.md_theme_light_primary)))
-                textSize = 12.0f
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
-                chipStartPadding = 1.0f
-                isClickable = false
-                chipEndPadding = 1.0f
-                chipBackgroundColor = ColorStateList.valueOf(
-                    ContextCompat.getColor(context, R.color.md_theme_light_inversePrimary))
-            })
+            if(holder.tags.childCount < currentItem.tags.size) {
+                createChip(holder.tags, tag)
+            }
         }
-        holder.author.text = currentItem.author
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val authorName = FirebaseHelper().getAuthorName(currentItem.author)
+            withContext(Dispatchers.Main) {
+                holder.author.text = authorName
+            }
+        }
 
         holder.discussionItem.setOnClickListener {
 
             // Navigate to FragmentB when item is clicked
             val action = CommunityFragmentDirections.actionCommunityFragmentToDiscussionDetailFragment (
-                currentItem.title,
-                currentItem.desc,
-                currentItem.createdOn.format(dateFormat),
-                currentItem.author,
-                currentItem.tags.toTypedArray(),
-            )
-            navController.navigate(action)
+                    currentItem.title,
+                    currentItem.desc,
+                    currentItem.createdOn.format(dateFormat),
+                    holder.author.text as String,
+                    currentItem.tags.toTypedArray(),
+                )
+
+            if (action != null) {
+                navController.navigate(action)
+            }
         }
-
-
     }
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -92,6 +104,61 @@ class CommunityItemAdapter(val context: Context, val itemList: List<CommunityDis
             tags  = itemView.findViewById(R.id.tagChipGroup)
             author = itemView.findViewById(R.id.discussion_author)
         }
+    }
+
+
+    private fun getDisplayNameFromUid(uid: String, callback: (String) -> Unit) {
+        if (usernameMap.containsKey(uid)) {
+            // Use cached username
+            callback.invoke(usernameMap[uid]!!)
+        } else {
+            // Fetch the username from Firebase and cache it
+            fetchUsernameFromFirebase(uid) { username ->
+                usernameMap[uid] = username
+                callback.invoke(username)
+            }
+        }
+    }
+
+    private fun fetchUsernameFromFirebase(uid: String, callback: (String) -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("users")
+            .document(uid)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val username = documentSnapshot.getString("username")
+                    if (username != null) {
+                        // Use the username
+                        // For example, set it in a TextView
+                        callback.invoke(username)
+                    } else {
+                        // Handle the case where the username is null
+                    }
+                } else {
+                    // Handle the case where the user document doesn't exist
+                    callback.invoke("N/A")
+                }
+            }
+            .addOnFailureListener { e ->
+                // Handle any errors here
+            }
+    }
+
+    private fun createChip(tagChipGroup: ChipGroup, tagName: String) {
+        tagChipGroup.addView(Chip(context).apply {
+            text = tagName
+            setTextColor(ColorStateList.valueOf(
+                ContextCompat.getColor(context, R.color.md_theme_light_primary)))
+            textSize = 12.0f
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+            chipStartPadding = 1.0f
+            isClickable = false
+            chipEndPadding = 1.0f
+            chipBackgroundColor = ColorStateList.valueOf(
+                ContextCompat.getColor(context, R.color.md_theme_light_inversePrimary))
+        })
     }
 
 }

@@ -20,6 +20,7 @@
     <color name="divider">#D8D6D6</color>
     <color name="button_disabled_bg">#EAEAEA</color>
     <color name="button_disabled_txt">#C0C0C0</color>
+    <color name="dialog_backdrop">#00FFFFFF</color>
 
 
     <!--  SplashScreen Screen  -->

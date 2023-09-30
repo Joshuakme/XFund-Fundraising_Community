@@ -1,34 +1,32 @@
 package com.example.xfund.screens.community
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.findFragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
+import com.example.xfund.adapter.CommunityItemAdapter
+import com.example.xfund.adapter.PostedDiscussionAdapter
+import com.example.xfund.model.CommunityDiscussion
+import com.example.xfund.util.FirebaseHelper
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ViewPostedCommunityFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ViewPostedCommunityFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val firestoreRepository = FirebaseHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +36,25 @@ class ViewPostedCommunityFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_view_posted_community, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ViewPostedCommunityFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ViewPostedCommunityFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // VIEW ELEMENTS
+        val postedCommunityRecycleView = view.findViewById<RecyclerView>(R.id.postedCommunityRecycleView)
+
+
+        // Use a coroutine scope to fetch user details
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+            val postedDiscussionMapList = firestoreRepository.fetchPostedDiscussions()
+            val navController = NavHostFragment.findNavController(view.findFragment())
+
+            val adapter = PostedDiscussionAdapter(postedDiscussionMapList, navController)
+            postedCommunityRecycleView.adapter = adapter
+            postedCommunityRecycleView.layoutManager = LinearLayoutManager(context)
+        }
     }
+
+
+
 }
