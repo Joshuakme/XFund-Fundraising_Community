@@ -129,8 +129,8 @@ class EditProfileFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)
-        val btnDelete : Button = dialog.findViewById(R.id.btnDelete)
-        val btnCancel : Button = dialog.findViewById(R.id.btnCancel)
+        val btnDelete : Button = dialog.findViewById(R.id.btnYes)
+        val btnCancel : Button = dialog.findViewById(R.id.btnNo)
 
         tvMessage.text = message
 

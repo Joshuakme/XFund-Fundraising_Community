@@ -86,63 +86,44 @@ class ProfileFragment : Fragment() {
                     // Handle the case where user details couldn't be fetched
                 }
             }
-        } else {
-            // Handle the case where the user is not authenticated
-        }
 
+            currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
+                if (user != null) {
+                    val imageUrl =
+                        user?.photoUrl   // Retrieve user's profile image URL from Firestore or Realtime Database
+                    if (user.displayName.isNullOrEmpty()) {
+                        view.findViewById<TextView>(R.id.ProfileName).text = "Username"
+                    } else {
+                        view.findViewById<TextView>(R.id.ProfileName).text = user.displayName
+                    }
 
-        currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                val imageUrl =
-                    user?.photoUrl   // Retrieve user's profile image URL from Firestore or Realtime Database
-                if (user.displayName.isNullOrEmpty()) {
-                    view.findViewById<TextView>(R.id.ProfileName).text = "Username"
-                } else {
-                    view.findViewById<TextView>(R.id.ProfileName).text = user.displayName
+                    Glide.with(context)
+                        .load(imageUrl)
+                        .placeholder(R.drawable.baseline_account_circle)
+                        .into(view?.findViewById(R.id.ProfileImage))
                 }
-
-                Glide.with(context)
-                    .load(imageUrl)
-                    .placeholder(R.drawable.baseline_account_circle)
-                    .into(view?.findViewById(R.id.ProfileImage))
-            }
-        }
-
-        // EVENT LISTENERS
-        // "Account" button
-        profileBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
-        }
-        // View Posted Discussions
-        viewDiscussionBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_viewPostedCommunityFragment)
-        }
-        // Sign Out
-        signOutBtn.setOnClickListener {
-            auth.signOut()
-            // Variables
-            val signOutBtn = view.findViewById<MaterialCardView>(R.id.signOutCard)
-
-            // Event Listeners
-            signOutBtn.setOnClickListener {
-                val messageSignOut : String = "Are you sure want to sign out?"
-                showSignOutAccountDialog(messageSignOut)
-
             }
 
-
-
-            //Click the 'Account" in Profile Fragment, it will link to Edit Profile Fragment
-            view.findViewById<MaterialCardView>(R.id.profileCard).setOnClickListener {
+            // EVENT LISTENERS
+            // "Account" button
+            profileBtn.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
             }
+            // View Posted Discussions
+            viewDiscussionBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_viewPostedCommunityFragment)
+            }
+            // Sign Out
+            signOutBtn.setOnClickListener {
+                val messageSignOut: String = "Are you sure want to sign out?"
+                showSignOutAccountDialog(messageSignOut)
+            }
+
         } else {
+            // Handle the case where the user is not authenticated
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
 
-            return view
         }
-
-        return view
     }
 
     private fun showSignOutAccountDialog(messageSignOut: String?){

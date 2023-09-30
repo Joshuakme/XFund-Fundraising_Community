@@ -97,7 +97,7 @@ class FirebaseHelper {
                     val userId = currentUser.uid
                     val querySnapshot = firestore.collection("discussions")
                         .whereEqualTo("author", userId)
-                        .orderBy("createdOn", Query.Direction.DESCENDING)
+                        //.orderBy("createdOn", Query.Direction.DESCENDING)
                         .get()
                         .await()
 
