@@ -28,15 +28,14 @@ class Payment : Fragment() {
             false
         )
 
-        val donateBtn: Button = binding.donateBtn
-        val changeMethodBtn: TextView = binding.changeCardTxt
-
-        donateBtn.setOnClickListener{
+        binding.donateBtn.setOnClickListener{
             findNavController().navigate(R.id.action_payment_to_paymentSuccessFragment)
         }
-
-        changeMethodBtn.setOnClickListener{
+        binding.changeCardTxt.setOnClickListener{
             findNavController().navigate(R.id.action_payment_to_paymentMethodFragment)
+        }
+        binding.backBtn.setOnClickListener{
+            findNavController().navigateUp()
         }
 
         // Inflate the layout for this fragment

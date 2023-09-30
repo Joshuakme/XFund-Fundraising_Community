@@ -22,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 class PaymentMethodFragment : Fragment() {
     private lateinit var binding: FragmentPaymentMethodBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,15 +33,14 @@ class PaymentMethodFragment : Fragment() {
             false
         )
 
-        val addPaymentCardBtn: CardView = binding.addPaymentCard
-        val addPaymentWalletBtn: CardView = binding.addPaymentWallet
-
-
-        addPaymentCardBtn.setOnClickListener{
+        binding.addPaymentCard.setOnClickListener{
             findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
         }
-        addPaymentWalletBtn.setOnClickListener{
+        binding.addPaymentWallet.setOnClickListener{
             findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
+        }
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
         }
 
 
@@ -60,15 +58,12 @@ class PaymentMethodFragment : Fragment() {
 
                 // Adapter
                 val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList) { paymentMethod ->
-
-                    // Handle the click event here,  receive the PaymentMethod object
-                    Toast.makeText(requireContext(), "Clicked on ${paymentMethod.cardName}", Toast.LENGTH_SHORT).show()
-
                     val bundle = bundleOf(
                         "cardName" to paymentMethod.cardName,
                         "cardNo" to paymentMethod.cardNo,
                         "cardExpiry" to paymentMethod.cardExpiry,
-                        "cardCvv" to paymentMethod.cardCvv
+                        "cardCvv" to paymentMethod.cardCvv,
+                        "documentId" to paymentMethod.id
                     )
                     // You can also navigate or perform other actions here using the paymentMethod data.
                     findNavController().navigate(R.id.action_paymentMethodFragment_to_paymentMethodDetailFragment, bundle)
@@ -102,8 +97,9 @@ class PaymentMethodFragment : Fragment() {
             val cardNo = document.getString("cardNo") ?: ""
             val cardExpiry = document.getString("cardExpiry") ?: ""
             val cardCvv = document.getString("cardCvv")?: ""
+            val paymentMethod = PaymentMethod(id = document.id, cardName, cardNo, cardExpiry, cardCvv)
 
-            val paymentMethod = PaymentMethod(cardName, cardNo, cardExpiry, cardCvv)
+
             paymentMethodList.add(paymentMethod)
         }
 
