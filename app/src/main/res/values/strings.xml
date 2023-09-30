@@ -104,6 +104,7 @@
     <string name="payment_detail_name_sample">Card Name Sample</string>
     <string name="payment_detail_no_sample">xxxxxxxxxxx1234</string>
     <string name="payment_detail_delete_txt">Delete</string>
+    <string name="payment_method_detail_update">Update</string>
 
 
 </resources>

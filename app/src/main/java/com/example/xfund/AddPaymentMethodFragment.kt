@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.xfund.databinding.FragmentAddPaymentMethodBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
@@ -32,6 +33,10 @@ class AddPaymentMethodFragment : Fragment() {
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         if (bottomNav != null) {
             bottomNav.visibility = View.INVISIBLE
+        }
+
+        binding.backBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_addPaymentMethodFragment_to_paymentMethodFragment)
         }
 
         //FireStore add data

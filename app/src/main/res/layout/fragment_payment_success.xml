@@ -72,14 +72,14 @@
                     android:layout_marginEnd="32dp"
                     android:gravity="center"
                     android:text="@string/payment_share_txt"
-                    app:layout_constraintBottom_toTopOf="@+id/cardView"
+                    app:layout_constraintBottom_toTopOf="@+id/shareBtnCV"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
+                    android:id="@+id/shareBtnCV"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -130,7 +130,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/paymentToMenuBtn"
             android:layout_width="0dp"
             android:layout_height="@dimen/payment_button_height"
             android:layout_marginStart="@dimen/screen_width_margin"
