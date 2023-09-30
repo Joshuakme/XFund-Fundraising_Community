@@ -60,11 +60,26 @@
             app:layout_constraintStart_toEndOf="@+id/ProfileImage"
             app:layout_constraintTop_toBottomOf="@+id/ProfileTitle" />
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ProfileImage" />
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/profileCard"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/profile_menu_height"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
@@ -83,7 +98,7 @@
                     android:layout_marginStart="38dp"
                     android:text="Account"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/profile_font"
+                    android:textSize="@dimen/profile_menu_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -104,14 +119,56 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/signOutCard"
+            android:id="@+id/viewPostCard"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/profile_menu_height"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginEnd="@dimen/screen_width_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ViewPostedDiscussion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="View Posts"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/viewPostDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="@dimen/screen_width_margin"
+                    android:layout_marginEnd="@dimen/screen_width_margin"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signOutCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPostCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -124,7 +181,7 @@
                     android:layout_marginStart="38dp"
                     android:text="Sign Out"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/profile_font"
+                    android:textSize="@dimen/profile_menu_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -157,20 +214,8 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/materialToolbar"
-            android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/screen_width_margin"
-            android:layout_marginBottom="16dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProfileImage" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
