@@ -63,7 +63,7 @@ class EditProfileFragment : Fragment() {
         val emailTxt = binding.tfEditEmail
         val passwordTxt = binding.tfEditPassword
 
-        // Check if logged ind
+        // Check if logged in
         val isLogin: Boolean = sharedPreferences?.getBoolean("IsLogin", false) == true
 
         if(isLogin && FirebaseAuth.getInstance().currentUser != null) {
@@ -84,13 +84,14 @@ class EditProfileFragment : Fragment() {
 
         // EVENT LISTENERS
         binding.btnSave.setOnClickListener {
-            updateUserDetail(binding.tfEditUsername.text.toString())
+            uri?.let { it1 -> updateUserDetail(binding.tfEditUsername.text.toString(), it1) }
         }
+
         // Delete Account
         binding.DeleteAccount.setOnClickListener{
-           val message : String? = "Are you sure want to delete account?"
-           showDeleteAccountDialog(message)
-       }
+            val message : String? = "Are you sure want to delete account?"
+            showDeleteAccountDialog(message)
+        }
         // Edit Image
         binding.EditIcon.setOnClickListener {
             pickImage.launch("image/*")
@@ -116,7 +117,7 @@ class EditProfileFragment : Fragment() {
             }
             .addOnFailureListener { exception ->
                 // Handle upload failure.
-                }
+            }
     }
 
 
@@ -128,12 +129,12 @@ class EditProfileFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)
-        val btnYes : Button = dialog.findViewById(R.id.btnYes)
-        val btnNo : Button = dialog.findViewById(R.id.btnNo)
+        val btnDelete : Button = dialog.findViewById(R.id.btnDelete)
+        val btnCancel : Button = dialog.findViewById(R.id.btnCancel)
 
         tvMessage.text = message
 
-        btnYes.setOnClickListener{
+        btnDelete.setOnClickListener{
             Toast.makeText(requireContext(), "Account Successfully Deleted", Toast.LENGTH_SHORT).show()
 
 
@@ -158,20 +159,20 @@ class EditProfileFragment : Fragment() {
             dialog.dismiss()
         }
 
-        btnNo.setOnClickListener{
+        btnCancel.setOnClickListener{
             dialog.dismiss()
         }
 
         dialog.show()
     }
 
-    private fun updateUserDetail(displayName: String) {
+    private fun updateUserDetail(displayName: String, imageUri: Uri) {
         // Upload photo to firebase
         //uploadProfileImageToFirebaseStorage(imageUri)
-        lateinit var imageUri: Uri
+
 
         val profileUpdates = UserProfileChangeRequest.Builder()
-            //.setPhotoUri(imageUri)
+            .setPhotoUri(imageUri)
             .setDisplayName(displayName)
             .build()
 

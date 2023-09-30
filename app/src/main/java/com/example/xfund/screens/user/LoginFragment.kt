@@ -1,9 +1,11 @@
 package com.example.xfund.screens.user
 
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +34,8 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
+    private var _binding: FragmentLoginBinding? = null
+        get() = _binding!!
     private lateinit var sharedPref: SharedPreferences
     private lateinit var userViewModel : UserViewModel
     private val firestoreRepository = FirebaseHelper()
