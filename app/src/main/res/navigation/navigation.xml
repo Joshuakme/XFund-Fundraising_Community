@@ -107,6 +107,9 @@
         <action
             android:id="@+id/action_paymentMethodFragment_to_addPaymentMethodFragment"
             app:destination="@id/addPaymentMethodFragment" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_paymentMethodDetailFragment"
+            app:destination="@id/paymentMethodDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentSuccessFragment"
@@ -116,5 +119,22 @@
         android:id="@+id/addPaymentMethodFragment"
         android:name="com.example.xfund.AddPaymentMethodFragment"
         android:label="AddPaymentMethodFragment" />
+    <fragment
+        android:id="@+id/paymentMethodDetailFragment"
+        android:name="com.example.xfund.PaymentMethodDetailFragment"
+        android:label="PaymentMethodDetailFragment">
+        <argument
+            android:name="cardName"
+            app:argType="string" />
+        <argument
+            android:name="cardNo"
+            app:argType="string" />
+        <argument
+            android:name="cardExpiry"
+            app:argType="string" />
+        <argument
+            android:name="cardCvv"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

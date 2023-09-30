@@ -5,15 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
-import com.example.xfund.model.CommunityDiscussion
 import com.example.xfund.model.PaymentMethod
 
-class PaymentAdapter(private val context: Context, paymentModelArrayList: ArrayList<PaymentMethod>) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
+class PaymentAdapter(
+    private val context: Context,
+    paymentModelArrayList: ArrayList<PaymentMethod>,
+    private val itemClickListener: (PaymentMethod) -> Unit // Add this parameter
+) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
 
     private val paymentModelArrayList: ArrayList<PaymentMethod>
 
+    interface OnItemClickListener {
+        fun onItemClick(paymentMethod: PaymentMethod)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentAdapter.ItemViewHolder {
         // create a new view
         val paymentView = LayoutInflater.from(parent.context)
@@ -25,6 +32,10 @@ class PaymentAdapter(private val context: Context, paymentModelArrayList: ArrayL
         val model = paymentModelArrayList[position]
         holder.cardName.text  = model.cardName
         holder.cardNo.text  = model.cardNo
+
+        holder.itemView.setOnClickListener {
+            itemClickListener(model) // Pass the PaymentMethod object when clicked
+        }
     }
 
     override fun getItemCount(): Int {

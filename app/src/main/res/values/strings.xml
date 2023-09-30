@@ -98,6 +98,12 @@
     <string name="payment_cardName_txt">Card Name</string>
     <string name="payment_add_card_btn">+ Add Credit/Debit Card</string>
     <string name="payment_add_wallet_btn">+ Add Digital Wallet</string>
+    <string name="payment_detail_name_label">Card Name</string>
+    <string name="card_detail_no_label">Card Number</string>
+    <string name="payment_detail_default_card">Set as Default Card</string>
+    <string name="payment_detail_name_sample">Card Name Sample</string>
+    <string name="payment_detail_no_sample">xxxxxxxxxxx1234</string>
+    <string name="payment_detail_delete_txt">Delete</string>
 
 
 </resources>

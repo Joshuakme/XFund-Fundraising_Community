@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -36,12 +37,14 @@ class PaymentMethodFragment : Fragment() {
         val addPaymentCardBtn: CardView = binding.addPaymentCard
         val addPaymentWalletBtn: CardView = binding.addPaymentWallet
 
+
         addPaymentCardBtn.setOnClickListener{
             findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
         }
         addPaymentWalletBtn.setOnClickListener{
             findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
         }
+
 
         // Inflate the layout for this fragment
         val paymentMethodRV = binding.savedCardList
@@ -53,11 +56,26 @@ class PaymentMethodFragment : Fragment() {
         db.collection("Payment Method Collection")
             .get()
             .addOnSuccessListener { result ->
-                    paymentModelArrayList = createPaymentMethods(result)
+                paymentModelArrayList = createPaymentMethods(result)
 
-                    //Adapter
-                    val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList)
-                    paymentMethodRV.adapter = paymentAdapter
+                // Adapter
+                val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList) { paymentMethod ->
+
+                    // Handle the click event here,  receive the PaymentMethod object
+                    Toast.makeText(requireContext(), "Clicked on ${paymentMethod.cardName}", Toast.LENGTH_SHORT).show()
+
+                    val bundle = bundleOf(
+                        "cardName" to paymentMethod.cardName,
+                        "cardNo" to paymentMethod.cardNo,
+                        "cardExpiry" to paymentMethod.cardExpiry,
+                        "cardCvv" to paymentMethod.cardCvv
+                    )
+                    // You can also navigate or perform other actions here using the paymentMethod data.
+                    findNavController().navigate(R.id.action_paymentMethodFragment_to_paymentMethodDetailFragment, bundle)
+
+                }
+
+                paymentMethodRV.adapter = paymentAdapter
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(context, exception.toString(), Toast.LENGTH_SHORT).show()
@@ -91,4 +109,5 @@ class PaymentMethodFragment : Fragment() {
 
         return ArrayList(paymentMethodList)
     }
+
 }
