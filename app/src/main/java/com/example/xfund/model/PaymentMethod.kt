@@ -1,10 +1,13 @@
 package com.example.xfund.model
 
-import java.net.URL
-import java.util.Date
+import com.google.firebase.firestore.DocumentId
 
 data class PaymentMethod(
-    val cardName: String,
-    val cardNo: String
-) {
+    @DocumentId val id: String = "",
+    var cardName: String = "",
+    var cardNo: String = "",
+    var cardExpiry: String = "",
+    var cardCvv: String = ""
+){
+
 }

@@ -25,7 +25,6 @@ import com.google.firebase.ktx.Firebase
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var sharedPref: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,17 +80,12 @@ class RegisterFragment : Fragment() {
                             if (task.isSuccessful) {
                                 val user = auth.currentUser
 
-                                // Set UserViewModel
-                                userViewModel.setUser(user)
-
                                 // Register to Firestore
                                 registerToFirestore(auth.currentUser)
 
-                                sharedPref = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-                                // Save Login Status (True) in Shared Preference
-                                val editor = sharedPref.edit()
-                                editor.putBoolean("IsLogin", true)
-                                editor.apply()
+                                // Set UserViewModel
+                                userViewModel.setUser(user)
+
 
                                 // Set Toast Message
                                 Toast.makeText(

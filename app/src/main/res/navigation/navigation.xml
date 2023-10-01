@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.xfund.screens.navigation.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_payment"
+            app:destination="@id/payment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.xfund.screens.navigation.ProfileFragment"
@@ -28,8 +32,12 @@
             android:id="@+id/action_profileFragment_to_viewPostedCommunityFragment"
             app:destination="@id/viewPostedCommunityFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            android:id="@+id/action_profileFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+        <argument
+            android:name="previousFragment"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"
@@ -251,8 +259,105 @@
             app:destination="@id/adminProjectFragment" />
     </fragment>
     <fragment
+        android:id="@+id/payment"
+        android:name="com.example.xfund.Payment"
+        android:label="Payment" >
+        <action
+            android:id="@+id/action_payment_to_paymentSuccessFragment"
+            app:destination="@id/paymentSuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_payment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="documentId"
+            app:argType="string" />
+        <argument
+            android:name="cardName"
+            app:argType="string" />
+        <argument
+            android:name="cardNo"
+            app:argType="string" />
+        <argument
+            android:name="cardExpiry"
+            app:argType="string" />
+        <argument
+            android:name="cardCvv"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.example.xfund.PaymentMethodFragment"
+        android:label="PaymentMethodFragment" >
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_addPaymentMethodFragment"
+            app:destination="@id/addPaymentMethodFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_paymentMethodDetailFragment"
+            app:destination="@id/paymentMethodDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_payment"
+            app:destination="@id/payment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentSuccessFragment"
+        android:name="com.example.xfund.PaymentSuccessFragment"
+        android:label="PaymentSuccessFragment" >
+        <action
+            android:id="@+id/action_paymentSuccessFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPaymentMethodFragment"
+        android:name="com.example.xfund.AddPaymentMethodFragment"
+        android:label="AddPaymentMethodFragment" />
+    <fragment
+        android:id="@+id/paymentMethodDetailFragment"
+        android:name="com.example.xfund.PaymentMethodDetailFragment"
+        android:label="PaymentMethodDetailFragment">
+        <argument
+            android:name="documentId"
+            app:argType="string" />
+        <argument
+            android:name="cardName"
+            app:argType="string" />
+        <argument
+            android:name="cardNo"
+            app:argType="string" />
+        <argument
+            android:name="cardExpiry"
+            app:argType="string" />
+        <argument
+            android:name="cardCvv"
+            app:argType="string" />
+    </fragment>
+
         android:id="@+id/aboutFragment"
         android:name="com.example.xfund.screens.user.AboutFragment"
         android:label="AboutFragment" />
+
 
 </navigation>

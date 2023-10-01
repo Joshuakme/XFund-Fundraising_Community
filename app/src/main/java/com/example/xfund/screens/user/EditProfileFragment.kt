@@ -197,17 +197,6 @@ class EditProfileFragment : Fragment() {
                 }
         }
 
-//        // Update username, photoUrl to Firebase
-//        currentUser.updateProfile(profileUpdates)
-//            .addOnCompleteListener {task ->
-//                Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
-//
-//                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-//            }
-
         // Update Email to Firebase
         if(binding.tfEditEmail.text.toString() != currentUser.email) {
             currentUser.updateEmail(binding.tfEditEmail.text.toString())
@@ -234,27 +223,4 @@ class EditProfileFragment : Fragment() {
 
         currentUserViewModel.setUser(currentUser)
     }
-
-//    public fun deleteAccount() {
-//
-//        // Get auth credentials from the user for re-authentication. The example below shows
-//        // email and password credentials but there are multiple possible providers,
-//        // such as GoogleAuthProvider or FacebookAuthProvider.
-//        val credential = EmailAuthProvider
-//            .getCredential("user@example.com", "password1234")
-//
-////        // Prompt the user to re-provide their sign-in credentials
-////        user.reauthenticate(credential)
-////            .addOnCompleteListener { Log.d(TAG, "User re-authenticated.") }
-////
-////            }
-//        user.delete()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    Log.d(TAG, "User account deleted.")
-//                }
-//            }
-//
-//
-//    }
 }

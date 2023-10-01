@@ -113,6 +113,7 @@ class FirebaseHelper {
         return withContext(Dispatchers.IO) {
             try {
                 val querySnapshot = firestore.collection("discussions")
+                    .orderBy("createdOn", Query.Direction.DESCENDING)
                     .get()
                     .await()
 

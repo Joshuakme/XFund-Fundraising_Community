@@ -21,6 +21,7 @@ import com.example.xfund.R
 import com.example.xfund.util.FirebaseHelper
 import com.example.xfund.viewModel.UserViewModel
 import com.google.android.gms.common.internal.BaseGmsClient.SignOutCallbacks
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -127,6 +128,11 @@ class ProfileFragment : Fragment() {
 
             // Display Message
             Toast.makeText(context,"Signed Out",Toast.LENGTH_SHORT).show()
+
+            val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+            bottomNav?.visibility = View.VISIBLE
+
+            currentUserViewModel.setUser(null)
 
             // Navigate to Home Page
             findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
