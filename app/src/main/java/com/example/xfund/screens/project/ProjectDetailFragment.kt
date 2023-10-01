@@ -12,6 +12,8 @@ import com.example.xfund.R
 import com.example.xfund.databinding.FragmentProjectDetailBinding
 import com.example.xfund.model.Project
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 class ProjectDetailFragment : Fragment() {
@@ -50,12 +52,48 @@ class ProjectDetailFragment : Fragment() {
             .centerCrop()
             .into(binding.projectDetailImage)
 
+
         // Set Values into the xml
         txtName.text = name
         txtDesc.text = description
-        //Make it into RM "fundCollected".00 form
-        val formattedText = getString(R.string.MoneyPatternForProject, "", fundCollected)
-        val formattedText2 = getString(R.string.MoneyPatternForProject, "", fundTarget)
+
+
+        // Make the values into RM *k, RM *m
+        var formattedTarget: Double? = fundTarget
+        var formattedCollected: Double? = fundCollected
+        var formattedText: String = ""
+        var formattedText2: String = ""
+
+        formattedTarget?.let {
+            if (it >= 1000000) {
+                formattedTarget = it / 1000000
+                formattedTarget = String.format("%.2f", formattedTarget).toDouble()
+                formattedText2 = getString(R.string.Millions, formattedTarget.toString())
+            } else if (it >= 10000) {
+                formattedTarget = it / 1000
+                formattedTarget = String.format("%.2f", formattedTarget).toDouble()
+                formattedText2 = getString(R.string.Thousands, formattedTarget.toString())
+            } else if (it < 10000) {
+                formattedText2 = getString(R.string.MoneyPatternForProject, "", formattedTarget)
+            }
+        }
+        formattedCollected?.let {
+            if (it >= 1000000) {
+                formattedCollected = it / 1000000
+                formattedCollected = String.format("%.2f", formattedCollected).toDouble()
+                formattedText = getString(R.string.Millions, formattedCollected.toString())
+            } else if (it >= 10000) {
+                formattedCollected = it / 1000
+                formattedCollected = String.format("%.2f", formattedCollected).toDouble()
+                formattedText = getString(R.string.Thousands, formattedCollected.toString())
+            } else if (it < 10000) {
+                formattedText = getString(R.string.MoneyPatternForProject, "", formattedCollected)
+            }
+        }
+
+        /*//Make it into RM "fundCollected" form
+        val formattedText = getString(R.string.MoneyPatternForProject, fundCollected.toString())
+        val formattedText2 = getString(R.string.MoneyPatternForProject, fundTarget.toString())*/
         txtFundCollected.text = formattedText
         txtFundTarget.text = formattedText2
 
