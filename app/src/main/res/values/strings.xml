@@ -19,19 +19,6 @@
     <string name="community_item_1_desc">Please help me! Lorem Ipsum, this is a description, yes don\'t doubt. Yuppp, this is a description. Just to display this is a long description.</string>
     <string name="community_item_1_date">23-Aug-2023</string>
 
-
-    <string name="affirmation1">I am strong.</string>
-    <string name="affirmation2">I believe in myself.</string>
-    <string name="affirmation3">Each day is a new opportunity to grow and be a better version of myself.</string>
-    <string name="affirmation4">Every challenge in my life is an opportunity to learn from.</string>
-    <string name="affirmation5">I have so much to be grateful for.</string>
-    <string name="affirmation6">Good things are always coming into my life.</string>
-    <string name="affirmation7">New opportunities await me at every turn.</string>
-    <string name="affirmation8">I have the courage to follow my heart.</string>
-    <string name="affirmation9">Things will unfold at precisely the right time.</string>
-    <string name="affirmation10">I will be present in all the moments that this day brings.</string>
-
-
     <!-- Home Fragment -->
     <string name="welcome_user_title">Hi, %s</string>
     <string name="search_query_hint">Enter the project name</string>
@@ -52,6 +39,11 @@
     <string name="tags_hint_txt">Add up to 5 tags to describe what your question is about.</string>
     <string name="add_discussion_submit_button">Submit</string>
     <string name="add_new_discussion_btn_txt">Add</string>
+  
+    <string name="home_news_title">News</string>
+    <string name="detail_discussion_comment_title">Comment</string>
+    <string name="posted_discussion_edit_button">Edit</string>
+    <string name="fragment_title_posted_community">Posted Discussions</string>
 
     <!--  Util  -->
     <string name="loading">Loading</string>
@@ -107,5 +99,9 @@
     <string name="payment_method_detail_update">Update</string>
     <string name="payment_method_detail">Payment Method Detail</string>
 
+    <!-- Project: project_list_card_cell -->
+    <string name="add_percentage_behind">%s</string>
+    <string name="fragment_title_edit_discussion">Edit Discussion</string>
+    <string name="edit_discussion_update_button">Update</string>
 
 </resources>

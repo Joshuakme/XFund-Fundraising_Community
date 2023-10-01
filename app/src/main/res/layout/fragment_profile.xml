@@ -28,27 +28,35 @@
             android:layout_marginBottom="664dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Profile"
-            android:textSize="34sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ProfileImage"
-            android:layout_width="96dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ProfileImageCard"
+            android:layout_width="87dp"
             android:layout_height="87dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="48dp"
-            android:src="@drawable/baseline_account_circle_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProfileTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/ProfileTitle"
+            app:cardCornerRadius="500dp">
+            <ImageView
+                android:id="@+id/ProfileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_account_circle_24"/>
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/ProfileName"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="34dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:fontFamily="@font/montserrat"
@@ -56,58 +64,8 @@
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ProfileImage"
+            app:layout_constraintStart_toEndOf="@+id/ProfileImageCard"
             app:layout_constraintTop_toBottomOf="@+id/ProfileTitle" />
-
-        <View
-            android:id="@+id/Divider1"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-
-            android:layout_marginStart="@dimen/screen_width_margin"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="@dimen/screen_width_margin"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProfileAccount" />
-
-        <View
-            android:id="@+id/Divider2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SignOut" />
-
-        <TextView
-            android:id="@+id/ProfileAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="24dp"
-            android:text="Account"
-            android:textSize="@dimen/profile_font"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/materialToolbar" />
-
-        <TextView
-            android:id="@+id/SignOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="Sign Out"
-            android:textSize="@dimen/profile_font"
-            app:layout_constraintBottom_toTopOf="@+id/Divider2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Divider1" />
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/materialToolbar"
@@ -120,20 +78,231 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
-            app:layout_constraintBottom_toTopOf="@+id/ProfileAccount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProfileImage" />
+            app:layout_constraintTop_toBottomOf="@+id/ProfileImageCard" />
 
-        <ImageView
-            android:id="@+id/IconSighOut"
-            android:layout_width="41dp"
-            android:layout_height="32dp"
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profileCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
-            android:src="@drawable/icon_logout"
-            app:layout_constraintBottom_toTopOf="@+id/Divider2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Divider1" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ProfileAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="Account"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/viewDiscussionDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/viewPostCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ViewDiscussion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="View Discussion"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/viewPostDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/paymentCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPostCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/PaymentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="Payment"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/PaymentDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/EditProjectsCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paymentCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/EditProjects"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="Edit Projects (Admin)"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/EditProjectsDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="@dimen/screen_width_margin"
+                    android:layout_marginEnd="@dimen/screen_width_margin"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signOutCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditProjectsCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/SignOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="Sign Out"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <ImageView
+                    android:id="@+id/IconSignOut"
+                    android:layout_width="41dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_logout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/Divider1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="@dimen/screen_width_margin"
+                    android:layout_marginEnd="@dimen/screen_width_margin"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

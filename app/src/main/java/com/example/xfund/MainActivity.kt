@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.xfund.databinding.ActivityMainBinding
+import com.example.xfund.viewModel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNav : BottomNavigationView
     lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private lateinit var currentUserViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,20 +32,12 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
 
-//        // Initialize data.
-//        val myDataset = CommunityDatasource().loadCommunities()
-//
-//        val recyclerView = findViewById<RecyclerView>(R.id.CommunityRecycleView)
-//        recyclerView.adapter = CommunityItemAdapter(this, myDataset)
-//
-//        // Use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-//        recyclerView.setHasFixedSize(true)
-
-
+        // Initialize data.
         bottomNav = binding.bottomNav
         val navHostFragment = supportFragmentManager.findFragmentById(binding.myNavHostFragment.id) as NavHostFragment
         navController = navHostFragment.navController
+        currentUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
 
         // Initialize Bottom Nav Item Badges
         setNavItemBadge(R.id.profileFragment)
@@ -82,16 +77,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            reload()
-        }
-    }
-
     private fun setNavItemBadge(menuItemId : Int) {
         var badge = bottomNav.getOrCreateBadge(menuItemId)
         badge.isVisible = true
@@ -106,10 +91,5 @@ class MainActivity : AppCompatActivity() {
             homeBadgeDrawable.isVisible = false
             homeBadgeDrawable.clearNumber()
         }
-    }
-
-    private fun reload() {
-        finish();
-        startActivity(intent);
     }
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/postedItemCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/button_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/penIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="@dimen/screen_width_margin"
+                app:layout_constraintBottom_toBottomOf="@+id/postedDiscussionDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/postedDiscussionTitle"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/baseline_border_color_24" />
+
+            <TextView
+                android:id="@+id/postedDiscussionDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:text="2023-10-10, 12:28"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/penIcon"
+                app:layout_constraintTop_toBottomOf="@+id/postedDiscussionTitle" />
+
+            <TextView
+                android:id="@+id/postedDiscussionTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Discussion Title Example"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toStartOf="@+id/postedDiscussionEditButton"
+                app:layout_constraintStart_toEndOf="@+id/penIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/postedDiscussionEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/screen_width_margin"
+                android:insetLeft="6dp"
+                android:insetRight="6dp"
+                android:text="@string/posted_discussion_edit_button"
+                android:textSize="12sp"
+                android:translationX="6dp"
+                app:cornerRadius="@dimen/button_radius"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <View
+                android:id="@+id/postedDiscussionDivider"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
