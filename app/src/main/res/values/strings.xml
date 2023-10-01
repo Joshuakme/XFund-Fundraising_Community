@@ -91,11 +91,13 @@
 
     <!-- Project: project_list_card_cell -->
     <string name="add_percentage_behind">%s</string>
-    <string name="MoneyPatternForProject">RM %s %.2f</string>
+    <string name="MoneyPatternForProject">RM %s%.2f</string>
+    <string name="Thousands">RM %sK</string>
+    <string name="Millions">RM %sM</string>
     <string name="double_format">RM%s</string>
 
     <!-- Project: fragment_project_detail -->
-    <string name="project_detail_from"> from </string>
+    <string name="project_detail_from">\u00A0from\u00A0</string>
     <string name="project_detail_collected">Collected: </string>
     <string name="project_detail_donate">Donate</string>
 
@@ -111,5 +113,7 @@
 
     <!-- Project: fragment_add_project -->
     <string name="add_project_fragment_title">Add Project</string>
+    <string name="add_project_fund_target">Fund Target*</string>
+    <string name="add_project_start_date">Start Date*</string>
 
 </resources>
