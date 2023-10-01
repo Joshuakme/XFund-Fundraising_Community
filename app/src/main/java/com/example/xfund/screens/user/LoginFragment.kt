@@ -122,7 +122,6 @@ class LoginFragment : Fragment() {
                         // Set UserViewModel
                         userViewModel.setUser(auth.currentUser)
 
-
                         // Set Toast Message
                         Toast.makeText(context, "Login Successfully!", Toast.LENGTH_SHORT).show()
 

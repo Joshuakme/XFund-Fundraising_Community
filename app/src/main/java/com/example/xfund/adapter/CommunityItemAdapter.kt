@@ -90,11 +90,11 @@ class CommunityItemAdapter(
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
-        lateinit var discussionItem: ConstraintLayout
-        lateinit var title: TextView
-        lateinit var date: TextView
-        lateinit var tags: ChipGroup
-        lateinit var author: TextView
+        var discussionItem: ConstraintLayout
+        var title: TextView
+        var date: TextView
+        var tags: ChipGroup
+        var author: TextView
 
         init {
             // Define click listener for the ViewHolder's View
@@ -106,45 +106,6 @@ class CommunityItemAdapter(
         }
     }
 
-
-    private fun getDisplayNameFromUid(uid: String, callback: (String) -> Unit) {
-        if (usernameMap.containsKey(uid)) {
-            // Use cached username
-            callback.invoke(usernameMap[uid]!!)
-        } else {
-            // Fetch the username from Firebase and cache it
-            fetchUsernameFromFirebase(uid) { username ->
-                usernameMap[uid] = username
-                callback.invoke(username)
-            }
-        }
-    }
-
-    private fun fetchUsernameFromFirebase(uid: String, callback: (String) -> Unit) {
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("users")
-            .document(uid)
-            .get()
-            .addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val username = documentSnapshot.getString("username")
-                    if (username != null) {
-                        // Use the username
-                        // For example, set it in a TextView
-                        callback.invoke(username)
-                    } else {
-                        // Handle the case where the username is null
-                    }
-                } else {
-                    // Handle the case where the user document doesn't exist
-                    callback.invoke("N/A")
-                }
-            }
-            .addOnFailureListener { e ->
-                // Handle any errors here
-            }
-    }
 
     private fun createChip(tagChipGroup: ChipGroup, tagName: String) {
         tagChipGroup.addView(Chip(context).apply {

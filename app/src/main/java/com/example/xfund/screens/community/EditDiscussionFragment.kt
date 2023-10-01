@@ -38,6 +38,7 @@ class EditDiscussionFragment : Fragment() {
     private val firestoreRepository = FirebaseHelper()
     private var discussionTagsList: MutableList<String> = mutableListOf()
     private lateinit var updateBtn: Button
+    private lateinit var discussionId: String
     // State Variables
     var isTitleValid: Boolean = false
     var isDescValid: Boolean = false
@@ -58,6 +59,7 @@ class EditDiscussionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Variable Declaration
+        val backBtn = binding.backButton
         val discussionTitle = binding.titleEditText
         val discussionDesc = binding.descEditText
         val tagsEditText = binding.tagsEditText
@@ -66,7 +68,7 @@ class EditDiscussionFragment : Fragment() {
 
 
         // Set Values
-        val discussionId = arguments?.getString("discussionId")
+        discussionId = arguments?.getString("discussionId").toString()
         discussionTitle.setText(arguments?.getString("title"))
         discussionDesc.setText(arguments?.getString("desc"))
         discussionTagsList = arguments?.getStringArray("tags")?.toMutableList() ?: mutableListOf()
@@ -76,6 +78,10 @@ class EditDiscussionFragment : Fragment() {
         }
 
         // EVENT LISTENERS
+        backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         discussionTitle.addTextChangedListener {
             isTitleValid = it?.isNotEmpty() == true && it?.isNotBlank()!! && it.length >= 15
             isDescValid = discussionDesc.text?.isNotEmpty() == true && discussionDesc.text?.isNotBlank()!! && discussionDesc.length() >= 30
@@ -141,25 +147,7 @@ class EditDiscussionFragment : Fragment() {
             // Prompt Dialog to confirm deletion
             showDeleteDiscussionDialog("Are you sure want to delete this discussion?")
 
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                val isDeleted = firestoreRepository.deleteDiscussion(discussionId!!)
 
-                if (isDeleted == 0) {
-                    // Handle the case where the discussion was successfully updated
-                    Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show()
-
-                    findNavController().navigate(R.id.action_editDiscussionFragment_to_viewPostedCommunityFragment)
-                } else if(isDeleted == 1) {
-                    // Discussion not belong to this user
-                    Toast.makeText(context, "You are not allowed to delete this discussion", Toast.LENGTH_SHORT).show()
-                }
-                else if(isDeleted == 2) {
-                    // User not authenticated
-                    Toast.makeText(context, "Please Login to delete this discussion", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Delete Failed", Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 
@@ -215,7 +203,6 @@ class EditDiscussionFragment : Fragment() {
     private fun showDeleteDiscussionDialog(message: String?){
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
         dialog.setContentView(R.layout.delete_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -227,15 +214,24 @@ class EditDiscussionFragment : Fragment() {
 
         btnDelete.setOnClickListener{
             val user = Firebase.auth.currentUser
-            user?.delete()?.addOnCompleteListener{
-                //Account Successfully Deleted
-                if(it.isSuccessful){
-                    // Message
-                    Toast.makeText(requireContext(), "Account Successfully Deleted", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_editProfileFragment_to_homeFragment)
-                }else{
-                    //catch error
-                    Toast.makeText(requireContext(), "Account Not Deleted", Toast.LENGTH_SHORT).show()
+
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                val isDeleted = firestoreRepository.deleteDiscussion(discussionId!!)
+
+                if (isDeleted == 0) {
+                    // Handle the case where the discussion was successfully updated
+                    Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show()
+
+                    findNavController().navigate(R.id.action_editDiscussionFragment_to_viewPostedCommunityFragment)
+                } else if(isDeleted == 1) {
+                    // Discussion not belong to this user
+                    Toast.makeText(context, "You are not allowed to delete this discussion", Toast.LENGTH_SHORT).show()
+                }
+                else if(isDeleted == 2) {
+                    // User not authenticated
+                    Toast.makeText(context, "Please Login to delete this discussion", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Delete Failed", Toast.LENGTH_SHORT).show()
                 }
             }
 
