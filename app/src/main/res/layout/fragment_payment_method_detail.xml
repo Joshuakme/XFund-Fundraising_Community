@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/payment_method_detail"
             android:textSize="@dimen/screen_title"
             app:layout_constraintStart_toEndOf="@+id/backBtn"
@@ -66,6 +67,7 @@
                         android:id="@+id/paymentDetailnameTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
                         android:inputType="text"
                         android:maxLength="20" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -91,6 +93,7 @@
                         android:id="@+id/paymentDetailNoTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
                         android:textColor="@color/md_theme_light_outline" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,6 +108,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/montserrat"
             android:text="@string/payment_detail_delete_txt"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,6 +124,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:enabled="false"
+            android:fontFamily="@font/montserrat"
             android:text="@string/payment_method_detail_update"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,6 +137,7 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat"
             android:text="@string/payment_detail_default_card"
             android:textAlignment="textStart"
             app:layout_constraintEnd_toEndOf="parent"
