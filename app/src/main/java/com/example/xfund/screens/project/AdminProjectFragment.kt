@@ -22,6 +22,7 @@ import com.example.xfund.R
 import com.example.xfund.adapter.AdminProjectAdapter
 import com.example.xfund.databinding.FragmentAdminProjectBinding
 import com.example.xfund.model.Project
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -147,7 +148,9 @@ class AdminProjectFragment : Fragment(),
         dialog.show(fragmentManager, "DELETE_DIALOG")
     }
 
-    inner class DeleteButtonDialog: DialogFragment() {
+    class DeleteButtonDialog: DialogFragment() {
+        private val db2 = Firebase.firestore.collection("projects")
+
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             return activity?.let {
 
@@ -158,7 +161,7 @@ class AdminProjectFragment : Fragment(),
                 builder.setMessage("Do you want to delete this item?")
                     .setPositiveButton("Delete") { dialog, id ->
                         deleteProject(project)
-                        Toast.makeText(context, "Project Deleted", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,"Project Deleted", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
                     .setNegativeButton("Cancel") { dialog, id ->
@@ -172,7 +175,7 @@ class AdminProjectFragment : Fragment(),
 
         private fun deleteProject(oldProject: Project?) = CoroutineScope(
             Dispatchers.IO).launch {
-            val projectQuery = db
+            val projectQuery = db2
                 .whereEqualTo("cover", oldProject?.cover)
                 .whereEqualTo("name", oldProject?.name)
                 .whereEqualTo("description", oldProject?.description)
@@ -182,17 +185,21 @@ class AdminProjectFragment : Fragment(),
             if(projectQuery.documents.isNotEmpty()) {
                 for(document in projectQuery) {
                     try {
-                        db.document(document.id)
+                        db2.document(document.id)
                             .delete()
-                            .addOnSuccessListener { Log.d("Edit Successful", "DocumentSnapshot successfully updated!") }
-                            .addOnFailureListener { e -> Log.w("Edit Failed", "Error updating document", e) }
+                            .addOnSuccessListener {
+                                Log.d("Edit Successful", "DocumentSnapshot successfully updated!")
+                            }
+                            .addOnFailureListener {
+                                    e -> Log.w("Edit Failed", "Error updating document", e)
+                            }
                     } catch(e: Exception) {
-                        Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                     }
                 }
             } else {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "No project matched the query.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "No project matched the query.", Toast.LENGTH_LONG).show()
                 }
             }
         }

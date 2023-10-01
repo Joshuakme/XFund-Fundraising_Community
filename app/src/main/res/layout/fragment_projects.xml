@@ -51,7 +51,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/projectTitle">
 
-
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/SearchBar"
                     android:layout_width="match_parent"

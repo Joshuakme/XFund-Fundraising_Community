@@ -67,7 +67,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_add_24"
-                app:tint="@color/material_dynamic_neutral20" />
+                app:tint="@color/gray_800" />
 
             <TextView
                 android:id="@+id/AddNewDiscussionBtn"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/add_new_discussion_btn_txt"
-                android:textColor="@color/material_dynamic_neutral20"
+                android:textColor="@color/gray_800"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/AddIcon"
                 app:layout_constraintTop_toTopOf="parent" />
