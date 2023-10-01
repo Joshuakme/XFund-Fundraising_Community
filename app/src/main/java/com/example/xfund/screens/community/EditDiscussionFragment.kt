@@ -220,12 +220,12 @@ class EditDiscussionFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)
-        val btnYes : Button = dialog.findViewById(R.id.btnYes)
-        val btnNo : Button = dialog.findViewById(R.id.btnNo)
+        val btnDelete : Button = dialog.findViewById(R.id.btnDelete)
+        val btnCancel : Button = dialog.findViewById(R.id.btnCancel)
 
         tvMessage.text = message
 
-        btnYes.setOnClickListener{
+        btnDelete.setOnClickListener{
             val user = Firebase.auth.currentUser
             user?.delete()?.addOnCompleteListener{
                 //Account Successfully Deleted
@@ -242,7 +242,7 @@ class EditDiscussionFragment : Fragment() {
             dialog.dismiss()
         }
 
-        btnNo.setOnClickListener{
+        btnCancel.setOnClickListener{
             dialog.dismiss()
         }
 
