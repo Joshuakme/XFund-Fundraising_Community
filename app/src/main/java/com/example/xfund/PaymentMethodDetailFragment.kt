@@ -1,7 +1,6 @@
 package com.example.xfund
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -36,15 +35,16 @@ class PaymentMethodDetailFragment : Fragment() {
         val id = arguments?.getString("documentId")
         val cardName = arguments?.getString("cardName")
         val cardNo = arguments?.getString("cardNo")
-        val cardExpiry = arguments?.getString("cardExpiry")
-        val cardCvv = arguments?.getString("cardCvv")
 
         //declare
         val editTextCardName = binding.root.findViewById<EditText>(R.id.paymentDetailnameTxt)
         val textCardNo = binding.root.findViewById<EditText>(R.id.paymentDetailNoTxt)
+
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()
         }
+
+
 
         //set
         editTextCardName.setText(cardName)

@@ -23,8 +23,8 @@
     <dimen name="profile_font">25dp</dimen>
 
     <!-- Payment -->
-    <dimen name="payment_method_width">92dp</dimen>
-    <dimen name="payment_method_height">63dp</dimen>
+    <dimen name="payment_method_width">65.7dp</dimen>
+    <dimen name="payment_method_height">45dp</dimen>
     <dimen name="payment_header">18sp</dimen>
     <dimen name="payment_button_height">60dp</dimen>
 

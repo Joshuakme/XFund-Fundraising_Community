@@ -4,23 +4,23 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.xfund.PaymentMethodFragmentDirections
 import com.example.xfund.R
 import com.example.xfund.model.PaymentMethod
 
 class PaymentAdapter(
     private val context: Context,
     paymentModelArrayList: ArrayList<PaymentMethod>,
-    private val itemClickListener: (PaymentMethod) -> Unit // Add this parameter
+    private val navController: NavController,
+    private val previousFragmentDestinationId: Int?
 ) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
 
     private val paymentModelArrayList: ArrayList<PaymentMethod>
 
-    interface OnItemClickListener {
-        fun onItemClick(paymentMethod: PaymentMethod)
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentAdapter.ItemViewHolder {
         // create a new view
         val paymentView = LayoutInflater.from(parent.context)
@@ -33,8 +33,42 @@ class PaymentAdapter(
         holder.cardName.text  = model.cardName
         holder.cardNo.text  = model.cardNo
 
-        holder.itemView.setOnClickListener {
-            itemClickListener(model) // Pass the PaymentMethod object when clicked
+        if(previousFragmentDestinationId == 2131362262){
+            holder.itemView.setOnClickListener {
+                val action = PaymentMethodFragmentDirections.actionPaymentMethodFragmentToPayment(
+                    model.id,
+                    model.cardName,
+                    model.cardNo,
+                    model.cardExpiry,
+                    model.cardCvv
+                )
+
+                navController?.navigate(action)
+            }
+
+            holder.editBtn.setOnClickListener {
+                val action = PaymentMethodFragmentDirections.actionPaymentMethodFragmentToPaymentMethodDetailFragment(
+                    model.id,
+                    model.cardName,
+                    model.cardNo,
+                    model.cardExpiry,
+                    model.cardCvv
+                )
+
+                navController?.navigate(action)
+            }
+        } else{
+            holder.editBtn.setOnClickListener {
+                val action = PaymentMethodFragmentDirections.actionPaymentMethodFragmentToPaymentMethodDetailFragment(
+                    model.id,
+                    model.cardName,
+                    model.cardNo,
+                    model.cardExpiry,
+                    model.cardCvv
+                )
+
+                navController?.navigate(action)
+            }
         }
     }
 
@@ -45,6 +79,7 @@ class PaymentAdapter(
     class ItemViewHolder(paymentView: View) : RecyclerView.ViewHolder(paymentView) {
         val cardName: TextView = paymentView.findViewById(R.id.savedCardName)
         val cardNo: TextView = paymentView.findViewById(R.id.savedCardNo)
+        val editBtn: ImageView = paymentView.findViewById(R.id.paymentMethodEditBtn)
     }
 
     init{

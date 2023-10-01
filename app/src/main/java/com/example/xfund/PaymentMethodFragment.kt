@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -57,32 +55,21 @@ class PaymentMethodFragment : Fragment() {
                 paymentModelArrayList = createPaymentMethods(result)
 
                 // Adapter
-                val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList) { paymentMethod ->
-                    val bundle = bundleOf(
-                        "cardName" to paymentMethod.cardName,
-                        "cardNo" to paymentMethod.cardNo,
-                        "cardExpiry" to paymentMethod.cardExpiry,
-                        "cardCvv" to paymentMethod.cardCvv,
-                        "documentId" to paymentMethod.id
-                    )
-                    // You can also navigate or perform other actions here using the paymentMethod data.
-                    findNavController().navigate(R.id.action_paymentMethodFragment_to_paymentMethodDetailFragment, bundle)
+                val navController = findNavController()
 
-                }
+                val previousFragmentDestinationId = findNavController().previousBackStackEntry?.destination?.id
 
+                val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList, navController, previousFragmentDestinationId)
+
+                Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
                 paymentMethodRV.adapter = paymentAdapter
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(context, exception.toString(), Toast.LENGTH_SHORT).show()
             }
 
-
-
-        // Below line is for setting a layout manager for our recycler view.
-        // Here, we are creating a vertical list, so we will provide orientation as vertical.
         val linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        // In the next two lines, we are setting the layout manager and adapter for our recycler view.
         paymentMethodRV.layoutManager = linearLayoutManager
 
 

@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.xfund.databinding.FragmentPaymentBinding
@@ -37,6 +35,13 @@ class Payment : Fragment() {
         binding.backBtn.setOnClickListener{
             findNavController().navigateUp()
         }
+
+        //Fetch data from payment
+        val cardName = arguments?.getString("cardName")
+        val cardNo = arguments?.getString("cardNo")
+
+        binding.savedCardName.text = cardName
+        binding.savedCardNo.text = cardNo
 
         // Inflate the layout for this fragment
         return binding.root
