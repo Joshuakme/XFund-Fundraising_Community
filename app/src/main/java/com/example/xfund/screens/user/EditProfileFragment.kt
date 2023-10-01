@@ -1,8 +1,6 @@
 package com.example.xfund.screens.user
 
 import android.app.Dialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -16,31 +14,31 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.xfund.R
 import com.example.xfund.databinding.FragmentEditProfileBinding
+import com.example.xfund.util.FirebaseHelper
 import com.example.xfund.viewModel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
-    private lateinit var storageRef: StorageReference
-    private lateinit var firebaseRef: DatabaseReference
+    private lateinit var currentUser: FirebaseUser
     private var uri: Uri? = null
-    private lateinit var sharedPreferences: SharedPreferences
+    private val firestoreRepository = FirebaseHelper()
+    private var currentUserViewModel = UserViewModel()
 
     val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
-
         if (it != null) {
             uri = it
             binding.EditImage.setImageURI(it)
@@ -53,29 +51,45 @@ class EditProfileFragment : Fragment() {
     ): View? {
         // Variables
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
-        firebaseRef = FirebaseDatabase.getInstance().getReference("user/")
-        storageRef = FirebaseStorage.getInstance().getReference("Images")
-        sharedPreferences = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
 
 
         // ELEMENTS
+        val profileImg = binding.EditImage
         val usernameTxt = binding.tfEditUsername
         val emailTxt = binding.tfEditEmail
         val passwordTxt = binding.tfEditPassword
+        val auth = FirebaseAuth.getInstance()
 
         // Check if logged in
-        val isLogin: Boolean = sharedPreferences?.getBoolean("IsLogin", false) == true
+        currentUser = auth.currentUser!!
 
-        if(isLogin && FirebaseAuth.getInstance().currentUser != null) {
-            user = FirebaseAuth.getInstance().currentUser!!
-            if(user.displayName.isNullOrEmpty()) {
-                usernameTxt.setText("Username")
-            } else {
-                usernameTxt.setText(user.displayName.toString())
+        if(currentUser != null) {
+//            // Use a coroutine scope to get all discussions
+//            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+//                val user = firestoreRepository.fetchUserDetails(currentUser.uid)
+//
+//                if(user != null) {
+//                    Toast.makeText(context, user.imgUri.toString(), Toast.LENGTH_SHORT).show()
+//                    profileImg.setImageURI(user.imgUri)
+//                    usernameTxt.setText(user?.displayName ?: "Username")
+//                    emailTxt.setText(user.email.toString())
+//                    passwordTxt.setText("")
+//                }
+//            }
+
+            currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
+                if (user != null) {
+                    //profileImg.setImageURI(user.photoUrl)
+                    usernameTxt.setText(user?.displayName ?: "Username")
+                    emailTxt.setText(user.email.toString())
+                    passwordTxt.setText("")
+
+                    Glide.with(context)
+                        .load(user.photoUrl)
+                        .placeholder(R.drawable.baseline_account_circle)
+                        .into(view?.findViewById(R.id.EditImage))
+                }
             }
-
-            emailTxt.setText(user.email.toString())
-            passwordTxt.setText("")
         } else {
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
 
@@ -100,27 +114,6 @@ class EditProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun uploadProfileImageToFirebaseStorage(imageUri: Uri) {
-        val storageRef = FirebaseStorage.getInstance().reference
-        val imageRef = storageRef.child("user/${FirebaseAuth.getInstance().currentUser!!.uid}")
-
-        imageRef.putFile(imageUri)
-            .addOnSuccessListener { taskSnapshot ->
-                // Image uploaded successfully, get the download URL.
-                imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    val imageUrl = uri.toString()
-                    // Save the imageUrl to Firestore or Realtime Database.
-
-                    Toast.makeText(context, "Upload Successfully to Firestore!", Toast.LENGTH_SHORT)
-
-                }
-            }
-            .addOnFailureListener { exception ->
-                // Handle upload failure.
-            }
-    }
-
-
     private fun showDeleteAccountDialog(message: String?){
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -139,13 +132,7 @@ class EditProfileFragment : Fragment() {
             val user = Firebase.auth.currentUser
             user?.delete()?.addOnCompleteListener{
                 //Account Successfully Deleted
-                if(it.isSuccessful){
-
-                    // Remove login status from preference file / sharedPreference
-                    val editor = sharedPreferences.edit()
-                    editor.putBoolean("IsLogin", false)
-                    editor.commit()
-
+                if(it.isSuccessful) {
                     // Message
                     Toast.makeText(requireContext(), "Account Successfully Deleted", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_editProfileFragment_to_homeFragment)
@@ -165,35 +152,65 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun updateUserDetail(displayName: String, imageUri: Uri?) {
-        // Upload photo to firebase
-        //uploadProfileImageToFirebaseStorage(imageUri)
-
         lateinit var profileUpdates: UserProfileChangeRequest
+
         if(imageUri != null) {
-            profileUpdates = UserProfileChangeRequest.Builder()
-                .setPhotoUri(imageUri)
-                .setDisplayName(displayName)
-                .build()
+            // Use a coroutine scope to upload the image to Firebase
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                val imageUrl = firestoreRepository.uploadUserImage(imageUri)
+
+                if (imageUrl != null) {
+                    // Image uploaded successful to Firebase Storage & Ref in Firestore
+                    profileUpdates = UserProfileChangeRequest.Builder()
+                        .setPhotoUri(Uri.parse(imageUrl))
+                        .setDisplayName(displayName)
+                        .build()
+
+                    // Update username, imageUri to Firebase
+                    currentUser.updateProfile(profileUpdates)
+                        .addOnCompleteListener {task ->
+                            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
+
+                            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    // Handle the case where image upload failed (e.g., authentication issue or upload error)
+                }
+            }
         }else {
             profileUpdates = UserProfileChangeRequest.Builder()
                 .setDisplayName(displayName)
                 .build()
+
+            // Update username to Firebase
+            currentUser.updateProfile(profileUpdates)
+                .addOnCompleteListener {task ->
+                    Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
+
+                    findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                }
         }
 
-        // Update username, photoUrl to Firebase
-        user.updateProfile(profileUpdates)
-            .addOnCompleteListener {task ->
-                Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
-
-                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-            }
+//        // Update username, photoUrl to Firebase
+//        currentUser.updateProfile(profileUpdates)
+//            .addOnCompleteListener {task ->
+//                Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
+//
+//                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+//            }
 
         // Update Email to Firebase
-        if(binding.tfEditEmail.text.toString() != user.email) {
-            user.updateEmail(binding.tfEditEmail.text.toString())
+        if(binding.tfEditEmail.text.toString() != currentUser.email) {
+            currentUser.updateEmail(binding.tfEditEmail.text.toString())
                 .addOnCompleteListener {
                     // Email updated successfully
                 }
@@ -204,7 +221,7 @@ class EditProfileFragment : Fragment() {
 
         // Update Password to Firebase
         if(!binding.tfEditPassword.text.isNullOrEmpty()) {
-            user.updatePassword(binding.tfEditPassword.text.toString())
+            currentUser.updatePassword(binding.tfEditPassword.text.toString())
                 .addOnCompleteListener {
                     // Email updated successfully
                 }
@@ -215,24 +232,7 @@ class EditProfileFragment : Fragment() {
 
         val currentUserViewModel = UserViewModel()
 
-        currentUserViewModel.setUser(getUserFromFirebase())
-    }
-
-
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        auth = Firebase.auth
-        // [END initialize_auth]
-
-
-    }
-
-
-    public fun getUserFromFirebase(): FirebaseUser {
-        return FirebaseAuth.getInstance().currentUser!!
+        currentUserViewModel.setUser(currentUser)
     }
 
 //    public fun deleteAccount() {

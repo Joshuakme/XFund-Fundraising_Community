@@ -1,5 +1,6 @@
 package com.example.xfund.util
 
+import android.net.Uri
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -13,18 +14,23 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.util.UUID
 
 class FirebaseHelper {
     // Variables
-    private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private val storage = FirebaseStorage.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
+
 
     // Coroutines Functions
+    // User-Related Coroutines
     suspend fun logInUser(email: String, password: String): AuthResult? {
         return withContext(Dispatchers.IO) {
             try {
@@ -70,7 +76,39 @@ class FirebaseHelper {
         }
     }
 
+    suspend fun uploadUserImage(imageUri: Uri): String? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val currentUser = auth.currentUser
+                if (currentUser != null) {
+                    val imageFileName = currentUser.uid.toString()
+                    val imageRef = storage.reference.child("images/users/$imageFileName")
 
+                    // Upload the image to Firebase Storage
+                    val uploadTask = imageRef.putFile(imageUri)
+                    uploadTask.await()
+
+                    // Get the download URL of the uploaded image
+                    val downloadUrl = imageRef.downloadUrl.await()
+
+                    // Store the download URL in Firestore
+                    val imageUrl = downloadUrl.toString()
+                    val userId = currentUser.uid
+                    val imageDoc = firestore.collection("users").document(userId)
+                    imageDoc.update("imageUrl", imageUrl).await()
+
+                    imageUrl
+                } else {
+                    null // User not authenticated
+                }
+            } catch (e: Exception) {
+                null // Handle exceptions
+            }
+        }
+    }
+
+
+    // Discussion-Related Coroutines
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getAllDiscussions(): List<CommunityDiscussion> {
         return withContext(Dispatchers.IO) {
@@ -219,4 +257,8 @@ class FirebaseHelper {
 
         return communityDiscussions.toList()
     }
+
+
+    // Discussion-Related Coroutines
+
 }

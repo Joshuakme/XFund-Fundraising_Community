@@ -18,6 +18,4 @@ class UserViewModel : ViewModel() {
     fun setUser(user: FirebaseUser?) {
         _currentUser.value = user
     }
-
-
 }

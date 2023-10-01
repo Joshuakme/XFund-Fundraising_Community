@@ -33,7 +33,6 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
     private var currentUserViewModel = UserViewModel()
-    private val firestoreRepository = FirebaseHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -74,11 +73,8 @@ class ProfileFragment : Fragment() {
                 if (user != null) {
                     val imageUrl =
                         user?.photoUrl   // Retrieve user's profile image URL from Firestore or Realtime Database
-                    if (user.displayName.isNullOrEmpty()) {
-                        view.findViewById<TextView>(R.id.ProfileName).text = "Username"
-                    } else {
-                        view.findViewById<TextView>(R.id.ProfileName).text = user.displayName
-                    }
+                        view.findViewById<TextView>(R.id.ProfileName).text = user.displayName ?: "Username"
+
 
                     Glide.with(context)
                         .load(imageUrl)

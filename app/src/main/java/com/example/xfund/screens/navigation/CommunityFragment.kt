@@ -62,6 +62,7 @@ class CommunityFragment : Fragment() {
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         addDiscussionButton = view.findViewById(R.id.AddButtonLinearLayout)
         val communityRecycler: RecyclerView = view.findViewById(R.id.CommunityRecycleView)
+        val user = FirebaseAuth.getInstance().currentUser
 
         // LAYOUT SETTINGS
         bottomNav?.visibility = View.VISIBLE
@@ -69,7 +70,7 @@ class CommunityFragment : Fragment() {
 
         // EVENT LISTENERS
         addDiscussionButton.setOnClickListener { view: View ->
-            if(isLogin()) {
+            if(user != null) {
                 findNavController().navigate(R.id.action_communityFragment_to_addDiscussionFragment)
             }
             else {
@@ -91,39 +92,6 @@ class CommunityFragment : Fragment() {
                 Toast.makeText(context, "Failed to load discussions", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun createCommunityDiscussions(querySnapshot: QuerySnapshot): List<CommunityDiscussion> {
-        val communityDiscussions = mutableListOf<CommunityDiscussion>()
-
-        for (document in querySnapshot.documents) {
-            val author = document.getString("author") ?: ""
-            val title = document.getString("title") ?: ""
-            val desc = document.getString("desc") ?: ""
-            val tags = document.get("tags") as? ArrayList<String> ?: emptyList()
-            val timestamp = document.getTimestamp("createdOn")
-
-            val createdOn = if (timestamp != null) {
-                timestamp.toDate().toInstant().atZone(ZoneOffset.UTC).toLocalDateTime()
-            } else {
-                LocalDateTime.now()
-            }
-
-            val communityDiscussion = CommunityDiscussion(author, title, desc, tags, createdOn)
-            communityDiscussions.add(communityDiscussion)
-        }
-
-        return communityDiscussions.toList()
-    }
-
-    private fun isLogin(): Boolean {
-        var sharedPreferences = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-        val user = FirebaseAuth.getInstance().currentUser
-
-        // Check if logged in
-        return sharedPreferences?.getBoolean("IsLogin", false) == true && user != null
     }
 }
 

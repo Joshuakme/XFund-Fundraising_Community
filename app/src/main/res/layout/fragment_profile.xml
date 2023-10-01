@@ -37,7 +37,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/ProfileImageCard"
-            android:layout_width="96dp"
+            android:layout_width="87dp"
             android:layout_height="87dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="48dp"
@@ -153,7 +153,7 @@
                     app:layout_constraintVertical_bias="0.5" />
 
                 <View
-                    android:id="@+id/Divider2"
+                    android:id="@+id/viewPostDivider"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
 
@@ -167,6 +167,89 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/paymentCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPostCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/PaymentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="Payment"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/PaymentDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/EditProjectsCard"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginStart="@dimen/screen_width_margin"
+            android:layout_marginEnd="@dimen/screen_width_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paymentCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/EditProjects"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:text="Edit Projects (Admin)"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_menu_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <View
+                    android:id="@+id/EditProjectsDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:layout_marginStart="@dimen/screen_width_margin"
+                    android:layout_marginEnd="@dimen/screen_width_margin"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/signOutCard"
             android:layout_width="0dp"
             android:layout_height="@dimen/profile_menu_height"
@@ -174,7 +257,7 @@
             android:layout_marginEnd="@dimen/screen_width_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPostCard">
+            app:layout_constraintTop_toBottomOf="@+id/EditProjectsCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -218,10 +301,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

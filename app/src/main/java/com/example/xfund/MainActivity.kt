@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.xfund.databinding.ActivityMainBinding
+import com.example.xfund.viewModel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNav : BottomNavigationView
     lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private lateinit var currentUserViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         bottomNav = binding.bottomNav
         val navHostFragment = supportFragmentManager.findFragmentById(binding.myNavHostFragment.id) as NavHostFragment
         navController = navHostFragment.navController
+        currentUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
 
         // Initialize Bottom Nav Item Badges
         setNavItemBadge(R.id.profileFragment)

@@ -34,10 +34,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
-    private var _binding: FragmentLoginBinding? = null
-        get() = _binding!!
-    private lateinit var sharedPref: SharedPreferences
-    private lateinit var userViewModel : UserViewModel
+    private var userViewModel = UserViewModel()
     private val firestoreRepository = FirebaseHelper()
 
     override fun onCreateView(
@@ -49,8 +46,6 @@ class LoginFragment : Fragment() {
 
         // VARIABLES
         auth = Firebase.auth        // Firebase Variables
-        sharedPref = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)    // Shared Preference
-
 
         return binding.root
     }
@@ -124,15 +119,9 @@ class LoginFragment : Fragment() {
                     if (authResult != null) {
                         // User logged in successfully
 
-
                         // Set UserViewModel
-                        userViewModel =
-                            ViewModelProvider(requireActivity())[UserViewModel::class.java]
                         userViewModel.setUser(auth.currentUser)
 
-                        // Save Login Status (True) in Shared Preference
-                        val editor = sharedPref?.edit()
-                        editor?.putBoolean("IsLogin", true)?.apply()
 
                         // Set Toast Message
                         Toast.makeText(context, "Login Successfully!", Toast.LENGTH_SHORT).show()
@@ -147,12 +136,6 @@ class LoginFragment : Fragment() {
                         bottomNav?.visibility = View.VISIBLE
                     } else {
                         // Handle login failure
-
-
-                        // Save Login Status (False) in Shared Preference
-                        with(sharedPref?.edit()) {
-                            this?.putBoolean("Islogin", false)?.apply()
-                        }
 
                         Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
