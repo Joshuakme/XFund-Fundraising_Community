@@ -55,7 +55,6 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
         if (isFirstTime == true) {
             // set login status to false if first time use app
-            editor?.putBoolean("IsLogin", false)
             editor?.putBoolean("IsFirstTime", false)
             editor?.apply()
         }

@@ -30,7 +30,6 @@ import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var sharedPreferences: SharedPreferences
     private var currentUserViewModel = UserViewModel()
 
     override fun onCreateView(
@@ -40,13 +39,14 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         // Variables
-        sharedPreferences = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         auth = Firebase.auth
-        val isLogin: Boolean = sharedPreferences?.getBoolean("IsLogin", false) == true
+        val currentUser = currentUserViewModel.currentUser
 
 
         // Check if logged in
-        if(!isLogin) {
+        if(currentUser != null) {
+            // is logged in
+        } else {
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
 
@@ -59,7 +59,8 @@ class ProfileFragment : Fragment() {
         // Variables
         val profileBtn = view.findViewById<MaterialCardView>(R.id.profileCard)
         val viewDiscussionBtn = view.findViewById<MaterialCardView>(R.id.viewPostCard)
-        val signOutBtn = view.findViewById<MaterialCardView>(R.id.signOutCard)
+        val aboutBtn = view.findViewById<MaterialCardView>(R.id.AboutCard)
+        val signOutBtn = view.findViewById<Button>(R.id.signOutBtn)
         val auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
 
@@ -73,6 +74,7 @@ class ProfileFragment : Fragment() {
                     val imageUrl =
                         user?.photoUrl   // Retrieve user's profile image URL from Firestore or Realtime Database
                         view.findViewById<TextView>(R.id.ProfileName).text = user.displayName ?: "Username"
+                        view.findViewById<TextView>(R.id.ProfileEmail).text = user.email
 
 
                     Glide.with(context)
@@ -91,11 +93,19 @@ class ProfileFragment : Fragment() {
             viewDiscussionBtn.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_viewPostedCommunityFragment)
             }
+
+            // About Screen
+            aboutBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_aboutFragment)
+            }
+
             // Sign Out
             signOutBtn.setOnClickListener {
                 val messageSignOut: String = "Are you sure want to sign out?"
                 showSignOutAccountDialog(messageSignOut)
             }
+        } else {
+            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
     }
 
@@ -115,17 +125,8 @@ class ProfileFragment : Fragment() {
         btnSignOut.setOnClickListener{
             auth.signOut()
 
-            //save to preference file / sharedPreference
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("IsLogin", false)
-            editor.commit()
-
             // Display Message
-            Toast.makeText(
-                context,
-                "Signed Out",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(context,"Signed Out",Toast.LENGTH_SHORT).show()
 
             // Navigate to Home Page
             findNavController().navigate(R.id.action_profileFragment_to_homeFragment)

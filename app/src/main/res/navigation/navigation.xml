@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_profileFragment_to_viewPostedCommunityFragment"
             app:destination="@id/viewPostedCommunityFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"
@@ -227,5 +230,9 @@
             android:id="@+id/action_editDiscussionFragment_to_viewPostedCommunityFragment"
             app:destination="@id/viewPostedCommunityFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.xfund.screens.user.AboutFragment"
+        android:label="AboutFragment" />
 
 </navigation>
