@@ -1,44 +1,54 @@
 package com.example.xfund.model
 
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.RequiresApi
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
 import java.util.Date
 
 
 data class Project(
 
-    val cover: Int,
+    val cover: String,
     val name: String,
-    val start_date: Date,
-    val end_date: Date,
-    val fund_target: Int,
-    var fund_collected: Int,
-    val description: String
+    val description: String,
+    val start_date: LocalDateTime,
+    val end_date: LocalDateTime,
+    var fund_collected: Double,
+    val fund_target: Double
+
 ) : Parcelable {
     val percentage: Int
-        get() = ((fund_collected.toFloat() / fund_target) * 100).toInt()
+        get() = ((fund_collected/ fund_target) * 100).toInt()
 
     val percentageValue: String = percentage.toString()
 
+    var stringFundTarget: String = "0.00"
+        get() = (String.format("%.2f", fund_target))
+
     // Parcelable implementation
+    @RequiresApi(Build.VERSION_CODES.O)
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readString() ?: "",
-        Date(parcel.readLong()),
-        Date(parcel.readLong()),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readString() ?: ""
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        Date(parcel.readLong()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+        Date(parcel.readLong()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+        parcel.readDouble(),
+        parcel.readDouble()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(cover)
+        parcel.writeString(cover)
         parcel.writeString(name)
-        parcel.writeLong(start_date.time)
-        parcel.writeLong(end_date.time)
-        parcel.writeInt(fund_target)
-        parcel.writeInt(fund_collected)
         parcel.writeString(description)
+        parcel.writeLong(start_date.toMillis())
+        parcel.writeLong(end_date.toMillis())
+        parcel.writeDouble(fund_collected)
+        parcel.writeDouble(fund_target)
     }
 
     override fun describeContents(): Int {
@@ -53,5 +63,10 @@ data class Project(
         override fun newArray(size: Int): Array<Project?> {
             return arrayOfNulls(size)
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun LocalDateTime.toMillis(): Long {
+        return this.atZone(ZoneOffset.UTC).toInstant().toEpochMilli()
     }
 }

@@ -284,7 +284,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/home_popular_fundraising_title"
-            android:textColor="@color/material_dynamic_neutral30"
+            android:textColor="@color/gray_800"
             android:textSize="@dimen/home_section_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/DotsIndicator" />

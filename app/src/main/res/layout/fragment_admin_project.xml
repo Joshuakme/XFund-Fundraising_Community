@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/ProjectTitle"
+                android:id="@+id/projectTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:gravity="center"
@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/ProjectAddButton"
+                android:id="@+id/projectAddButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -47,58 +47,73 @@
                 android:paddingTop="9dp"
                 android:paddingEnd="18dp"
                 android:paddingBottom="9dp"
-                app:layout_constraintBottom_toTopOf="@+id/ProjectSearch"
+                app:layout_constraintBottom_toTopOf="@+id/projectSearch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
-                    android:id="@+id/ProjectAddButtonIcon"
+                    android:id="@+id/projectAddButtonIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:background="#002B2020"
-                    android:contentDescription="Add Discussion"
+                    android:contentDescription="Add Project"
                     android:scaleType="center"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/baseline_add_24"
-                    app:tint="@color/AddButton" />
+                    app:tint="@color/addButton" />
 
                 <TextView
-                    android:id="@+id/ProjectAddButtonText"
+                    android:id="@+id/projectAddButtonText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/add_new_discussion_btn_txt"
-                    android:textColor="@color/AddButton"
+                    android:text="@string/admin_project_add"
+                    android:textColor="@color/addButton"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/AddIcon"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/ProjectSearch"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/projectSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/screen_width_margin"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:iconifiedByDefault="false"
-                android:inputType="text|textAutoCorrect"
-                android:queryBackground="@android:color/transparent"
-                android:queryHint="Enter the project name"
-                app:iconifiedByDefault="false"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="10dp"
+                android:clipToPadding="true"
+                android:padding="0dp"
+                app:cardBackgroundColor="@color/gray_100"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:cardPreventCornerOverlap="false"
+                app:contentPadding="-4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ProjectTitle" />
+                app:layout_constraintTop_toBottomOf="@id/projectTitle">
+
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/SearchBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:queryHint="@string/search_query_hint"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@android:color/transparent" />
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ProjectRecycleView"
+            android:id="@+id/projectRecycleView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="40dp"
