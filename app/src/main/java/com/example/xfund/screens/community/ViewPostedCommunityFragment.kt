@@ -6,23 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
-import com.example.xfund.adapter.CommunityItemAdapter
 import com.example.xfund.adapter.PostedDiscussionAdapter
-import com.example.xfund.model.CommunityDiscussion
 import com.example.xfund.util.FirebaseHelper
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 
 class ViewPostedCommunityFragment : Fragment() {
@@ -41,6 +37,7 @@ class ViewPostedCommunityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // VIEW ELEMENTS
+        val postedCommunitybackButton = view.findViewById<ImageButton>(R.id.postedCommunitybackButton)
         val postedCommunityRecycleView = view.findViewById<RecyclerView>(R.id.postedCommunityRecycleView)
 
 
@@ -52,6 +49,12 @@ class ViewPostedCommunityFragment : Fragment() {
             val adapter = PostedDiscussionAdapter(postedDiscussionMapList, navController)
             postedCommunityRecycleView.adapter = adapter
             postedCommunityRecycleView.layoutManager = LinearLayoutManager(context)
+        }
+
+
+        // EVENT LISTENERS
+        postedCommunitybackButton.setOnClickListener {
+            findNavController().navigate(R.id.action_viewPostedCommunityFragment_to_profileFragment)
         }
     }
 

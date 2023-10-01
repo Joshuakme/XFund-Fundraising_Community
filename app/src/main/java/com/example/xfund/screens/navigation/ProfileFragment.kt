@@ -76,7 +76,8 @@ class ProfileFragment : Fragment() {
                 if (userDetail != null) {
                     // Update the UI with user details
                     val imageUrl = userDetail.imgUri
-                    view.findViewById<TextView>(R.id.ProfileName).text = userDetail?.displayName ?: "Username"
+                    view.findViewById<TextView>(R.id.ProfileName).text =
+                        userDetail?.displayName ?: "Username"
 
                     Glide.with(context)
                         .load(imageUrl)
@@ -118,12 +119,11 @@ class ProfileFragment : Fragment() {
                 val messageSignOut: String = "Are you sure want to sign out?"
                 showSignOutAccountDialog(messageSignOut)
             }
-
-        } else {
-            // Handle the case where the user is not authenticated
-            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-
         }
+//        } else {
+//            // Handle the case where the user is not authenticated
+//            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+//        }
     }
 
     private fun showSignOutAccountDialog(messageSignOut: String?){
