@@ -54,4 +54,5 @@ class ProjectItemAdapter(
                 .into(binding.cardImage)
         }
     }
+
 }

@@ -152,8 +152,15 @@ class EditProjectFragment : Fragment() {
                 try {
                     db.document(document.id)
                         .update(newProject)
-                        .addOnSuccessListener { Log.d("Edit Successful", "DocumentSnapshot successfully updated!") }
-                        .addOnFailureListener { e -> Log.w("Edit Failed", "Error updating document", e) }
+                        .addOnSuccessListener {
+                            Log.d("Edit Successful", "DocumentSnapshot successfully updated!")
+                            Toast.makeText(context, "Project has been edited.", Toast.LENGTH_LONG).show()
+                        }
+                        .addOnFailureListener {
+                                e -> Log.w("Edit Failed", "Error updating document", e)
+                            Toast.makeText(context, "Fail to edit project! Please try again", Toast.LENGTH_LONG).show()
+                        }
+
                 } catch(e: Exception) {
                     Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
                 }
