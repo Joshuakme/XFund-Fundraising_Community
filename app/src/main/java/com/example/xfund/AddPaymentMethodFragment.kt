@@ -34,9 +34,8 @@ class AddPaymentMethodFragment : Fragment() {
 
         // Hide Bottom Navigation
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
-        if (bottomNav != null) {
-            bottomNav.visibility = View.INVISIBLE
-        }
+        bottomNav?.visibility = View.INVISIBLE
+
 
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()

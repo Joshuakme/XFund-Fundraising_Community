@@ -10,6 +10,7 @@ import com.example.xfund.model.User
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
@@ -278,10 +279,12 @@ class FirebaseHelper {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createProject(querySnapshot: QuerySnapshot): List<Project> {
         val adminProjects = mutableListOf<Project>()
 
         for (document in querySnapshot.documents) {
+            val id = document.getString("id") ?: ""
             val cover = document.getString("cover") ?: ""
             val name = document.getString("name") ?: ""
             val description = document.getString("description") ?: ""
@@ -311,11 +314,39 @@ class FirebaseHelper {
                 endCalendar.get(Calendar.MINUTE)
             )
 
-            val adminProject = Project(cover, name, description, start_date, end_date, fund_collected, fund_target)
+            val adminProject = Project(id, cover, name, description, start_date, end_date, fund_collected, fund_target)
             adminProjects.add(adminProject)
         }
 
         return adminProjects.toList()
+    }
+
+    suspend fun donateToProject(projectId: String, donationAmount: Int): Boolean  {
+        val projectsRef = FirebaseFirestore.getInstance().collection("projects")
+
+        try {
+            // Start a Firestore transaction to ensure consistency
+            FirebaseFirestore.getInstance().runTransaction { transaction ->
+                val projectDoc = projectsRef.document(projectId)
+
+                // Get the current collected funds
+                val currentCollectedFunds = transaction.get(projectDoc).getDouble("fund_collected")?.toInt() ?: 0
+
+                // Update the collected funds by adding the donation amount
+                val newCollectedFunds = currentCollectedFunds + donationAmount
+
+                // Set the updated collected funds in the Firestore document
+                transaction.update(projectDoc, "fund_collected", newCollectedFunds)
+
+                true
+            }.await()
+        } catch (e: Exception) {
+            // Handle any errors, such as Firestore exceptions or network issues
+            // You can log the error or handle it as needed
+            Log.d("KENAPAAA???", e.toString())
+            false
+        }
+        return false
     }
 
 }

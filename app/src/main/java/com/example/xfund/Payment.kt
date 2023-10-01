@@ -5,14 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.xfund.R
 import com.example.xfund.databinding.FragmentPaymentBinding
+import com.example.xfund.util.FirebaseHelper
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Payment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentPaymentBinding
-
+    private val firestoreRepository = FirebaseHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +32,21 @@ class Payment : Fragment() {
             false
         )
 
+        val projectId = arguments?.getString("projectId")
+
         binding.donateBtn.setOnClickListener{
+            val donationAmount = binding.donateAmountInput.text.toString().toInt()
+
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                val isDeleted = firestoreRepository.donateToProject(projectId ?: "", donationAmount)
+
+                if(isDeleted) {
+                    Toast.makeText(context, "Donate Successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Donate Rejected", Toast.LENGTH_SHORT).show()
+                }
+            }
+
             findNavController().navigate(R.id.action_payment_to_paymentSuccessFragment)
         }
         binding.changeCardTxt.setOnClickListener{

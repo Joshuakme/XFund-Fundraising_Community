@@ -11,7 +11,7 @@ import java.util.Date
 
 
 data class Project(
-
+    val id: String,
     val cover: String,
     val name: String,
     val description: String,
@@ -51,6 +51,7 @@ data class Project(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
+        parcel.readString() ?: "",
         Date(parcel.readLong()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
         Date(parcel.readLong()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
         parcel.readDouble(),
@@ -58,6 +59,7 @@ data class Project(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(cover)
         parcel.writeString(name)
         parcel.writeString(description)

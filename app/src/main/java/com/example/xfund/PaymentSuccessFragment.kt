@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.example.xfund.R
 import com.example.xfund.databinding.FragmentPaymentSuccessBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PaymentSuccessFragment : Fragment() {
     private lateinit var binding: FragmentPaymentSuccessBinding
@@ -24,6 +26,8 @@ class PaymentSuccessFragment : Fragment() {
         )
 
         binding.paymentToMenuBtn.setOnClickListener {
+            val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+            bottomNav?.visibility = View.VISIBLE
             findNavController().navigate(R.id.action_paymentSuccessFragment_to_homeFragment)
         }
 

@@ -33,7 +33,7 @@ class PaymentAdapter(
         holder.cardName.text  = model.cardName
         holder.cardNo.text  = model.cardNo
 
-        if(previousFragmentDestinationId == 2131362262){
+        if(previousFragmentDestinationId == 2131362363){
             holder.itemView.setOnClickListener {
                 val action = PaymentMethodFragmentDirections.actionPaymentMethodFragmentToPayment(
                     model.id,

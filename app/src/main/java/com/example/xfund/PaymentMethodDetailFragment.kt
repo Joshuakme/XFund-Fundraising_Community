@@ -37,7 +37,7 @@ class PaymentMethodDetailFragment : Fragment() {
         val cardNo = arguments?.getString("cardNo")
 
         //declare
-        val editTextCardName = binding.root.findViewById<EditText>(R.id.paymentDetailnameTxt)
+        val editTextCardName = binding.paymentDetailnameTxt
         val textCardNo = binding.root.findViewById<EditText>(R.id.paymentDetailNoTxt)
 
         binding.backBtn.setOnClickListener {
@@ -87,7 +87,7 @@ class PaymentMethodDetailFragment : Fragment() {
                 val updates = hashMapOf<String, Any>(
                     "cardName" to newValue
                 )
-                updateBtn.isEnabled = true
+
 
                 updateBtn.setOnClickListener{
                     documentRef.update(updates)
@@ -101,6 +101,7 @@ class PaymentMethodDetailFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateBtn.isEnabled = true
             }
         })
 

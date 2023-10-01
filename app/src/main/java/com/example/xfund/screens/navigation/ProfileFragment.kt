@@ -58,8 +58,10 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Variables
+        val viewWalletBtn = view.findViewById<Button>(R.id.EditWalletBtn)
         val profileBtn = view.findViewById<MaterialCardView>(R.id.profileCard)
         val viewDiscussionBtn = view.findViewById<MaterialCardView>(R.id.viewPostCard)
+        val editProjectsBtn = view.findViewById<MaterialCardView>(R.id.EditProjectsCard)
         val aboutBtn = view.findViewById<MaterialCardView>(R.id.AboutCard)
         val signOutBtn = view.findViewById<Button>(R.id.signOutBtn)
         val auth = FirebaseAuth.getInstance()
@@ -77,7 +79,6 @@ class ProfileFragment : Fragment() {
                         view.findViewById<TextView>(R.id.ProfileName).text = user.displayName ?: "Username"
                         view.findViewById<TextView>(R.id.ProfileEmail).text = user.email
 
-
                     Glide.with(context)
                         .load(imageUrl)
                         .placeholder(R.drawable.baseline_account_circle)
@@ -86,6 +87,11 @@ class ProfileFragment : Fragment() {
             }
 
             // EVENT LISTENERS
+            // View Wallet button
+            viewWalletBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_paymentMethodFragment)
+            }
+
             // "Account" button
             profileBtn.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
@@ -93,6 +99,11 @@ class ProfileFragment : Fragment() {
             // View Posted Discussions
             viewDiscussionBtn.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_viewPostedCommunityFragment)
+            }
+
+            // Edit Projects
+            editProjectsBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_editProjectFragment)
             }
 
             // About Screen

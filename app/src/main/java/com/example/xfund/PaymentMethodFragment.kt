@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.xfund.adapter.PaymentAdapter
 import com.example.xfund.databinding.FragmentPaymentMethodBinding
 import com.example.xfund.model.PaymentMethod
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -31,6 +32,9 @@ class PaymentMethodFragment : Fragment() {
             false
         )
 
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav?.visibility = View.INVISIBLE
+
         binding.addPaymentCard.setOnClickListener{
             findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
         }
@@ -38,6 +42,8 @@ class PaymentMethodFragment : Fragment() {
             findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
         }
         binding.backBtn.setOnClickListener {
+            bottomNav?.visibility = View.VISIBLE
+            //bottomNav?.visibility = View.VISIBLE
             findNavController().navigateUp()
         }
 

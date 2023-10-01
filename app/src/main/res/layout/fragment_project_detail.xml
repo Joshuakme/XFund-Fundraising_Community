@@ -99,19 +99,6 @@
                     app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"  />
 
                 <TextView
-                    android:id="@+id/projectDetailPercentageCollectedText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="14dp"
-                    android:gravity="center"
-                    android:text="@string/project_detail_collected"
-                    android:textColor="@color/accent_secondary"
-                    android:textSize="11sp"
-                    android:layout_marginEnd="7dp"
-                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"
-                    app:layout_constraintEnd_toStartOf="@id/projectDetailPercentageValue"
-                    app:layout_constraintTop_toTopOf="@+id/projectDetailPercentageValue" />
-
-                <TextView
                     android:id="@+id/projectDetailPercentageValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

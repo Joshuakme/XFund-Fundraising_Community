@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -36,6 +37,7 @@ class ProjectDetailFragment : Fragment() {
         val project = arguments?.getParcelable<Project>("project")
 
         // Access the properties of the Project object
+        val id = project?.id
         val cover = project?.cover
         val name = project?.name
         val fundTarget = project?.fund_target
@@ -126,7 +128,9 @@ class ProjectDetailFragment : Fragment() {
         }
 
         binding.ProjectDetailDonateButton.setOnClickListener{
-            findNavController().navigate(R.id.action_projectDetailFragment_to_adminProjectFragment)
+            val action = ProjectDetailFragmentDirections.actionProjectDetailFragmentToPayment(id.toString())
+
+            findNavController().navigate(action)
         }
 
     }
