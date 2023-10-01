@@ -41,21 +41,23 @@ class PaymentMethodDetailFragment : Fragment() {
 
         //declare
         val editTextCardName = binding.root.findViewById<EditText>(R.id.paymentDetailnameTxt)
-
+        val textCardNo = binding.root.findViewById<EditText>(R.id.paymentDetailNoTxt)
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()
         }
 
         //set
         editTextCardName.setText(cardName)
-        binding.paymentDetailNoTxt.text = cardNo
+
+        val hiddenCardNo = hideCardNumber(cardNo.toString())
+        textCardNo.setText(hiddenCardNo)
 
         // Delete the document
         val db = FirebaseFirestore.getInstance()
         // Define the collection and document you want to delete
         val collectionName = "Payment Method Collection" // Replace with your collection name
         val documentId = id.toString() // Replace with the ID of the document you want to delete
-
+        val updateBtn = binding.paymentMethodDeleteBtn
         val documentRef = db.collection(collectionName).document(documentId)
 
         //Delete Payment Method
@@ -67,11 +69,11 @@ class PaymentMethodDetailFragment : Fragment() {
             builder.setPositiveButton("Confirm") { dialog, _ ->
                 deletePaymentMethod(documentRef)
                 dialog.dismiss()
+                findNavController().navigateUp()
             }
             builder.setNegativeButton("Cancel") { dialog, _ ->
                 // Cancel deletion
                 dialog.dismiss()
-                findNavController().navigateUp()
             }
 
             val alertDialog = builder.create()
@@ -85,24 +87,20 @@ class PaymentMethodDetailFragment : Fragment() {
                 val updates = hashMapOf<String, Any>(
                     "cardName" to newValue
                 )
+                updateBtn.isEnabled = true
 
-                binding.paymentMethodUpdateBtn.setOnClickListener{
+                updateBtn.setOnClickListener{
                     documentRef.update(updates)
                         .addOnSuccessListener {
                             Toast.makeText(requireContext(), "Payment Method Name change successfully!", Toast.LENGTH_SHORT).show()
-                            editTextCardName.isEnabled = false
                         }
                         .addOnFailureListener { e ->
                         }
                 }
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
-            override fun onTextChanged(s: CharSequence?, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
 
@@ -120,5 +118,13 @@ class PaymentMethodDetailFragment : Fragment() {
             }
     }
 
+    private fun hideCardNumber(cardNumber: String): String {
+        val visibleChars = 4 // Number of visible characters at the end of the card number
+        val cardLength = cardNumber.length
+        val asterisks = "*".repeat(cardLength - visibleChars)
+        val visiblePart = cardNumber.takeLast(visibleChars)
+
+        return "$asterisks$visiblePart"
+    }
 
 }
