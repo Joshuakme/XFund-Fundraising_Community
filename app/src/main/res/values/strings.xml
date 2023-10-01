@@ -13,6 +13,7 @@
 
     <!--  Form Helper  -->
     <string name="form_field_required">Required</string>
+    <string name="required_more_than_50_characters">Required (More than 50 characters)</string>
 
     <!--  Testing Strings  -->
     <string name="community_item_1_title">I am strong.</string>
@@ -102,6 +103,7 @@
     <string name="payment_method_detail_update">Update</string>
     <string name="payment_method_detail">Payment Method Detail</string>
 
+
     <!-- Project: project_list_card_cell -->
     <string name="add_percentage_behind">%s</string>
     <string name="fragment_title_edit_discussion">Edit Discussion</string>
@@ -109,5 +111,32 @@
 
     <!-- About Fragment -->
     <string name="fragment_about_title">About</string>
+
+    <string name="MoneyPatternForProject">RM %s%.2f</string>
+    <string name="Thousands">RM %sK</string>
+    <string name="Millions">RM %sM</string>
+    <string name="double_format">RM %s</string>
+
+    <!-- Project: fragment_project_detail -->
+    <string name="project_detail_from">\u00A0from\u00A0</string>
+    <string name="project_detail_collected">Collected: </string>
+    <string name="project_detail_donate">Donate</string>
+    <string name="project_detail_share">Share</string>
+
+
+    <!-- Project: fragment_admin_project -->
+    <string name="admin_project_add">Add</string>
+
+    <!-- Project: fragment_edit_project -->
+    <string name="edit_project_fragment_title">Edit Project</string>
+    <string name="edit_project_name">Name*</string>
+    <string name="edit_project_desc">Description*</string>
+    <string name="edit_project_cancel">Cancel</string>
+    <string name="edit_project_update">Update</string>
+
+    <!-- Project: fragment_add_project -->
+    <string name="add_project_fragment_title">Add Project</string>
+    <string name="add_project_fund_target">Fund Target*</string>
+    <string name="add_project_start_date">Start Date*</string>
 
 </resources>

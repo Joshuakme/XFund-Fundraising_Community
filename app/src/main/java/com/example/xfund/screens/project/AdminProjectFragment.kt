@@ -5,19 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.R
+import com.example.xfund.adapter.AdminProjectAdapter
+import com.example.xfund.adapter.ProjectItemAdapter
 import com.example.xfund.databinding.FragmentAdminProjectBinding
+import com.example.xfund.model.Project
+import com.example.xfund.util.FirebaseHelper
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.Locale
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AdminProjectFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AdminProjectFragment : Fragment() {
+class AdminProjectFragment : Fragment()
+{
+    private val firestoreRepository = FirebaseHelper()
     private lateinit var binding : FragmentAdminProjectBinding
+    private lateinit var projectAdminList : List<Project>
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +47,108 @@ class AdminProjectFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_admin_project, container, false)
 
-        binding.ProjectAddButton.setOnClickListener{
-            findNavController().navigate(R.id.action_adminProjectFragment_to_editProjectFragment)
-        }
-
 
         return binding.root
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = binding.projectRecycleView
+
+        // Use a coroutine scope to get all projects
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+            projectAdminList = firestoreRepository.getAllProjects()
+            if (projectAdminList.isNotEmpty()) {
+
+                val adapter = AdminProjectAdapter(requireContext(), projectAdminList,
+                    object : AdminProjectAdapter.OnEditButtonClickListener {
+                        override fun onEditClick(position: Int, project: Project) {
+                            // Handle edit click event
+                            val action = AdminProjectFragmentDirections.actionAdminProjectFragmentToEditProjectFragment(project)
+                            findNavController().navigate(action)
+                        }
+                    })
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            } else {
+                Toast.makeText(context, "Failed to load discussions", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Hide bottom nav when load this page
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        if (bottomNav != null) {
+            bottomNav.visibility = View.GONE
+        }
+
+        // ELEMENTS IN FRAGMENT
+        // Search Elements
+        val searchBar : SearchView = binding.SearchBar
+        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
+        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
+        // Search Bar
+        searchIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_300),android.graphics.PorterDuff.Mode.SRC_IN)
+        txtSearch.setHint(R.string.search_query_hint)
+        txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+
+        searchBar.clearFocus()
+        searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                filterListSubmit(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+        })
+
+
+        binding.projectAddButton.setOnClickListener{
+            findNavController().navigate(R.id.action_adminProjectFragment_to_addProjectFragment)
+        }
+
+    }
+
+    private fun filterList(query: String?) {
+        if(query != null) {
+            val filteredList = arrayListOf<Project>()
+            for (i in projectAdminList) {
+                if (i.name.toLowerCase(Locale.ROOT).contains(query)) {
+                    filteredList.add(i)
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+
+            } else {
+                val navController = NavHostFragment.findNavController(this)
+                val adapter = ProjectItemAdapter(requireContext(), filteredList, navController)
+                recyclerView.adapter = adapter
+            }
+        }
+    }
+
+    private fun filterListSubmit(query: String?) {
+        if(query != null) {
+            val filteredList = arrayListOf<Project>()
+            for (i in projectAdminList) {
+                if (i.name.toLowerCase(Locale.ROOT).contains(query)) {
+                    filteredList.add(i)
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show()
+            } else {
+                val navController = NavHostFragment.findNavController(this)
+                val adapter = ProjectItemAdapter(requireContext(), filteredList, navController)
+                recyclerView.adapter = adapter
+            }
+        }
+    }
 }

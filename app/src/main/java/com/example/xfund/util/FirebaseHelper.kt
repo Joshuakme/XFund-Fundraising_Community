@@ -3,23 +3,22 @@ package com.example.xfund.util
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.xfund.R
 import com.example.xfund.model.CommunityDiscussion
+import com.example.xfund.model.Project
 import com.example.xfund.model.User
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.util.Calendar
+import java.util.Date
 import java.util.UUID
 
 class FirebaseHelper {
@@ -260,6 +259,63 @@ class FirebaseHelper {
     }
 
 
-    // Discussion-Related Coroutines
+
+    // Project-Related Coroutines
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getAllProjects(): List<Project> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val querySnapshot = firestore.collection("projects")
+                    .get()
+                    .await()
+
+                val projects = createProject(querySnapshot)
+                projects
+            } catch (e: Exception) {
+                // Handle exceptions
+                emptyList()
+            }
+        }
+    }
+
+    private fun createProject(querySnapshot: QuerySnapshot): List<Project> {
+        val adminProjects = mutableListOf<Project>()
+
+        for (document in querySnapshot.documents) {
+            val cover = document.getString("cover") ?: ""
+            val name = document.getString("name") ?: ""
+            val description = document.getString("description") ?: ""
+            val startLocalDateTime = document.getDate("start_date")
+            val endLocalDateTime = document.getDate("end_date")
+            val fund_collected = document.getDouble("fund_collected") ?: 0.0
+            val fund_target = document.getDouble("fund_target") ?: 0.0
+
+            // Convert Date objects to LocalDateTime using Calendar
+            val startCalendar = Calendar.getInstance()
+            startCalendar.time = startLocalDateTime ?: Date(0) // Use some default date if start_date is null
+            val start_date = LocalDateTime.of(
+                startCalendar.get(Calendar.YEAR),
+                startCalendar.get(Calendar.MONTH) + 1,
+                startCalendar.get(Calendar.DAY_OF_MONTH),
+                startCalendar.get(Calendar.HOUR_OF_DAY),
+                startCalendar.get(Calendar.MINUTE)
+            )
+
+            val endCalendar = Calendar.getInstance()
+            endCalendar.time = endLocalDateTime ?: Date(0) // Use some default date if end_date is null
+            val end_date = LocalDateTime.of(
+                endCalendar.get(Calendar.YEAR),
+                endCalendar.get(Calendar.MONTH) + 1,
+                endCalendar.get(Calendar.DAY_OF_MONTH),
+                endCalendar.get(Calendar.HOUR_OF_DAY),
+                endCalendar.get(Calendar.MINUTE)
+            )
+
+            val adminProject = Project(cover, name, description, start_date, end_date, fund_collected, fund_target)
+            adminProjects.add(adminProject)
+        }
+
+        return adminProjects.toList()
+    }
 
 }
