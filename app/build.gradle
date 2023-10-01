@@ -8,7 +8,7 @@ plugins {
     // Glide - for loading images in ImageView
     id 'kotlin-kapt'
 
-    // Navigation Safe Args
+    //Navigation Safe Args
     id 'androidx.navigation.safeargs'
 }
 

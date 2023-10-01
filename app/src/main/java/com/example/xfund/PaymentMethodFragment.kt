@@ -1,84 +1,96 @@
 package com.example.xfund
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.xfund.adapter.PaymentAdapter
+import com.example.xfund.databinding.FragmentPaymentMethodBinding
 import com.example.xfund.model.PaymentMethod
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PaymentMethodFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PaymentMethodFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentPaymentMethodBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_payment_method,
+            container,
+            false
+        )
+
+        binding.addPaymentCard.setOnClickListener{
+            findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
+        }
+        binding.addPaymentWallet.setOnClickListener{
+            findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
+        }
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_payment_method, container, false)
+        val paymentMethodRV = binding.savedCardList
 
-        val paymentMethodRV = view.findViewById<RecyclerView>(R.id.savedCardList)
+        var paymentModelArrayList: ArrayList<PaymentMethod>
 
-        val paymentModelArrayList: ArrayList<PaymentMethod> = ArrayList<PaymentMethod>()
-        paymentModelArrayList.add(PaymentMethod("Master Card Ecas", "1234567887654321"))
-        paymentModelArrayList.add(PaymentMethod("Visa Card Joshua", "1234567890987654"))
-        paymentModelArrayList.add(PaymentMethod("Apple Pay Kyeze", "9999999999999999"))
-        paymentModelArrayList.add(PaymentMethod("Samsung Pay LoongKok", "6666666666666666"))
+        val db = Firebase.firestore
 
-        val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList)
+        db.collection("Payment Method Collection")
+            .get()
+            .addOnSuccessListener { result ->
+                paymentModelArrayList = createPaymentMethods(result)
 
-        // Below line is for setting a layout manager for our recycler view.
-        // Here, we are creating a vertical list, so we will provide orientation as vertical.
+                // Adapter
+                val navController = findNavController()
+
+                val previousFragmentDestinationId = findNavController().previousBackStackEntry?.destination?.id
+
+                val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList, navController, previousFragmentDestinationId)
+
+                Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
+                paymentMethodRV.adapter = paymentAdapter
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, exception.toString(), Toast.LENGTH_SHORT).show()
+            }
+
         val linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        // In the next two lines, we are setting the layout manager and adapter for our recycler view.
         paymentMethodRV.layoutManager = linearLayoutManager
-        paymentMethodRV.adapter = paymentAdapter
 
-        return view
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PaymentMethodFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PaymentMethodFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun createPaymentMethods(querySnapshot: QuerySnapshot): ArrayList<PaymentMethod> {
+        val paymentMethodList = mutableListOf<PaymentMethod>()
+
+        for (document in querySnapshot.documents) {
+            val cardName = document.getString("cardName") ?: ""
+            val cardNo = document.getString("cardNo") ?: ""
+            val cardExpiry = document.getString("cardExpiry") ?: ""
+            val cardCvv = document.getString("cardCvv")?: ""
+            val paymentMethod = PaymentMethod(id = document.id, cardName, cardNo, cardExpiry, cardCvv)
+
+
+            paymentMethodList.add(paymentMethod)
+        }
+
+        return ArrayList(paymentMethodList)
     }
+
 }

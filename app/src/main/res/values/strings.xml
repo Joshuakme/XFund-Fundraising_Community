@@ -19,7 +19,6 @@
     <string name="community_item_1_desc">Please help me! Lorem Ipsum, this is a description, yes don\'t doubt. Yuppp, this is a description. Just to display this is a long description.</string>
     <string name="community_item_1_date">23-Aug-2023</string>
 
-
     <!-- Home Fragment -->
     <string name="welcome_user_title">Hi, %s</string>
     <string name="search_query_hint">Enter the project name</string>
@@ -40,6 +39,11 @@
     <string name="tags_hint_txt">Add up to 5 tags to describe what your question is about.</string>
     <string name="add_discussion_submit_button">Submit</string>
     <string name="add_new_discussion_btn_txt">Add</string>
+  
+    <string name="home_news_title">News</string>
+    <string name="detail_discussion_comment_title">Comment</string>
+    <string name="posted_discussion_edit_button">Edit</string>
+    <string name="fragment_title_posted_community">Posted Discussions</string>
 
     <!--  Util  -->
     <string name="loading">Loading</string>
@@ -56,7 +60,6 @@
         <item>Master Card</item>
         <item>Visa Card</item>
     </string-array>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="payment_title">One-time payment</string>
     <string name="payment_donation_label">Enter the donation amount</string>
@@ -81,18 +84,24 @@
     <string name="payment_thankDesc_txt">Thank you so much for your donation.\nYour generosity means everything to us and to the community we serve.</string>
     <string name="payment_share_txt">Please share it with your friends to help us reach larger heart.</string>
     <string name="payment_shareIt_txt">Share with friends</string>
-    <string name="payment_donation_sample">10</string>
     <string name="payment_back_btn">Back to main menu</string>
     <string name="payment_addPay_txt">Add Method</string>
-    <string name="home_news_title">News</string>
-    <string name="detail_discussion_comment_title">Comment</string>
-    <string name="posted_discussion_edit_button">Edit</string>
-    <string name="fragment_title_posted_community">Posted Discussions</string>
+    <string name="payment_cardName_example">Ecas Gold Card</string>
+    <string name="payment_cardName_txt">Card Name</string>
+    <string name="payment_add_card_btn">+ Add Credit/Debit Card</string>
+    <string name="payment_add_wallet_btn">+ Add Digital Wallet</string>
+    <string name="payment_detail_name_label">Card Name</string>
+    <string name="card_detail_no_label">Card Number</string>
+    <string name="payment_detail_default_card">Set as Default Card</string>
+    <string name="payment_detail_name_sample">Card Name Sample</string>
+    <string name="payment_detail_no_sample">xxxxxxxxxxx1234</string>
+    <string name="payment_detail_delete_txt">Delete</string>
+    <string name="payment_method_detail_update">Update</string>
+    <string name="payment_method_detail">Payment Method Detail</string>
 
     <!-- Project: project_list_card_cell -->
     <string name="add_percentage_behind">%s</string>
     <string name="fragment_title_edit_discussion">Edit Discussion</string>
     <string name="edit_discussion_update_button">Update</string>
-
 
 </resources>
