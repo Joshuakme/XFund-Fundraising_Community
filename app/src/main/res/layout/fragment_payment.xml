@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/payment_title"
             android:textSize="@dimen/screen_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="48dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/payment_donation_label"
             android:textSize="@dimen/payment_header"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +53,7 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat"
             android:text="@string/donation_thank_you_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="250dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/payment_saved_card_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +78,8 @@
             android:layout_marginTop="240dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:clickable="true"
+            android:focusable="auto"
+            android:fontFamily="@font/montserrat_semibold"
             android:padding="8dp"
             android:text="@string/payment_change_card_link"
             android:textColor="@color/accent_primary_300"
@@ -107,6 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat"
                     android:text="@string/saved_card_name"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -119,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat"
                     android:text="@string/saved_card_no"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/savedCardImg"
@@ -145,6 +153,7 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/payment_donate_btn"
             app:cornerRadius="@dimen/button_radius"
             app:layout_constraintEnd_toEndOf="parent"
@@ -159,15 +168,20 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/donationLabel">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/donateAmountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
                 android:gravity="center"
-                android:hint="@string/payment_donation_sample" />
+                android:hint="@string/donation_sample_amount"
+                android:inputType="number"
+                android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

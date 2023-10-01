@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         tools:context=".screens.community.AddDiscussionFragment">
 
-    <!-- TODO: Update payment fragment layout -->
+        <!-- TODO: Update payment fragment layout -->
 
         <ImageView
             android:id="@+id/imageView"
@@ -30,6 +30,7 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat"
             android:text="@string/payment_thank_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +43,7 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat"
             android:gravity="center"
             android:text="@string/payment_thankDesc_txt"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,16 +72,17 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
+                    android:fontFamily="@font/montserrat"
                     android:gravity="center"
                     android:text="@string/payment_share_txt"
-                    app:layout_constraintBottom_toTopOf="@+id/cardView"
+                    app:layout_constraintBottom_toTopOf="@+id/shareBtnCV"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
+                    android:id="@+id/shareBtnCV"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -107,6 +110,7 @@
                             android:layout_height="0dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="16dp"
+                            android:fontFamily="@font/montserrat"
                             android:gravity="center|start"
                             android:text="@string/payment_shareIt_txt"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -130,12 +134,13 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/paymentToMenuBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/payment_button_height"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/payment_back_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
