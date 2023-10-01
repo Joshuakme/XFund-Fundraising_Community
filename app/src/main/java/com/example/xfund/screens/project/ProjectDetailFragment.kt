@@ -13,8 +13,6 @@ import com.example.xfund.R
 import com.example.xfund.databinding.FragmentProjectDetailBinding
 import com.example.xfund.model.Project
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 
 class ProjectDetailFragment : Fragment() {
@@ -40,8 +38,6 @@ class ProjectDetailFragment : Fragment() {
         // Access the properties of the Project object
         val cover = project?.cover
         val name = project?.name
-        val startDate = project?.start_date
-        val endDate = project?.end_date
         val fundTarget = project?.fund_target
         val fundCollected = project?.fund_collected
         val description = project?.description
@@ -69,8 +65,8 @@ class ProjectDetailFragment : Fragment() {
         // Make the values into RM *k, RM *m
         var formattedTarget: Double? = fundTarget
         var formattedCollected: Double? = fundCollected
-        var formattedText: String = ""
-        var formattedText2: String = ""
+        var formattedText = ""
+        var formattedText2 = ""
 
         formattedTarget?.let {
             if (it >= 1000000) {
@@ -99,16 +95,12 @@ class ProjectDetailFragment : Fragment() {
             }
         }
 
-        /*//Make it into RM "fundCollected" form
-        val formattedText = getString(R.string.MoneyPatternForProject, fundCollected.toString())
-        val formattedText2 = getString(R.string.MoneyPatternForProject, fundTarget.toString())*/
         txtFundCollected.text = formattedText
         txtFundTarget.text = formattedText2
 
 
-
         //ProgressBar Calculation
-        var progressBar = ((fundCollected ?: 0).toFloat() / (fundTarget ?: 1).toFloat() * 100).toInt()
+        val progressBar = ((fundCollected ?: 0).toFloat() / (fundTarget ?: 1).toFloat() * 100).toInt()
         binding.projectDetailPercentageValue.text = progressBar.toString()
         progressBarView.progress = progressBar
 
@@ -129,7 +121,7 @@ class ProjectDetailFragment : Fragment() {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             intent.putExtra("Share this", url)
-            var chooser = Intent.createChooser(intent, "Share using....")
+            val chooser = Intent.createChooser(intent, "Share using....")
             startActivity(chooser)
         }
 

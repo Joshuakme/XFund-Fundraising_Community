@@ -27,15 +27,9 @@ import com.google.firebase.storage.StorageReference
 class AddProjectFragment : Fragment() {
     private lateinit var binding: FragmentAddProjectBinding
 
-/*
-    var pickedPhoto: Uri? = null
-    var pickedBitMap: Bitmap? = null
-*/
-
     private lateinit var newCover: TextInputEditText
     private lateinit var newName: TextInputEditText
     private lateinit var newDescription: TextInputEditText
-    private lateinit var newStartDate: TextInputEditText
     private lateinit var newFundTarget: TextInputEditText
 
     private val db = Firebase.firestore
@@ -78,7 +72,6 @@ class AddProjectFragment : Fragment() {
         newCover = binding.projectNameText
         newName = binding.projectNameText
         newDescription = binding.projectDescriptionText
-        /*newStartDate = binding.projectStartDate*/
         newFundTarget = binding.projectFundTarget
 
 
@@ -162,60 +155,4 @@ class AddProjectFragment : Fragment() {
                 Toast.makeText(requireContext(), "Project added failed! Please try again.", Toast.LENGTH_LONG).show()
             }
     }
-
-
-
-
-
-    /*fun pickPhoto(view: View){
-        if(ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                1)
-
-        } else {
-            val galleryIntent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-
-            startActivityForResult(galleryIntent, 2)
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 1) {
-            if (grantResults.size > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                val galeriIntext = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                startActivityForResult(galeriIntext,2)
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null) {
-            pickedPhoto = data.data
-            if (pickedPhoto != null) {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    val source = ImageDecoder.createSource(this.contentResolver,pickedPhoto!!)
-                    pickedBitMap = ImageDecoder.decodeBitmap(source)
-                    imageView.setImageBitmap(pickedBitMap)
-                }
-                else {
-                    pickedBitMap = MediaStore.Images.Media.getBitmap(this.contentResolver,pickedPhoto)
-                    imageView.setImageBitmap(pickedBitMap)
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }*/
-
-
 }

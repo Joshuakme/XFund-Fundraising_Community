@@ -122,7 +122,7 @@ class EditProjectFragment : Fragment() {
         //Delete button
         binding.projectAdminDeleteButtonImage.setOnClickListener{
             val fragmentManager = requireActivity().supportFragmentManager
-            val dialog = AdminProjectFragment.DeleteButtonDialog()
+            val dialog = DeleteButtonDialog()
             val bundle = Bundle()
             bundle.putParcelable("project", project)
             dialog.arguments = bundle
@@ -163,12 +163,12 @@ class EditProjectFragment : Fragment() {
                 // Use the Builder class for convenient dialog construction.
                 val builder = AlertDialog.Builder(it)
                 builder.setMessage("Do you want to delete this item?")
-                    .setPositiveButton("Delete") { dialog, id ->
+                    .setPositiveButton("Delete") { dialog, _ ->
                         deleteProject(project)
                         Toast.makeText(context,"Project Deleted", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
-                    .setNegativeButton("Cancel") { dialog, id ->
+                    .setNegativeButton("Cancel") { dialog, _ ->
                         Toast.makeText(context, "Deletion has been canceled", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
@@ -226,11 +226,9 @@ class EditProjectFragment : Fragment() {
                         .update(newProject)
                         .addOnSuccessListener {
                             Log.d("Edit Successful", "DocumentSnapshot successfully updated!")
-                            "Project has been edited."
                         }
                         .addOnFailureListener {
                                 e -> Log.w("Edit Failed", "Error updating document", e)
-                            "Fail to edit project! Please try again"
                         }
 
                 } catch(e: Exception) {
