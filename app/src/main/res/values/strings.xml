@@ -100,12 +100,14 @@
     <string name="MoneyPatternForProject">RM %s%.2f</string>
     <string name="Thousands">RM %sK</string>
     <string name="Millions">RM %sM</string>
-    <string name="double_format">RM%s</string>
+    <string name="double_format">RM %s</string>
 
     <!-- Project: fragment_project_detail -->
     <string name="project_detail_from">\u00A0from\u00A0</string>
     <string name="project_detail_collected">Collected: </string>
     <string name="project_detail_donate">Donate</string>
+    <string name="project_detail_share">Share</string>
+
 
     <!-- Project: fragment_admin_project -->
     <string name="admin_project_add">Add</string>

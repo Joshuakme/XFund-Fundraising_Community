@@ -35,6 +35,17 @@
             app:layout_constraintStart_toEndOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/projectAdminDeleteButtonImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_delete"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/projectNameContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

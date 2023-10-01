@@ -9,6 +9,11 @@ import com.bumptech.glide.Glide
 import com.example.xfund.databinding.ProjectsListCardCellBinding
 import com.example.xfund.model.Project
 import com.example.xfund.screens.navigation.ProjectsFragmentDirections
+import com.example.xfund.util.FirebaseHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProjectItemAdapter(
     val context: Context,
@@ -35,7 +40,10 @@ class ProjectItemAdapter(
             val action = ProjectsFragmentDirections
                 .actionProjectsFragmentToProjectDetailFragment(
                     currentItem)
-            navController.navigate(action)
+
+            if (action != null) {
+                navController.navigate(action)
+            }
         }
     }
 

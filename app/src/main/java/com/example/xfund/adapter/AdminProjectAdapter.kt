@@ -11,8 +11,7 @@ import com.example.xfund.model.Project
 class AdminProjectAdapter(
     val context: Context,
     private val itemList: List<Project>,
-    private val onEditButtonClickListener: OnEditButtonClickListener,
-    private val onDeleteButtonClickListener: OnDeleteButtonClickListener
+    private val onEditButtonClickListener: OnEditButtonClickListener
 ) : RecyclerView.Adapter<AdminProjectAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminProjectAdapter.ViewHolder {
@@ -27,10 +26,6 @@ class AdminProjectAdapter(
 
     interface OnEditButtonClickListener {
         fun onEditClick(position: Int, project: Project)
-    }
-
-    interface OnDeleteButtonClickListener {
-        fun onDeleteClick(position: Int, project: Project)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -59,14 +54,6 @@ class AdminProjectAdapter(
                 if (position != RecyclerView.NO_POSITION) {
                     val project = itemList[position]
                     onEditButtonClickListener.onEditClick(position, project)
-                }
-            }
-
-            binding.projectAdminCardDeleteButtonImage.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val project = itemList[position]
-                    onDeleteButtonClickListener.onDeleteClick(position, project)
                 }
             }
         }

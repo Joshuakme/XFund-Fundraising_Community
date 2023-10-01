@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.xfund.R
 import com.example.xfund.databinding.FragmentAddProjectBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -60,10 +61,17 @@ class AddProjectFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_add_project, container, false)
+
+
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         firebaseRef = FirebaseDatabase.getInstance().getReference("projects/")
         storageRef = FirebaseStorage.getInstance().getReference("Images")
-
-
 
 
         //declare variable
@@ -73,6 +81,12 @@ class AddProjectFragment : Fragment() {
         /*newStartDate = binding.projectStartDate*/
         newFundTarget = binding.projectFundTarget
 
+
+        // Hide bottom nav when load this page
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        if (bottomNav != null) {
+            bottomNav.visibility = View.GONE
+        }
 
 
         binding.backButton.setOnClickListener{
@@ -114,9 +128,8 @@ class AddProjectFragment : Fragment() {
             }
         }
 
-
-        return binding.root
     }
+
 
     private fun uploadProjectImageToFirebaseStorage(imageUri: Uri?, coverName: String) {
         val imageRef = storageRef.child("projects/{$coverName}.jpg")

@@ -43,7 +43,7 @@
                 android:id="@+id/projectName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:gravity="start"
                 android:lines="1"
                 android:text="@{project.name}"
@@ -55,8 +55,9 @@
                 android:id="@+id/CardDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
                 android:gravity="start"
                 android:lines="2"
                 android:text="@{project.description}"
@@ -72,7 +73,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
 
                 <TextView
                     android:id="@+id/cardProgressBarText"
@@ -81,7 +84,8 @@
                     android:layout_marginStart="10dp"
                     android:textSize="20sp"
                     android:text="@{@string/add_percentage_behind(project.percentageValue)}"
-                    android:textColor="@color/md_theme_light_secondary"
+                    android:textColor="@color/accent_secondary"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/percentageSymbol"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -92,7 +96,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="%"
-                    android:textColor="@color/md_theme_light_secondary"
+                    android:textColor="@color/accent_secondary"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/cardProgressBarText"
                     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -102,8 +107,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:textSize="20sp"
-                    android:text="@{@string/double_format(project.stringFundTarget)}"
-                    android:textColor="@color/md_theme_light_secondary"
+                    android:text="@{@string/double_format(project.formattedString)}"
+                    android:textColor="@color/accent_secondary"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -116,12 +122,12 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
             android:max="100"
             android:progress="@{project.percentage}"
-            android:progressTint="@color/md_theme_light_secondary"/>
+            android:progressTint="@color/accent_secondary"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

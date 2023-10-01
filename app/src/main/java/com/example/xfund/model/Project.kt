@@ -26,8 +26,24 @@ data class Project(
 
     val percentageValue: String = percentage.toString()
 
-    var stringFundTarget: String = "0.00"
-        get() = (String.format("%.2f", fund_target))
+
+    val formattedString = when {
+        fund_target >= 1000000 -> {
+            val millions = String.format("%.1f", fund_target / 1000000)
+            millions+"M"
+        }
+        fund_target >= 1000 -> {
+            val thousands = String.format("%.1f", fund_target / 1000)
+            thousands+"K"
+        }
+        fund_target % 1 == 0.0 -> {
+            "${fund_target.toInt()}"
+        }
+        else -> {
+            "$fund_target"
+        }
+    }
+
 
     // Parcelable implementation
     @RequiresApi(Build.VERSION_CODES.O)
