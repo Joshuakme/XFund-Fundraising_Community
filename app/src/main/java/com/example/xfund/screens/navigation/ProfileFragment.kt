@@ -71,22 +71,22 @@ class ProfileFragment : Fragment() {
             val uid = currentUser.uid
 
             // Use a coroutine scope to fetch user details
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                val userDetail = firestoreRepository.fetchUserDetails(uid)
-                if (userDetail != null) {
-                    // Update the UI with user details
-                    val imageUrl = userDetail.imgUri
-                    view.findViewById<TextView>(R.id.ProfileName).text =
-                        userDetail?.displayName ?: "Username"
-
-                    Glide.with(context)
-                        .load(imageUrl)
-                        .placeholder(R.drawable.baseline_account_circle)
-                        .into(view?.findViewById(R.id.ProfileImage))
-                } else {
-                    // Handle the case where user details couldn't be fetched
-                }
-            }
+//            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+//                val userDetail = firestoreRepository.fetchUserDetails(uid)
+//                if (userDetail != null) {
+//                    // Update the UI with user details
+//                    val imageUrl = userDetail.imgUri
+//                    view.findViewById<TextView>(R.id.ProfileName).text =
+//                        userDetail?.displayName ?: "Username"
+//
+//                    Glide.with(context)
+//                        .load(imageUrl)
+//                        .placeholder(R.drawable.baseline_account_circle)
+//                        .into(view?.findViewById(R.id.ProfileImage))
+//                } else {
+//                    // Handle the case where user details couldn't be fetched
+//                }
+//            }
 
             currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
                 if (user != null) {

@@ -31,7 +31,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class EditProfileFragment : Fragment() {
-    private lateinit var binding: com.example.xfund.databinding.FragmentEditProfileBinding
+    private lateinit var binding: FragmentEditProfileBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var user: FirebaseUser
     private lateinit var storageRef: StorageReference
@@ -84,7 +84,7 @@ class EditProfileFragment : Fragment() {
 
         // EVENT LISTENERS
         binding.btnSave.setOnClickListener {
-            uri?.let { it1 -> updateUserDetail(binding.tfEditUsername.text.toString(), it1) }
+            updateUserDetail(binding.tfEditUsername.text.toString(), uri)
         }
 
         // Delete Account
@@ -135,8 +135,6 @@ class EditProfileFragment : Fragment() {
         tvMessage.text = message
 
         btnDelete.setOnClickListener{
-            Toast.makeText(requireContext(), "Account Successfully Deleted", Toast.LENGTH_SHORT).show()
-
 
             val user = Firebase.auth.currentUser
             user?.delete()?.addOnCompleteListener{
@@ -166,25 +164,31 @@ class EditProfileFragment : Fragment() {
         dialog.show()
     }
 
-    private fun updateUserDetail(displayName: String, imageUri: Uri) {
+    private fun updateUserDetail(displayName: String, imageUri: Uri?) {
         // Upload photo to firebase
         //uploadProfileImageToFirebaseStorage(imageUri)
 
-
-        val profileUpdates = UserProfileChangeRequest.Builder()
-            .setPhotoUri(imageUri)
-            .setDisplayName(displayName)
-            .build()
+        lateinit var profileUpdates: UserProfileChangeRequest
+        if(imageUri != null) {
+            profileUpdates = UserProfileChangeRequest.Builder()
+                .setPhotoUri(imageUri)
+                .setDisplayName(displayName)
+                .build()
+        }else {
+            profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(displayName)
+                .build()
+        }
 
         // Update username, photoUrl to Firebase
         user.updateProfile(profileUpdates)
             .addOnCompleteListener {task ->
-                Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
 
                 findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
             }
             .addOnFailureListener {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT)
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
             }
 
         // Update Email to Firebase
@@ -194,7 +198,7 @@ class EditProfileFragment : Fragment() {
                     // Email updated successfully
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT)
+                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 }
         }
 
@@ -205,7 +209,7 @@ class EditProfileFragment : Fragment() {
                     // Email updated successfully
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT)
+                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 }
         }
 
