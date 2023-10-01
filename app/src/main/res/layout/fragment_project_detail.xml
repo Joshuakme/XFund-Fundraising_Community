@@ -13,23 +13,24 @@
         <ImageView
             android:id="@+id/projectDetailImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
+            android:contentDescription="project Image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="project image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/ProjectDetailBackButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginTop="24dp"
-            android:backgroundTint="#00FFFFFF"
-            android:contentDescription="Back Button"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
+            android:backgroundTint="#33000000"
+            android:contentDescription="back Button"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             android:src="@drawable/baseline_arrow_back_24"
+            android:background="@drawable/circle_black_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +49,6 @@
                 android:id="@+id/projectDetailName"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:text="project name"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="22sp"
@@ -71,51 +71,68 @@
                     android:id="@+id/projectDetailFundCollected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="RM 700"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/MoneyPatternForProject"
+                    android:textStyle="bold"
+                    android:textColor="@color/accent_secondary"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar" />
 
                 <TextView
                     android:id="@+id/projectDetailFundFrom"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text=" FROM "
-                    app:layout_constraintStart_toEndOf="@id/projectDetailFundCollected"
-                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar" />
+                    android:layout_height="0dp"
+                    android:layout_marginStart="0dp"
+                    android:text="@string/project_detail_from"
+                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"
+                    app:layout_constraintStart_toEndOf="@id/projectDetailFundCollected" />
 
                 <TextView
                     android:id="@+id/projectFundTarget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="RM 1200"
+                    android:layout_marginStart="0dp"
+                    android:text="@string/MoneyPatternForProject"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/projectDetailFundFrom"
                     app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"  />
 
                 <TextView
+                    android:id="@+id/projectDetailPercentageCollectedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:gravity="center"
+                    android:text="@string/project_detail_collected"
+                    android:textColor="@color/accent_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginEnd="7dp"
+                    app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"
+                    app:layout_constraintEnd_toStartOf="@id/projectDetailPercentageValue"
+                    app:layout_constraintTop_toTopOf="@+id/projectDetailPercentageValue" />
+
+                <TextView
                     android:id="@+id/projectDetailPercentageValue"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="40"
-                    android:textSize="35sp"
-                    android:textColor="@color/design_default_color_primary"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/accent_secondary"
                     app:layout_constraintBottom_toTopOf="@+id/ProjectDetailCardProgressBar"
-                    app:layout_constraintEnd_toStartOf="@id/percentageSymbol2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toStartOf="@id/percentageSymbol2"/>
 
                 <TextView
                     android:id="@+id/percentageSymbol2"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:text="%"
-                    android:textSize="35sp"
-                    android:textColor="@color/design_default_color_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/accent_secondary"
                     app:layout_constraintBottom_toTopOf="@+id/ProjectDetailCardProgressBar"
-                    app:layout_constraintEnd_toEndOf="@id/Constraint2"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="@id/Constraint2"/>
 
 
                 <ProgressBar
@@ -127,9 +144,10 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:max="100"
+                    android:progressTint="@color/accent_secondary"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/projectDetailPercentageValue" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,31 +162,45 @@
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:padding="10dp"
             android:background="@color/gray_100"
-            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/ProjectDetailShareButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contraintOne" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/ProjectDetailShareButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/accent_primary_300"
+            android:enabled="true"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:textSize="14sp"
+            android:text="@string/project_detail_share"
+            android:visibility="visible"
+            app:cornerRadius="@dimen/button_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ProjectDetailDonateButton"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/ProjectDetailDonateButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="@dimen/screen_width_margin"
             android:layout_marginBottom="40dp"
-            android:text="Donate"
+            android:backgroundTint="@color/accent_primary_300"
+            android:enabled="true"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:textSize="14sp"
+            android:text="@string/project_detail_donate"
+            android:visibility="visible"
+            app:cornerRadius="@dimen/button_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ProjectDetailShareButton" />
