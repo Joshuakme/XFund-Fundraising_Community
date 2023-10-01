@@ -95,7 +95,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="20sp"
                     android:text="@{project.percentageValue}"
-                    android:textColor="@color/progressBarColor"
+                    android:textColor="@color/md_theme_light_secondary"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/percentageSymbol"
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="%"
-                    android:textColor="@color/progressBarColor"
+                    android:textColor="@color/md_theme_light_secondary"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toEndOf="@id/cardProgressBarText"
                     app:layout_constraintTop_toTopOf="parent"
@@ -157,7 +157,7 @@
                 android:layout_marginBottom="10dp"
                 android:max="100"
                 android:progress="@{project.percentage}"
-                android:progressTint="@color/progressBarColor"
+                android:progressTint="@color/md_theme_light_secondary"
                 android:clickable="false"
                 android:focusable="false"/>
 

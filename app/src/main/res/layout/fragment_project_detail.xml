@@ -99,7 +99,7 @@
                     android:layout_height="14dp"
                     android:gravity="center"
                     android:text="@string/project_detail_collected"
-                    android:textColor="@color/progressBarColor"
+                    android:textColor="@color/md_theme_light_secondary"
                     android:textSize="11sp"
                     app:layout_constraintBottom_toTopOf="@id/ProjectDetailCardProgressBar"
                     app:layout_constraintEnd_toStartOf="@id/projectDetailPercentageValue"
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="20sp"
-                    android:textColor="@color/progressBarColor"
+                    android:textColor="@color/md_theme_light_secondary"
                     app:layout_constraintBottom_toTopOf="@+id/ProjectDetailCardProgressBar"
                     app:layout_constraintEnd_toStartOf="@id/percentageSymbol2"/>
 
@@ -122,7 +122,7 @@
                     android:layout_marginEnd="20dp"
                     android:text="%"
                     android:textSize="20sp"
-                    android:textColor="@color/progressBarColor"
+                    android:textColor="@color/md_theme_light_secondary"
                     app:layout_constraintBottom_toTopOf="@+id/ProjectDetailCardProgressBar"
                     app:layout_constraintEnd_toEndOf="@id/Constraint2"/>
 
@@ -136,7 +136,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:max="100"
-                    android:backgroundTint="@color/progressBarColor"
+                    android:progressTint="@color/md_theme_light_secondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
