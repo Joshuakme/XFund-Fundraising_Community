@@ -1,7 +1,6 @@
 package com.example.xfund.screens.navigation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +27,7 @@ import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 
 class ProjectsFragment : Fragment(){
@@ -57,6 +58,7 @@ class ProjectsFragment : Fragment(){
         recyclerView = binding.projectRecycleView
 
 
+
         db.collection("projects")
             .orderBy("start_date", Query.Direction.ASCENDING)
             .get()
@@ -66,6 +68,7 @@ class ProjectsFragment : Fragment(){
                 // RecyclerView
                 val navController = NavHostFragment.findNavController(this)
                 val adapter = ProjectItemAdapter(requireContext(), projectList, navController)
+
                 recyclerView.adapter = adapter
             }
             .addOnFailureListener { exception ->
@@ -84,6 +87,19 @@ class ProjectsFragment : Fragment(){
         searchIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_300),android.graphics.PorterDuff.Mode.SRC_IN)
         txtSearch.setHint(R.string.search_query_hint)
         txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+
+        searchBar.clearFocus()
+        searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+        })
+
 
         // Show bottom nav when load this page
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
@@ -132,5 +148,23 @@ class ProjectsFragment : Fragment(){
         return projects.toList()
     }
 
+    private fun filterList(query: String?) {
+        if(query != null) {
+            val filteredList = arrayListOf<Project>()
+            for (i in projectList) {
+                if (i.name.toLowerCase(Locale.ROOT).contains(query)) {
+                    filteredList.add(i)
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+                Toast.makeText(context, "No Data Found", Toast.LENGTH_LONG).show()
+            } else {
+                val navController = NavHostFragment.findNavController(this)
+                val adapter = ProjectItemAdapter(requireContext(), filteredList, navController)
+                recyclerView.adapter = adapter
+            }
+        }
+    }
 
 }
