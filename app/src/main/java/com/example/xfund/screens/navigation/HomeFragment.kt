@@ -21,6 +21,7 @@ import com.example.xfund.databinding.FragmentHomeBinding
 import com.example.xfund.model.NewsModel
 import com.example.xfund.util.FirebaseHelper
 import com.example.xfund.viewModel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,7 +34,6 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
     private lateinit var newsList: List<NewsModel>
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var currentUserViewModel: UserViewModel
-    private val firestoreRepository = FirebaseHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +48,7 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         currentUserViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
 
 
+
         // SharedPreference - Login
         val isFirstTime = sharedPreferences?.getBoolean("IsFirstTime", true)
         val editor = sharedPreferences?.edit()
@@ -55,7 +56,6 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
         if (isFirstTime == true) {
             // set login status to false if first time use app
-            editor?.putBoolean("IsLogin", false)
             editor?.putBoolean("IsFirstTime", false)
             editor?.apply()
         }
@@ -68,23 +68,9 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // ELEMENTS IN FRAGMENT
-        // Search Elements
-//        val searchBar : SearchView = binding.SearchBar
-//        val txtSearch = searchBar.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
-//        val searchIcon: ImageView = searchBar.findViewById(androidx.appcompat.R.id.search_mag_icon)
         // Image Slider Elements
         val newsViewPager: ViewPager = binding.NewsImageSlider
         val dotsIndicator = binding.DotsIndicator
-
-
-        // Search Bar
-        //searchIcon.setColorFilter(
-        //    ContextCompat.getColor(requireContext(), R.color.gray_300),
-        //    android.graphics.PorterDuff.Mode.SRC_IN
-        //)
-        //txtSearch.setHint(R.string.search_query_hint)
-        //txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
-        //txtSearch.textSize = R.dimen.search_txt_size.toFloat()
 
         // Image Slider
         // Create a list of NewsModel objects
@@ -98,14 +84,16 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
 
         // Welcome Text
         // Displaying User detail
-        currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                binding.WelcomeUserTxt.text = "Hi, " + user.displayName.toString()
-            } else {
-                // User is not signed in
-                binding.WelcomeUserTxt.text = "Welcome"
-            }
+        val user = FirebaseAuth.getInstance().currentUser
+
+        if (user != null) {
+            binding.WelcomeUserTxt.text = "Hi, " + user.displayName
+
+        } else {
+            // User is not signed in
+            binding.WelcomeUserTxt.text = "Welcome"
         }
+
     }
 
     override fun onItemClick(position: Int) {

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">XFund</string>
+    <string name="app_version">v1.0 (unreleased)</string>
 
     <!--  User-related Strings  -->
     <string name="user_display_name">Joshua</string>
@@ -12,7 +13,6 @@
 
     <!--  Form Helper  -->
     <string name="form_field_required">Required</string>
-
 
     <!--  Testing Strings  -->
     <string name="community_item_1_title">I am strong.</string>
@@ -45,10 +45,13 @@
     <string name="posted_discussion_edit_button">Edit</string>
     <string name="fragment_title_posted_community">Posted Discussions</string>
 
+    <!-- Community: Discussion Detail -->
+    <string name="fragment_title_community_detail">Discussion</string>
+
     <!--  Util  -->
     <string name="loading">Loading</string>
 
-    <string name="fragment_title_community_detail">Discussion</string>
+
 
 
     <!-- Payment: Donation -->
@@ -103,5 +106,8 @@
     <string name="add_percentage_behind">%s</string>
     <string name="fragment_title_edit_discussion">Edit Discussion</string>
     <string name="edit_discussion_update_button">Update</string>
+
+    <!-- About Fragment -->
+    <string name="fragment_about_title">About</string>
 
 </resources>

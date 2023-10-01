@@ -335,4 +335,9 @@
             app:argType="string" />
     </fragment>
 
+        android:id="@+id/aboutFragment"
+        android:name="com.example.xfund.screens.user.AboutFragment"
+        android:label="AboutFragment" />
+
+
 </navigation>

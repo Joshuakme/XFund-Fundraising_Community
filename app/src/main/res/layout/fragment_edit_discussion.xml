@@ -19,7 +19,7 @@
             android:contentDescription="Back Button"
             android:scaleX="1.2"
             android:scaleY="1.2"
-            android:src="@drawable/baseline_arrow_back_24"
+            android:src="@drawable/baseline_chevron_left_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

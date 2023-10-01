@@ -30,9 +30,6 @@ import com.google.firebase.ktx.Firebase
 
 class AddDiscussionFragment : Fragment() {
     private lateinit var binding: FragmentAddDiscussionBinding
-    private lateinit var backButton : ImageButton
-    private lateinit var titleEditText: TextInputEditText
-    private lateinit var descEditText: TextInputEditText
     private lateinit var tagsEditText: TextInputEditText
     private val discussionTagsList: MutableList<String> = mutableListOf()
     lateinit var submitButton: MaterialButton
@@ -58,10 +55,10 @@ class AddDiscussionFragment : Fragment() {
         )
 
         // Variables
-        backButton = binding.backButton
+        val backButton = binding.backButton
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
-        titleEditText = binding.titleEditText
-        descEditText = binding.descEditText
+        val titleEditText = binding.titleEditText
+        val descEditText = binding.descEditText
         tagsEditText = binding.tagsEditText
         submitButton = binding.submitButton
 
@@ -81,7 +78,15 @@ class AddDiscussionFragment : Fragment() {
 
         // EVENT LISTENERS
         titleEditText.addTextChangedListener {
+            val titleEditTextContainer = binding.titleContainer
+
             isTitleValid = titleEditText.text?.isNotEmpty() == true && titleEditText.text?.isNotBlank()!! && titleEditText.length() >= 15
+
+            if(isTitleValid) {
+                titleEditTextContainer.isErrorEnabled = false
+            } else {
+                titleEditTextContainer.error = "Min 15 characters"
+            }
 
             if(isFormInputValid()) {
                 setBtnEnabled()
@@ -91,7 +96,15 @@ class AddDiscussionFragment : Fragment() {
         }
 
         descEditText.addTextChangedListener {
+            val descEditTextContainer = binding.descContainer
+
             isDescValid = descEditText.text?.isNotEmpty() == true && descEditText.text?.isNotBlank()!! && descEditText.length() >= 30
+
+            if(isDescValid) {
+                descEditTextContainer.isErrorEnabled = false
+            } else {
+                descEditTextContainer.error = "Min 30 characters"
+            }
 
             if(isFormInputValid()) {
                 setBtnEnabled()

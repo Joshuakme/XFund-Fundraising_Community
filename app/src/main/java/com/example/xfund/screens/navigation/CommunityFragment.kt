@@ -94,22 +94,3 @@ class CommunityFragment : Fragment() {
         }
     }
 }
-
-
-
-// Initializing list for Community RecyclerView
-//        discussionList = listOf(
-//            CommunityDiscussion("Emily Johnson",
-//                "Crowdfunding Campaign for Local School Renovation",
-//                "Let's discuss strategies and ideas for launching a crowdfunding campaign to raise funds for renovating our local school. We need your input on how to reach our fundraising goal!",
-//                listOf("Education", "Crowdfunding", "Renovation", "Community", "School"),
-//                LocalDateTime.of(2022, 7, 12, 14, 43, 23)),
-//            CommunityDiscussion("David Anderson", "Nonprofit Gala Event Planning",
-//                "Join the discussion on planning a nonprofit gala event to raise funds for a local charity. Share your expertise on event logistics, fundraising ideas, and securing sponsorships.",
-//                listOf("Nonprofit", "Gala", "Fundraising Event", "Charity", "Sponsorships"),
-//                LocalDateTime.of(2021, 5, 2, 8, 5, 33)),
-//            CommunityDiscussion("Sarah Williams", "Online Fundraising Platforms Comparison",
-//                "Let's compare different online fundraising platforms like GoFundMe, Kickstarter, and Indiegogo. Share your experiences and recommendations for various fundraising campaigns.",
-//                listOf("Fundraising Platforms", "Online Fundraising", "Crowdfunding", "Comparison", "Recommendations"),
-//                LocalDateTime.of(2023, 1, 27, 23, 0, 33))
-//        )
