@@ -87,10 +87,16 @@
     <string name="payment_addPay_txt">Add Method</string>
     <string name="home_news_title">News</string>
     <string name="detail_discussion_comment_title">Comment</string>
+    <string name="posted_discussion_edit_button">Edit</string>
+    <string name="fragment_title_posted_community">Posted Discussions</string>
 
 
     <!-- Project: project_list_card_cell -->
     <string name="add_percentage_behind">%s</string>
+    <string name="fragment_title_edit_discussion">Edit Discussion</string>
+    <string name="edit_discussion_update_button">Update</string>
+
+
     <string name="MoneyPatternForProject">RM %s%.2f</string>
     <string name="Thousands">RM %sK</string>
     <string name="Millions">RM %sM</string>

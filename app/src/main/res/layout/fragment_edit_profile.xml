@@ -7,21 +7,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ImageView
-            android:id="@+id/EditImage"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/EditImgCard"
             android:layout_width="138dp"
             android:layout_height="137dp"
-            android:layout_marginStart="136dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
+            app:cardCornerRadius="500dp"
             app:layout_constraintBottom_toTopOf="@+id/textInputEditUsername"
-            app:layout_constraintEnd_toStartOf="@+id/MaterialEditImg"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:shapeAppearanceOverlay="@drawable/baseline_account_circle"
-            app:srcCompat="@drawable/baseline_account_circle_24" />
+            app:layout_constraintVertical_bias="0.5">
+
+            <ImageView
+                android:id="@+id/EditImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shapeAppearanceOverlay="@drawable/baseline_account_circle"
+                app:srcCompat="@drawable/baseline_account_circle_24" />
+        </androidx.cardview.widget.CardView>
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/MaterialEditImg"
@@ -32,7 +39,7 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="@dimen/card_elevation"
             app:layout_constraintBottom_toTopOf="@+id/textInputEditUsername"
-            app:layout_constraintStart_toEndOf="@+id/EditImage">
+            app:layout_constraintStart_toEndOf="@+id/EditImgCard">
 
             <ImageView
                 android:id="@+id/EditIcon"
@@ -55,7 +62,7 @@
             android:text="Edit Profile"
             android:textSize="27sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/EditImage"
+            app:layout_constraintBottom_toTopOf="@+id/EditImgCard"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -71,7 +78,7 @@
             app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/LogoEditUsername"
-            app:layout_constraintTop_toBottomOf="@+id/EditImage">
+            app:layout_constraintTop_toBottomOf="@+id/EditImgCard">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tfEditUsername"
@@ -131,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="New Password"
                 android:inputType="textPassword"
                 android:textAlignment="viewStart"
                 android:textSize="16sp"
@@ -166,7 +173,8 @@
             app:layout_constraintEnd_toStartOf="@+id/textInputEditUsername"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textInputEditUsername"
-            app:srcCompat="@drawable/baseline_account_circle_24" />
+            app:srcCompat="@drawable/baseline_account_circle_24"
+            app:tint="@color/button_disabled_txt" />
 
         <ImageView
             android:id="@+id/LogoEditEmail"
@@ -179,7 +187,8 @@
             app:layout_constraintEnd_toStartOf="@+id/textEditEmail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputEditUsername"
-            app:srcCompat="@drawable/ic_email" />
+            app:srcCompat="@drawable/ic_email"
+            app:tint="@color/button_disabled_txt" />
 
         <ImageView
             android:id="@+id/LogoEditPassword"
@@ -194,7 +203,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textEditEmail"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_password" />
+            app:srcCompat="@drawable/ic_password"
+            app:tint="@color/button_disabled_txt" />
 
         <ProgressBar
             android:id="@+id/EditProcessBar"
@@ -209,15 +219,16 @@
 
         <ImageView
             android:id="@+id/DeleteAccount"
-            android:layout_width="40dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
