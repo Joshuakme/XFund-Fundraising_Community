@@ -76,7 +76,7 @@ class AddProjectFragment : Fragment() {
 
 
         binding.backButton.setOnClickListener{
-            findNavController().navigate(R.id.action_addProjectFragment_to_adminProjectFragment)
+            findNavController().navigateUp()
         }
 
         // Edit Image
@@ -86,7 +86,7 @@ class AddProjectFragment : Fragment() {
 
         binding.addProjectCancelButton.setOnClickListener{
             Toast.makeText(requireContext(), "The process has been canceled", Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_addProjectFragment_to_adminProjectFragment)
+            findNavController().navigateUp()
         }
 
         binding.addProjectAddButton.setOnClickListener{
@@ -98,10 +98,9 @@ class AddProjectFragment : Fragment() {
             uploadProjectImageToFirebaseStorage(projectUri, hashName)
 
             callBack = { imageUrl ->
-                val hashCover = imageUrl
 
                 val newProject = hashMapOf(
-                    "cover" to hashCover,
+                    "cover" to imageUrl,
                     "name" to hashName,
                     "description" to hashDesc,
                     "start_date" to FieldValue.serverTimestamp(),

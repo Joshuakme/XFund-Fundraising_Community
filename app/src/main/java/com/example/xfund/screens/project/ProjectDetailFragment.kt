@@ -113,7 +113,7 @@ class ProjectDetailFragment : Fragment() {
 
 
         binding.ProjectDetailBackButton.setOnClickListener{
-            findNavController().navigate(R.id.action_projectDetailFragment_to_projectsFragment)
+            findNavController().navigateUp()
         }
 
         binding.ProjectDetailDonateButton.setOnClickListener{

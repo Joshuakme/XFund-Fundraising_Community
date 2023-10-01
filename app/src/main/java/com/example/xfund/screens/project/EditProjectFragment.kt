@@ -107,12 +107,12 @@ class EditProjectFragment : Fragment() {
 
         //Navigation
         binding.backButton.setOnClickListener{
-            findNavController().navigate(R.id.action_editProjectFragment_to_adminProjectFragment)
+            findNavController().navigateUp()
         }
 
         binding.EditProjectCancelButton.setOnClickListener{
             Toast.makeText(context, "Edit has been cancelled", Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_editProjectFragment_to_adminProjectFragment)
+            findNavController().navigateUp()
         }
 
         binding.EditProjectUpdateButton.setOnClickListener{
@@ -124,7 +124,7 @@ class EditProjectFragment : Fragment() {
             )
 
             editProject(project, edited)
-            findNavController().navigate(R.id.action_editProjectFragment_to_adminProjectFragment)
+            findNavController().navigateUp()
         }
 
         return (binding.root)
