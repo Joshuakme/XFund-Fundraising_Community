@@ -1,8 +1,6 @@
 package com.example.xfund.screens.navigation
 
 import android.app.Dialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,20 +12,15 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.xfund.R
-import com.example.xfund.util.FirebaseHelper
 import com.example.xfund.viewModel.UserViewModel
-import com.google.android.gms.common.internal.BaseGmsClient.SignOutCallbacks
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -43,6 +36,9 @@ class ProfileFragment : Fragment() {
         auth = Firebase.auth
         val currentUser = currentUserViewModel.currentUser
 
+        //Bottom Navigate
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav?.visibility = View.VISIBLE
 
         // Check if logged in
         if(currentUser != null) {

@@ -13,21 +13,14 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.example.xfund.R
 import com.example.xfund.adapter.ImageSliderAdapter
 import com.example.xfund.databinding.FragmentHomeBinding
 import com.example.xfund.model.NewsModel
-import com.example.xfund.util.FirebaseHelper
 import com.example.xfund.viewModel.UserViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
 
 class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
     private lateinit var binding: FragmentHomeBinding
@@ -47,7 +40,8 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         // User Element
         currentUserViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
 
-
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav?.visibility = View.VISIBLE
 
         // SharedPreference - Login
         val isFirstTime = sharedPreferences?.getBoolean("IsFirstTime", true)

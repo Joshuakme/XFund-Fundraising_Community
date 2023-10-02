@@ -274,7 +274,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_payment_to_paymentMethodFragment"
             app:destination="@id/paymentMethodFragment"
@@ -298,6 +299,17 @@
                 android:name="cardCvv"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_payment_to_paymentSelectFragment"
+            app:destination="@id/paymentSelectFragment">
+            <argument
+                android:name="projectId"
+                app:argType="string" />
+            <argument
+                android:name="donateAmt"
+                app:argType="string" />
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/paymentMethodFragment"
@@ -316,7 +328,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/paymentMethodFragment">
             <argument
                 android:name="documentId"
                 app:argType="string" />
@@ -378,10 +391,46 @@
         android:name="com.example.xfund.PaymentMethodDetailFragment"
         android:label="PaymentMethodDetailFragment">
 
+        <action
+            android:id="@+id/action_paymentMethodDetailFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment"
+            app:popUpTo="@id/payment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.xfund.screens.user.AboutFragment"
         android:label="AboutFragment" />
+    <fragment
+        android:id="@+id/paymentSelectFragment"
+        android:name="com.example.xfund.PaymentSelectFragment"
+        android:label="PaymentSelectFragment">
+
+        <action
+            android:id="@+id/action_paymentSelectFragment_to_payment"
+            app:destination="@id/payment"
+            app:popUpTo="@id/projectDetailFragment">
+            <argument
+                android:name="projectId"
+                app:argType="string" />
+            <argument
+                android:name="donateAmt"
+                app:argType="string" />
+            <argument
+                android:name="documentId"
+                app:argType="string" />
+            <argument
+                android:name="cardName"
+                app:argType="string" />
+            <argument
+                android:name="cardNo"
+                app:argType="string" />
+            <argument
+                android:name="cardExpiry"
+                app:argType="string" />
+            <argument
+                android:name="cardCvv"
+                app:argType="string" />
+        </action>
+    </fragment>
 
 </navigation>

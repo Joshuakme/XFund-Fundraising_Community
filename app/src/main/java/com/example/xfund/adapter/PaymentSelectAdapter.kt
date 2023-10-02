@@ -8,35 +8,38 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xfund.PaymentMethodFragmentDirections
+import com.example.xfund.PaymentSelectFragmentDirections
 import com.example.xfund.R
 import com.example.xfund.model.PaymentMethod
 
-class PaymentAdapter(
+class PaymentSelectAdapter(
     private val context: Context,
     paymentModelArrayList: ArrayList<PaymentMethod>,
     private val navController: NavController,
-    private val previousFragmentDestinationId: Int?
-) : RecyclerView.Adapter<PaymentAdapter.ItemViewHolder>() {
+    private val projectId: String?,
+    private val donateAmt: String?
+) : RecyclerView.Adapter<PaymentSelectAdapter.ItemViewHolder>() {
 
     private val paymentModelArrayList: ArrayList<PaymentMethod>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentAdapter.ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentSelectAdapter.ItemViewHolder {
         // create a new view
         val paymentView = LayoutInflater.from(parent.context)
             .inflate(R.layout.cardview_payment_method, parent, false)
         return ItemViewHolder(paymentView)
     }
 
-    override fun onBindViewHolder(holder: PaymentAdapter.ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PaymentSelectAdapter.ItemViewHolder, position: Int) {
         val model = paymentModelArrayList[position]
         holder.cardName.text  = model.cardName
         holder.cardNo.text  = model.cardNo
         val currentDestinationId = navController?.currentDestination?.id
 
-        if(currentDestinationId == R.id.paymentMethodFragment){
+        if (currentDestinationId == R.id.paymentSelectFragment){
             holder.itemView.setOnClickListener {
-                val action = PaymentMethodFragmentDirections.actionPaymentMethodFragmentToPaymentMethodDetailFragment(
+                val action = PaymentSelectFragmentDirections.actionPaymentSelectFragmentToPayment(
+                    projectId!!,
+                    donateAmt!!,
                     model.id,
                     model.cardName,
                     model.cardNo,
@@ -46,7 +49,6 @@ class PaymentAdapter(
 
                 navController?.navigate(action)
             }
-
         }
     }
 

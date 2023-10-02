@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 class Payment : Fragment() {
     private lateinit var binding: FragmentPaymentBinding
     private val firestoreRepository = FirebaseHelper()
+    private var donationAmount: String = ""
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -35,34 +36,24 @@ class Payment : Fragment() {
         )
 
         val projectId = arguments?.getString("projectId")
-//        val projectDetailClassName = "com.example.xfund.screens.project.ProjectDetailFragment"
-//        val lastBackStackEntry =  findNavController().backStack.last
+        val donateAmt = arguments?.getString("donateAmt")
 
-        val previousFragmentDestinationId = findNavController().previousBackStackEntry?.destination?.id
-        //Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
-
-//        Toast.makeText(context, lastBackStackEntry.toString(), Toast.LENGTH_SHORT).show()
-//        Toast.makeText(context, lastBackStackEntry?.destination?.javaClass?.simpleName.toString(), Toast.LENGTH_SHORT).show()
-//        if(lastBackStackEntry?.destination?.javaClass?.simpleName == projectDetailClassName ) {
-//            Toast.makeText(context, "BOLEH KAAA????", Toast.LENGTH_SHORT).show()
-//        }
-
-        if(previousFragmentDestinationId == 2131362412) {
-            binding.documentIdHidden.text = projectId
+        if(donateAmt.toString() != ""){
+            binding.donateAmountInput.setText(donateAmt)
         }
 
         //Donation Amount Validation
         binding.donateAmountInput.addTextChangedListener(TextFieldValidation(binding.donateAmountInput))
 
         binding.donateBtn.setOnClickListener{
-            if (isValidate()) {
+            if (isValidate() && isCardValid()) {
                 val donationAmount = binding.donateAmountInput.text.toString().toInt()
 
                 //Validate payment amount
                 binding.donateAmountInput.addTextChangedListener(TextFieldValidation(binding.donateAmountInput))
 
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                    val isDeleted = firestoreRepository.donateToProject(binding.documentIdHidden.text.toString(), donationAmount)
+                    val isDeleted = firestoreRepository.donateToProject(projectId.toString(), donationAmount)
 
                     if(isDeleted) {
                         Toast.makeText(context, "Donate Successfully", Toast.LENGTH_SHORT).show()
@@ -79,6 +70,12 @@ class Payment : Fragment() {
         binding.changeCardTxt.setOnClickListener{
             findNavController().navigate(R.id.action_payment_to_paymentMethodFragment)
         }
+
+        binding.savedCardView.setOnClickListener{
+            val action = PaymentDirections.actionPaymentToPaymentSelectFragment(projectId.toString(), donationAmount)
+            findNavController().navigate(action)
+        }
+
         binding.backBtn.setOnClickListener{
             findNavController().navigateUp()
         }
@@ -94,9 +91,17 @@ class Payment : Fragment() {
         return binding.root
     }
 
-    private fun isValidate(): Boolean =
-        validateDonateAmount()
+    private fun isValidate(): Boolean = validateDonateAmount()
 
+    private fun isCardValid(): Boolean{
+        if(binding.savedCardName.text != ""){
+            return true
+        }
+        else{
+            Toast.makeText(requireContext(), "Please select payment method", Toast.LENGTH_SHORT).show()
+            return false
+        }
+    }
 
     private fun validateDonateAmount(): Boolean {
         if (binding.donateAmountInput.text.toString().trim().isEmpty()) {
@@ -121,6 +126,7 @@ class Payment : Fragment() {
             when (view.id) {
                 R.id.donateAmountInput -> {
                     validateDonateAmount()
+                    donationAmount = binding.donateAmountInput.text.toString()
                 }
             }
         }

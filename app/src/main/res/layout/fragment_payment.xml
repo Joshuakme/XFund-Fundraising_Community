@@ -182,18 +182,9 @@
                 android:gravity="center"
                 android:hint="@string/donation_sample_amount"
                 android:inputType="number"
+                android:textColorHint="@color/md_theme_dark_onSurfaceVariant"
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/documentIdHidden"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:visibility="gone"
-            tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="277dp"
-            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,25 +1,25 @@
 package com.example.xfund
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.xfund.adapter.PaymentAdapter
-import com.example.xfund.databinding.FragmentPaymentMethodBinding
+import com.example.xfund.adapter.PaymentSelectAdapter
+import com.example.xfund.databinding.FragmentPaymentSelectBinding
 import com.example.xfund.model.PaymentMethod
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-
-class PaymentMethodFragment : Fragment() {
-    private lateinit var binding: FragmentPaymentMethodBinding
+class PaymentSelectFragment : Fragment() {
+    private lateinit var binding: FragmentPaymentSelectBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +27,7 @@ class PaymentMethodFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_payment_method,
+            R.layout.fragment_payment_select,
             container,
             false
         )
@@ -35,16 +35,16 @@ class PaymentMethodFragment : Fragment() {
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav?.visibility = View.INVISIBLE
 
-        binding.addPaymentCard.setOnClickListener{
-            findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
-        }
-        binding.addPaymentWallet.setOnClickListener{
-            findNavController().navigate(R.id.action_paymentMethodFragment_to_addPaymentMethodFragment)
-        }
         binding.backBtn.setOnClickListener {
             bottomNav?.visibility = View.VISIBLE
             findNavController().navigateUp()
         }
+
+        val imageViewToHide = view?.findViewById<ImageView>(R.id.paymentMethodEditBtn)
+        val projectId = arguments?.getString("projectId")
+        val donateAmt = arguments?.getString("donateAmt")
+
+        imageViewToHide?.visibility = View.GONE
 
 
         // Inflate the layout for this fragment
@@ -64,16 +64,17 @@ class PaymentMethodFragment : Fragment() {
 
                 val previousFragmentDestinationId = findNavController().previousBackStackEntry?.destination?.id
 
-                val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList, navController, previousFragmentDestinationId)
+                val paymentSelectAdapter = PaymentSelectAdapter(requireContext(), paymentModelArrayList, navController, projectId, donateAmt)
 
                 //Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
-                paymentMethodRV.adapter = paymentAdapter
+                paymentMethodRV.adapter = paymentSelectAdapter
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(context, exception.toString(), Toast.LENGTH_SHORT).show()
             }
 
-        val linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         paymentMethodRV.layoutManager = linearLayoutManager
 
@@ -97,5 +98,4 @@ class PaymentMethodFragment : Fragment() {
 
         return ArrayList(paymentMethodList)
     }
-
 }
