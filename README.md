@@ -39,16 +39,16 @@ Join us on XFund and be a part of a global movement to end poverty. Together, we
         <td width="25%" style="line-height:0;"><img src="./readme/xfund_profile_screen.jpg"></td>
     </tr>
     <tr>
-        <td width="25%" style="line-height:0;">
-            <p style="text-align:center">Home Screen</p>
+        <td width="25%" align="center" style="line-height:0;">
+            <p  width="100%" style="text-align:center">Home Screen</p>
         </td>
-        <td width="25%" style="line-height:0;">
-            <p style="text-align:center">Projects Screen</p>
+        <td width="25%" align="center" style="line-height:0;">
+            <p>Projects Screen</p>
         </td>
-        <td width="25%" style="line-height:0;">
+        <td width="25%" align="center" style="line-height:0;">
             <p style="text-align:center">Community Screen</p>
         </td>
-        <td width="25%" style="line-height:0;">
+        <td width="25%" align="center" style="line-height:0;">
             <p style="text-align:center">Profile Screen</p>
         </td>
     </tr>
