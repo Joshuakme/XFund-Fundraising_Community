@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editProjectFragment"
             app:destination="@id/editProjectFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProjectFragment2"
+            app:destination="@id/editProjectFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"

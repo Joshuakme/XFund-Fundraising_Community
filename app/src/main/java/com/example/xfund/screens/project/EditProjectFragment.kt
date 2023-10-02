@@ -50,7 +50,7 @@ class EditProjectFragment : Fragment() {
         R.layout.fragment_edit_project, container, false)
 
 
-        return (binding.root)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
