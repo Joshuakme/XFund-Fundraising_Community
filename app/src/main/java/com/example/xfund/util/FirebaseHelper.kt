@@ -324,8 +324,8 @@ class FirebaseHelper {
     suspend fun donateToProject(projectId: String, donationAmount: Int): Boolean  {
         val projectsRef = FirebaseFirestore.getInstance().collection("projects")
 
-//        Log.d("PROJECT MANA !!!!", projectId)
-//        Log.d("DONATION AMOUNT::", donationAmount.toString())
+        Log.d("PROJECT MANA !!!!", projectId)
+        Log.d("DONATION AMOUNT::", donationAmount.toString())
 
         return withContext(Dispatchers.IO) {
             try {

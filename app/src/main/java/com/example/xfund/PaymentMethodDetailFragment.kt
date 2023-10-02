@@ -1,6 +1,7 @@
 package com.example.xfund
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -44,7 +46,7 @@ class PaymentMethodDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-
+        binding.paymentDetailnameTxt.addTextChangedListener(TextFieldValidation(binding.paymentDetailnameTxt))
 
         //set
         editTextCardName.setText(cardName)
@@ -80,31 +82,40 @@ class PaymentMethodDetailFragment : Fragment() {
             alertDialog.show()
         }
 
-        //edit Payment Method
-        editTextCardName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val newValue = s.toString()
-                val updates = hashMapOf<String, Any>(
-                    "cardName" to newValue
-                )
+            //edit Payment Method
+            editTextCardName.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    val newValue = s.toString()
+                    val updates = hashMapOf<String, Any>(
+                        "cardName" to newValue
+                    )
 
 
-                updateBtn.setOnClickListener{
-                    documentRef.update(updates)
-                        .addOnSuccessListener {
-                            Toast.makeText(requireContext(), "Payment Method Name change successfully!", Toast.LENGTH_SHORT).show()
+                    binding.paymentMethodUpdateBtn.setOnClickListener {
+                        if(isValidate()) {
+                            it.hideKeyboard()
+                            editTextCardName.clearFocus();
+
+                            documentRef.update(updates)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Payment Method Name change successfully!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                .addOnFailureListener { e ->
+                                }
                         }
-                        .addOnFailureListener { e ->
-                        }
+                    }
                 }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                updateBtn.isEnabled = true
-            }
-        })
 
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            })
         return binding.root
     }
 
@@ -126,6 +137,40 @@ class PaymentMethodDetailFragment : Fragment() {
         val visiblePart = cardNumber.takeLast(visibleChars)
 
         return "$asterisks$visiblePart"
+    }
+
+
+    private fun isValidate(): Boolean =
+        validateDetailname()
+
+
+    private fun validateDetailname(): Boolean {
+        if (binding.paymentDetailnameTxt.text.toString().trim().isEmpty()) {
+            binding.paymentDetailnameInput.error = "Required Field!"
+            binding.paymentDetailnameTxt.requestFocus()
+            return false
+        } else{
+            binding.paymentDetailnameInput.isErrorEnabled = false
+        }
+        return true
+    }
+    inner class TextFieldValidation(private val view: View) : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            // checking ids of each text field and applying functions accordingly.
+            when (view.id) {
+                R.id.paymentDetailnameTxt -> {
+                    validateDetailname()
+                }
+            }
+        }
+    }
+
+    fun View.hideKeyboard() {
+        val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
 }

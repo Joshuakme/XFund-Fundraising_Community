@@ -68,7 +68,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/donateAmountLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -107,7 +107,7 @@
             android:textColor="#485BFF"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/donateAmountLayout" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -175,10 +175,10 @@
             android:layout_marginStart="@dimen/screen_width_margin"
             android:layout_marginEnd="6dp"
             app:tint="@color/button_disabled_txt"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-            app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/donateAmountLayout"
+            app:layout_constraintEnd_toStartOf="@+id/donateAmountLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@+id/donateAmountLayout"
             app:srcCompat="@drawable/ic_password" />
 
         <ImageView
