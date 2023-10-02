@@ -15,12 +15,14 @@ XFund is a powerful mobile application committed to making a difference by addre
 
 Key Features:
 
-- Donate to Projects:
-  XFund allows users to contribute to a wide range of projects and initiatives dedicated to alleviating poverty. Your donations directly impact those in need.
+- Donate to Projects:  
+XFund allows users to contribute to a wide range of projects and initiatives dedicated to alleviating poverty. Your donations directly impact those in need.
 
-- Community Engagement: Join vibrant discussions within the XFund community, where like-minded individuals collaborate and share insights on creating positive change.
+- Community Engagement:  
+Join vibrant discussions within the XFund community, where like-minded individuals collaborate and share insights on creating positive change.
 
-- Transparency: We ensure complete transparency by sharing detailed information about every funded project, giving you the confidence that your contributions are making a tangible impact.
+- Transparency:  
+ We ensure complete transparency by sharing detailed information about every funded project, giving you the confidence that your contributions are making a tangible impact.
 
 Platform:
 XFund is available exclusively on [Android](https://www.android.com), built using [Android Studio](https://developer.android.com/studio) and [Kotlin](https://kotlinlang.org) to provide a seamless and user-friendly experience.
