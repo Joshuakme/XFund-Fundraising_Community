@@ -67,7 +67,7 @@ class PaymentMethodFragment : Fragment() {
 
                 val paymentAdapter = PaymentAdapter(requireContext(), paymentModelArrayList, navController, previousFragmentDestinationId)
 
-                Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
                 paymentMethodRV.adapter = paymentAdapter
             }
             .addOnFailureListener { exception ->

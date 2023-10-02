@@ -324,29 +324,35 @@ class FirebaseHelper {
     suspend fun donateToProject(projectId: String, donationAmount: Int): Boolean  {
         val projectsRef = FirebaseFirestore.getInstance().collection("projects")
 
-        try {
-            // Start a Firestore transaction to ensure consistency
-            FirebaseFirestore.getInstance().runTransaction { transaction ->
-                val projectDoc = projectsRef.document(projectId)
+//        Log.d("PROJECT MANA !!!!", projectId)
+//        Log.d("DONATION AMOUNT::", donationAmount.toString())
 
-                // Get the current collected funds
-                val currentCollectedFunds = transaction.get(projectDoc).getDouble("fund_collected")?.toInt() ?: 0
+        return withContext(Dispatchers.IO) {
+            try {
+                // Start a Firestore transaction to ensure consistency
+                FirebaseFirestore.getInstance().runTransaction { transaction ->
+                    val projectDoc = projectsRef.document(projectId)
 
-                // Update the collected funds by adding the donation amount
-                val newCollectedFunds = currentCollectedFunds + donationAmount
+                    // Get the current collected funds
+                    val currentCollectedFunds =
+                        transaction.get(projectDoc).getDouble("fund_collected")?.toInt() ?: 0
 
-                // Set the updated collected funds in the Firestore document
-                transaction.update(projectDoc, "fund_collected", newCollectedFunds)
+                    // Update the collected funds by adding the donation amount
+                    val newCollectedFunds = currentCollectedFunds + donationAmount
+
+                    // Set the updated collected funds in the Firestore document
+                    transaction.update(projectDoc, "fund_collected", newCollectedFunds)
+                }.await()
 
                 true
-            }.await()
-        } catch (e: Exception) {
-            // Handle any errors, such as Firestore exceptions or network issues
-            // You can log the error or handle it as needed
-            Log.d("KENAPAAA???", e.toString())
+            } catch (e: Exception) {
+                // Handle any errors, such as Firestore exceptions or network issues
+                // You can log the error or handle it as needed
+                Log.d("KENAPAAA???", e.toString())
+                false
+            }
             false
         }
-        return false
     }
 
 }

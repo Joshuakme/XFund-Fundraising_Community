@@ -1,5 +1,6 @@
 package com.example.xfund
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +10,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.xfund.R
 import com.example.xfund.databinding.FragmentPaymentBinding
 import com.example.xfund.util.FirebaseHelper
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,6 +19,7 @@ class Payment : Fragment() {
     private lateinit var binding: FragmentPaymentBinding
     private val firestoreRepository = FirebaseHelper()
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,12 +33,28 @@ class Payment : Fragment() {
         )
 
         val projectId = arguments?.getString("projectId")
+//        val projectDetailClassName = "com.example.xfund.screens.project.ProjectDetailFragment"
+//        val lastBackStackEntry =  findNavController().backStack.last
+
+        val previousFragmentDestinationId = findNavController().previousBackStackEntry?.destination?.id
+        //Toast.makeText(requireContext(), previousFragmentDestinationId.toString(), Toast.LENGTH_SHORT).show()
+
+//        Toast.makeText(context, lastBackStackEntry.toString(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, lastBackStackEntry?.destination?.javaClass?.simpleName.toString(), Toast.LENGTH_SHORT).show()
+//        if(lastBackStackEntry?.destination?.javaClass?.simpleName == projectDetailClassName ) {
+//            Toast.makeText(context, "BOLEH KAAA????", Toast.LENGTH_SHORT).show()
+//        }
+
+        if(previousFragmentDestinationId == 2131362412) {
+            binding.documentIdHidden.text = projectId
+        }
+
 
         binding.donateBtn.setOnClickListener{
             val donationAmount = binding.donateAmountInput.text.toString().toInt()
 
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                val isDeleted = firestoreRepository.donateToProject(projectId ?: "", donationAmount)
+                val isDeleted = firestoreRepository.donateToProject(binding.documentIdHidden.text.toString(), donationAmount)
 
                 if(isDeleted) {
                     Toast.makeText(context, "Donate Successfully", Toast.LENGTH_SHORT).show()
