@@ -52,6 +52,8 @@ class ProjectsFragment : Fragment(){
             R.layout.fragment_projects, container, false
         )
 
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav?.visibility = View.VISIBLE
 
         return binding.root
     }

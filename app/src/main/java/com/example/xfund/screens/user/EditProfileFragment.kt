@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -80,7 +79,7 @@ class EditProfileFragment : Fragment() {
             currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
                 if (user != null) {
                     //profileImg.setImageURI(user.photoUrl)
-                    usernameTxt.setText(user?.displayName ?: "Username")
+                    usernameTxt.setText(user?.displayName ?: "")
                     emailTxt.setText(user.email.toString())
                     passwordTxt.setText("")
 
@@ -118,7 +117,7 @@ class EditProfileFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.delete_dialog)
+        dialog.setContentView(R.layout.dialog_delete)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)
