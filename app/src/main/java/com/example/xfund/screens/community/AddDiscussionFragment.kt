@@ -1,5 +1,7 @@
 package com.example.xfund.screens.community
 
+import android.app.ProgressDialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -190,6 +193,18 @@ class AddDiscussionFragment : Fragment() {
     }
 
     private fun writeNewDiscussion(title: String, desc: String, tags: MutableList<String>) {
+
+        // Close the keyboard
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+
+        // Display Loading Dialog
+        val progressDialog = ProgressDialog(this.requireContext())
+        progressDialog.setMessage("Adding discussion...")
+        progressDialog.setCancelable(false) // Prevent dismiss by tapping outside
+        progressDialog.show()
+
+
         val user = FirebaseAuth.getInstance().currentUser
 
         var author: String = user?.uid ?: ""
@@ -205,17 +220,21 @@ class AddDiscussionFragment : Fragment() {
         // Check if the input field is empty
         if(title.isBlank() || title.isEmpty()) return
 
+
         db.collection("discussions").document().set(newDiscussion)
             .addOnSuccessListener {
                 // Write was successful!
                 // Clear input field
                 resetForm()
+                progressDialog.dismiss()
                 Snackbar.make(this.binding.submitButton, "Discussion added successfully!", Snackbar.LENGTH_SHORT).show()
+
                 findNavController().navigate(R.id.action_addDiscussionFragment_to_communityFragment)
             }
             .addOnFailureListener {
                 // Write failed
                 Snackbar.make(this.binding.submitButton, "Discussion added failed! Please try again.", Snackbar.LENGTH_SHORT).show()
+                progressDialog.dismiss()
             }
     }
 

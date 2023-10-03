@@ -1,6 +1,7 @@
 package com.example.xfund.screens.community
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -120,22 +121,32 @@ class EditDiscussionFragment : Fragment() {
         updateBtn.setOnClickListener {
             val updatedDiscussion = listOf(discussionTitle.text.toString(), discussionDesc.text.toString(), discussionTagsList.toList())
 
+            // Display Loading Dialog
+            val progressDialog = ProgressDialog(this.requireContext())
+            progressDialog.setMessage("Updating discussion...")
+            progressDialog.setCancelable(false) // Prevent dismiss by tapping outside
+            progressDialog.show()
+
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                 val isUpdated = firestoreRepository.updateDiscussion(discussionId!!,updatedDiscussion as List<Any>)
                 if (isUpdated == 0) {
                     // Handle the case where the discussion was successfully updated
                     Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
 
                     findNavController().navigate(R.id.action_editDiscussionFragment_to_viewPostedCommunityFragment)
                 } else if(isUpdated == 1) {
                     // Discussion not belong to this user
                     Toast.makeText(context, "You are not allowed to update this discussion", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 }
                 else if(isUpdated == 2) {
                     // User not authenticated
                     Toast.makeText(context, "Please Login to update this discussion", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 } else {
                     Toast.makeText(context, "Update Failed", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 }
             }
         }
