@@ -128,6 +128,9 @@
         android:name="com.example.xfund.screens.community.DiscussionDetailFragment"
         android:label="fragment_discussion_detail"
         tools:layout="@layout/fragment_discussion_detail" >
+        <deepLink
+            android:id="@+id/discussionDetailDeepLink"
+            app:uri="XFund://discussionDetailFragment?title={title}?desc={desc}?author={author}?date={date}" />
         <action
             android:id="@+id/action_discussionDetailFragment_to_communityFragment"
             app:destination="@id/communityFragment" />

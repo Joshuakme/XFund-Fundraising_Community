@@ -67,6 +67,7 @@ class CommunityFragment : Fragment() {
         val loadingSpinner = view.findViewById<ConstraintLayout>(R.id.communityLoadingSpinnerConstraintLayout)
         val communityErrorCard = view.findViewById<MaterialCardView>(R.id.communityErrorCard)
         val user = FirebaseAuth.getInstance().currentUser
+        val sharedPreferences = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
 
         // LAYOUT SETTINGS
         bottomNav?.visibility = View.VISIBLE
