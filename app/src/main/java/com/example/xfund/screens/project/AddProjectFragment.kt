@@ -117,7 +117,8 @@ class AddProjectFragment : Fragment() {
                 )
 
                 addNewProject(newProject)
-                findNavController().navigate(R.id.action_addProjectFragment_to_adminProjectFragment)
+                Toast.makeText(context, "Project has been added", Toast.LENGTH_LONG).show()
+                findNavController().navigateUp()
             }
         }
 
@@ -148,11 +149,15 @@ class AddProjectFragment : Fragment() {
             .set(hashMap)
             .addOnSuccessListener {
                 Log.d("TAG", "DocumentSnapshot successfully written!")
-                Toast.makeText(requireContext(), "Project has been added", Toast.LENGTH_LONG).show()
+/*
+                Toast.makeText(context, "Project has been added", Toast.LENGTH_LONG).show()
+*/
             }
             .addOnFailureListener {
                 e -> Log.w("TAG", "Error writing document", e)
-                Toast.makeText(requireContext(), "Project added failed! Please try again.", Toast.LENGTH_LONG).show()
+/*
+                Toast.makeText(context, "Project added failed! Please try again.", Toast.LENGTH_LONG).show()
+*/
             }
     }
 }

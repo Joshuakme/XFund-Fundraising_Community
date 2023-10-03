@@ -99,7 +99,7 @@ class ProfileFragment : Fragment() {
 
             // Edit Projects
             editProjectsBtn.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment_to_editProjectFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_adminProjectFragment)
             }
 
             // About Screen

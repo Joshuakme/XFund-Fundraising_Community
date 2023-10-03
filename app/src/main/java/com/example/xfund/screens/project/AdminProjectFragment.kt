@@ -31,7 +31,7 @@ class AdminProjectFragment : Fragment()
 {
     private val firestoreRepository = FirebaseHelper()
     private lateinit var binding : FragmentAdminProjectBinding
-    private lateinit var projectAdminList : List<Project>
+    private var projectAdminList : List<Project> = emptyList()
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,8 +126,14 @@ class AdminProjectFragment : Fragment()
             if (filteredList.isEmpty()) {
 
             } else {
-                val navController = NavHostFragment.findNavController(this)
-                val adapter = ProjectItemAdapter(requireContext(), filteredList, navController)
+                val adapter = AdminProjectAdapter(requireContext(), filteredList,
+                    object : AdminProjectAdapter.OnEditButtonClickListener {
+                        override fun onEditClick(position: Int, project: Project) {
+                            // Handle edit click event
+                            val action = AdminProjectFragmentDirections.actionAdminProjectFragmentToEditProjectFragment(project)
+                            findNavController().navigate(action)
+                        }
+                    })
                 recyclerView.adapter = adapter
             }
         }
@@ -145,8 +151,14 @@ class AdminProjectFragment : Fragment()
             if (filteredList.isEmpty()) {
                 Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show()
             } else {
-                val navController = NavHostFragment.findNavController(this)
-                val adapter = ProjectItemAdapter(requireContext(), filteredList, navController)
+                val adapter = AdminProjectAdapter(requireContext(), filteredList,
+                    object : AdminProjectAdapter.OnEditButtonClickListener {
+                    override fun onEditClick(position: Int, project: Project) {
+                        // Handle edit click event
+                        val action = AdminProjectFragmentDirections.actionAdminProjectFragmentToEditProjectFragment(project)
+                        findNavController().navigate(action)
+                    }
+                })
                 recyclerView.adapter = adapter
             }
         }

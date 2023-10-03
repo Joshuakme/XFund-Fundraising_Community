@@ -3,6 +3,8 @@ package com.example.xfund.screens.project
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -126,8 +128,7 @@ class EditProjectFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable("project", project)
             dialog.arguments = bundle
-            dialog.show(fragmentManager, "DELETE_DIALOG")
-            findNavController().navigate(R.id.action_editProjectFragment_to_adminProjectFragment)
+            dialog.show(requireFragmentManager(), "DELETE_DIALOG")
         }
 
         //Cancel button
@@ -167,14 +168,27 @@ class EditProjectFragment : Fragment() {
                         deleteProject(project)
                         Toast.makeText(context,"Project Deleted", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
+                        navigateToAdminProjectFragment()
                     }
                     .setNegativeButton("Cancel") { dialog, _ ->
                         Toast.makeText(context, "Deletion has been canceled", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
+                        navigateToAdminProjectFragment()
                     }
                 // Create the AlertDialog object and return it.
                 builder.create()
             } ?: throw IllegalStateException("Activity cannot be null")
+        }
+
+        private fun navigateToAdminProjectFragment() {
+            val parentFragment = parentFragment
+            if (parentFragment != null) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    parentFragment.findNavController().navigateUp()
+                }, 200) // Delayed navigation to ensure dialog is fully dismissed
+            } else {
+                Log.e("DeleteButtonDialog", "Parent fragment is null")
+            }
         }
 
         private fun deleteProject(oldProject: Project?) = CoroutineScope(
@@ -193,22 +207,18 @@ class EditProjectFragment : Fragment() {
                             .delete()
                             .addOnSuccessListener {
                                 Log.d("Edit Successful", "DocumentSnapshot successfully updated!")
-                                Toast.makeText(context, "Project deleted.", Toast.LENGTH_SHORT).show()
                             }
                             .addOnFailureListener {
-                                    e -> Log.w("Edit Failed", "Error updating document", e)
+
                             }
+
+
                     } catch(e: Exception) {
-                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+
                     }
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "No project matched the query.", Toast.LENGTH_LONG).show()
                 }
             }
         }
-
     }
 
     private fun editProject(oldProject: Project?, newProject: HashMap<String, Any>) = CoroutineScope(Dispatchers.IO).launch {
