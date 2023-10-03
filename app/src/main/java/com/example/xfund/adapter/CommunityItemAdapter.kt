@@ -36,7 +36,6 @@ class CommunityItemAdapter(
     private val navController: NavController
 ) : RecyclerView.Adapter<CommunityItemAdapter.ViewHolder>() {
 
-    private val usernameMap = mutableMapOf<String, String>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.community_list_item,
@@ -57,11 +56,11 @@ class CommunityItemAdapter(
         // Date
         val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         holder.date.text = currentItem.createdOn.format(dateFormat)
+        // Clear existing chips
+        holder.tags.removeAllViews()
         // Tags
         for (tag in currentItem.tags) {
-            if(holder.tags.childCount < currentItem.tags.size) {
-                createChip(holder.tags, tag)
-            }
+            createChip(holder.tags, tag)
         }
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -121,5 +120,4 @@ class CommunityItemAdapter(
                 ContextCompat.getColor(context, R.color.md_theme_light_inversePrimary))
         })
     }
-
 }

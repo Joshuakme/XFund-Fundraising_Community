@@ -128,6 +128,9 @@
         android:name="com.example.xfund.screens.community.DiscussionDetailFragment"
         android:label="fragment_discussion_detail"
         tools:layout="@layout/fragment_discussion_detail" >
+        <deepLink
+            android:id="@+id/discussionDetailDeepLink"
+            app:uri="XFund://discussionDetailFragment?title={title}?desc={desc}?author={author}?date={date}" />
         <action
             android:id="@+id/action_discussionDetailFragment_to_communityFragment"
             app:destination="@id/communityFragment" />
@@ -244,6 +247,9 @@
                 android:name="tags"
                 app:argType="string[]" />
         </action>
+        <action
+            android:id="@+id/action_viewPostedCommunityFragment_to_addDiscussionFragment"
+            app:destination="@id/addDiscussionFragment" />
     </fragment>
     <fragment
         android:id="@+id/editDiscussionFragment"

@@ -1,21 +1,19 @@
 package com.example.xfund.screens.user
 
-import android.app.AlertDialog
-import android.content.ContentValues.TAG
+import android.app.ProgressDialog
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.xfund.R
@@ -104,43 +102,62 @@ class LoginFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {
             if (isValidEmail) {
+                // Close the keyboard
+                val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+
+
                 // Display Loading Dialog
-                val builder = AlertDialog.Builder(this.requireContext())
-                val dialog = builder.setTitle("Loading").create()
-                dialog.show()
+                val progressDialog = ProgressDialog(this.requireContext())
+                progressDialog.setMessage("Logging in...")
+                progressDialog.setCancelable(false) // Prevent dismiss by tapping outside
+                progressDialog.show()
 
                 // Sign in With (Email, Password)
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                    val authResult = firestoreRepository.logInUser(
-                        emailEditText.text.toString(),
-                        passwordEditText.text.toString()
-                    )
+                    try {
+                        val authResult = firestoreRepository.logInUser(
+                            emailEditText.text.toString(),
+                            passwordEditText.text.toString()
+                        )
 
-                    if (authResult != null) {
-                        // User logged in successfully
+                        if (authResult != null) {
+                            // User logged in successfully
 
-                        // Set UserViewModel
-                        userViewModel.setUser(auth.currentUser)
+                            // Set UserViewModel
+                            userViewModel.setUser(auth.currentUser)
 
-                        // Set Toast Message
-                        Toast.makeText(context, "Login Successfully!", Toast.LENGTH_SHORT).show()
+                            // Set Toast Message
+                            Toast.makeText(context, "Login Successfully!", Toast.LENGTH_SHORT).show()
 
-                        // Close the loading Alert Dialog after success login
-                        dialog.dismiss()
+                            // Close the loading ProgressDialog after successful login
+                            progressDialog.dismiss()
 
-                        // Navigate to Homepage
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            // Navigate to Homepage
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
-                        // Show the bottom navigation
-                        bottomNav?.visibility = View.VISIBLE
-                    } else {
-                        // Handle login failure
+                            // Show the bottom navigation
+                            bottomNav?.visibility = View.VISIBLE
+                        } else {
+                            // Handle login failure
 
-                        Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+
+                            // Dismiss the ProgressDialog
+                            progressDialog.dismiss()
+                        }
+                    } catch (e: Exception) {
+                        // Handle exceptions, e.g., network errors
+
+                        Toast.makeText(context, "Login failed: ${e.message}", Toast.LENGTH_SHORT).show()
+
+                        // Dismiss the ProgressDialog
+                        progressDialog.dismiss()
                     }
                 }
             }
         }
+
 //                auth.signInWithEmailAndPassword(
 //                    emailEditText.text.toString(),
 //                    passwordEditText.text.toString()

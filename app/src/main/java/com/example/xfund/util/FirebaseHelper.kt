@@ -1,5 +1,7 @@
 package com.example.xfund.util
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import android.util.Log
@@ -16,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.Calendar
@@ -27,6 +30,7 @@ class FirebaseHelper {
     private val auth = FirebaseAuth.getInstance()
     private val storage = FirebaseStorage.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
+    //private val sharedPreferences = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
 
 
     // Coroutines Functions
@@ -119,6 +123,7 @@ class FirebaseHelper {
                     .await()
 
                 val discussions = createCommunityDiscussions(querySnapshot)
+
                 discussions
             } catch (e: Exception) {
                 // Handle exceptions
@@ -136,7 +141,7 @@ class FirebaseHelper {
                     val userId = currentUser.uid
                     val querySnapshot = firestore.collection("discussions")
                         .whereEqualTo("author", userId)
-                        //.orderBy("createdOn", Query.Direction.DESCENDING)
+                        .orderBy("createdOn", Query.Direction.DESCENDING)
                         .get()
                         .await()
 
@@ -147,6 +152,7 @@ class FirebaseHelper {
                     emptyList()
                 }
             } catch (e: Exception) {
+                Log.d("KENAPAAAA!!!!", e.toString())
                 emptyList() // Handle errors gracefully
             }
         }

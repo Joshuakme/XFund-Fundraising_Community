@@ -1,6 +1,7 @@
 package com.example.xfund.screens.user
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -26,13 +27,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
-    private lateinit var auth: FirebaseAuth
     private lateinit var currentUser: FirebaseUser
     private var uri: Uri? = null
     private val firestoreRepository = FirebaseHelper()
@@ -64,23 +63,10 @@ class EditProfileFragment : Fragment() {
         currentUser = auth.currentUser!!
 
         if(currentUser != null) {
-//            // Use a coroutine scope to get all discussions
-//            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-//                val user = firestoreRepository.fetchUserDetails(currentUser.uid)
-//
-//                if(user != null) {
-//                    Toast.makeText(context, user.imgUri.toString(), Toast.LENGTH_SHORT).show()
-//                    profileImg.setImageURI(user.imgUri)
-//                    usernameTxt.setText(user?.displayName ?: "Username")
-//                    emailTxt.setText(user.email.toString())
-//                    passwordTxt.setText("")
-//                }
-//            }
-
             currentUserViewModel.currentUser.observe(viewLifecycleOwner) { user ->
                 if (user != null) {
                     //profileImg.setImageURI(user.photoUrl)
-                    usernameTxt.setText(user?.displayName ?: "Username")
+                    usernameTxt.setText(user?.displayName ?: "")
                     emailTxt.setText(user.email.toString())
                     passwordTxt.setText("")
 
@@ -118,7 +104,7 @@ class EditProfileFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.delete_dialog)
+        dialog.setContentView(R.layout.dialog_delete)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)
@@ -154,6 +140,13 @@ class EditProfileFragment : Fragment() {
     private fun updateUserDetail(displayName: String, imageUri: Uri?) {
         lateinit var profileUpdates: UserProfileChangeRequest
 
+        // Display Loading Dialog
+        val progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Updating Profile...")
+        progressDialog.setCancelable(false) // Prevent dismiss by tapping outside
+        progressDialog.show()
+
+
         if(imageUri != null) {
             // Use a coroutine scope to upload the image to Firebase
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
@@ -170,6 +163,8 @@ class EditProfileFragment : Fragment() {
                     currentUser.updateProfile(profileUpdates)
                         .addOnCompleteListener {task ->
                             Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
+
+                            progressDialog.dismiss()
 
                             findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
                         }
@@ -190,6 +185,8 @@ class EditProfileFragment : Fragment() {
                 .addOnCompleteListener {task ->
                     Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show()
 
+                    progressDialog.dismiss()
+
                     findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
                 }
                 .addOnFailureListener {
@@ -202,6 +199,8 @@ class EditProfileFragment : Fragment() {
             currentUser.updateEmail(binding.tfEditEmail.text.toString())
                 .addOnCompleteListener {
                     // Email updated successfully
+
+                    //progressDialog.dismiss()
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
@@ -213,6 +212,7 @@ class EditProfileFragment : Fragment() {
             currentUser.updatePassword(binding.tfEditPassword.text.toString())
                 .addOnCompleteListener {
                     // Email updated successfully
+                    //progressDialog.dismiss()
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()

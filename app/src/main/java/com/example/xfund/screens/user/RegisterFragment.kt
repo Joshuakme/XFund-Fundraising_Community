@@ -1,5 +1,6 @@
 package com.example.xfund.screens.user
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -67,6 +68,13 @@ class RegisterFragment : Fragment() {
         }
 
         binding.btnRegister.setOnClickListener {
+            // Display Loading Dialog
+            val progressDialog = ProgressDialog(requireContext())
+            progressDialog.setMessage("Registering...")
+            progressDialog.setCancelable(false) // Prevent dismiss by tapping outside
+            progressDialog.show()
+
+            // Variables
             val email = binding.textInputEmail.editText?.text.toString()
             val password = binding.textInputPassword.editText?.text.toString()
             val confirmPassword = binding.textInputConPassword.editText?.text.toString()
@@ -86,10 +94,11 @@ class RegisterFragment : Fragment() {
                                 // Set UserViewModel
                                 userViewModel.setUser(user)
 
-
                                 // Set Toast Message
                                 Toast.makeText(
                                     requireContext(), "Registered Successful", Toast.LENGTH_SHORT).show()
+
+                                progressDialog.dismiss()
 
                                 findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
 
@@ -104,6 +113,7 @@ class RegisterFragment : Fragment() {
                         .addOnFailureListener(requireActivity()) {
                             Toast.makeText(
                                 requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+                            progressDialog.dismiss()
                         }
                 } else {
                     Toast.makeText(
@@ -111,6 +121,7 @@ class RegisterFragment : Fragment() {
                         "Password is not matching!",
                         Toast.LENGTH_SHORT
                     ).show()
+                    progressDialog.dismiss()
                 }
             } else {
                 Toast.makeText(
@@ -118,31 +129,9 @@ class RegisterFragment : Fragment() {
                     "Empty Fields are not Allowed!",
                   Toast.LENGTH_SHORT
                 ).show()
+                progressDialog.dismiss()
             }
         }
-    }
-
-    private fun createAccount(email: String, password: String) {
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener() { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("EmailPassword", "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    //updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("EmailPassword", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        requireContext(),
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                    //updateUI(null)
-                }
-            }
-        // [END create_user_with_email]
     }
 
     private fun registerToFirestore(user: FirebaseUser?) {
@@ -164,6 +153,7 @@ class RegisterFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 // Handle the error
+                Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
     }
 

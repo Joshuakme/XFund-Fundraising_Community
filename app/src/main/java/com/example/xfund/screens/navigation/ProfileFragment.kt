@@ -72,7 +72,7 @@ class ProfileFragment : Fragment() {
                 if (user != null) {
                     val imageUrl =
                         user?.photoUrl   // Retrieve user's profile image URL from Firestore or Realtime Database
-                        view.findViewById<TextView>(R.id.ProfileName).text = user.displayName ?: "Username"
+                        view.findViewById<TextView>(R.id.ProfileName).text = user.displayName ?: "Anonymous"
                         view.findViewById<TextView>(R.id.ProfileEmail).text = user.email
 
                     Glide.with(context)
@@ -121,7 +121,7 @@ class ProfileFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.signout_dialog)
+        dialog.setContentView(R.layout.dialog_signout)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessageSignOut: TextView = dialog.findViewById(R.id.tvMessageSignOut)

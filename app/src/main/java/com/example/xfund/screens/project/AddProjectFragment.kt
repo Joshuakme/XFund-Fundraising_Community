@@ -1,5 +1,6 @@
 package com.example.xfund.screens.project
 
+import android.app.ProgressDialog
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -103,6 +104,12 @@ class AddProjectFragment : Fragment() {
         }
 
         binding.addProjectAddButton.setOnClickListener{
+            // Display Loading Dialog
+            val progressDialog = ProgressDialog(requireContext())
+            progressDialog.setMessage("Updating Profile...")
+            progressDialog.setCancelable(false) // Prevent dismiss by tapping outside
+            progressDialog.show()
+
 
             val hashName = newName.text.toString()
             val hashDesc = newDescription.text.toString()
@@ -132,6 +139,7 @@ class AddProjectFragment : Fragment() {
 
                 addNewProject(newProject)
                 Toast.makeText(context, "Project has been added", Toast.LENGTH_LONG).show()
+                progressDialog.dismiss()
                 findNavController().navigateUp()
             }
         }

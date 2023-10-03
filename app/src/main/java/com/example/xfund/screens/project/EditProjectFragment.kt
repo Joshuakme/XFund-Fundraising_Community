@@ -2,6 +2,7 @@ package com.example.xfund.screens.project
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -142,6 +143,8 @@ class EditProjectFragment : Fragment() {
 
         //Edit button
         binding.EditProjectUpdateButton.setOnClickListener{
+
+
             val editedProjectName = projectNameText.text.toString()
             val editedProjectDesc = projectDescText.text.toString()
             val edited = hashMapOf<String, Any>(
@@ -225,6 +228,8 @@ class EditProjectFragment : Fragment() {
     }
 
     private fun editProject(oldProject: Project?, newProject: HashMap<String, Any>) = CoroutineScope(Dispatchers.IO).launch {
+
+        // Variables
         val projectQuery = db
             .whereEqualTo("name", oldProject?.name)
             .whereEqualTo("description", oldProject?.description)

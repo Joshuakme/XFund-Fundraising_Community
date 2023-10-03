@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -22,6 +23,7 @@ import com.example.xfund.model.CommunityDiscussion
 import com.example.xfund.util.FirebaseHelper
 import com.example.xfund.util.LoginDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
@@ -62,7 +64,10 @@ class CommunityFragment : Fragment() {
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         addDiscussionButton = view.findViewById(R.id.AddButtonLinearLayout)
         val communityRecycler: RecyclerView = view.findViewById(R.id.CommunityRecycleView)
+        val loadingSpinner = view.findViewById<ConstraintLayout>(R.id.communityLoadingSpinnerConstraintLayout)
+        val communityErrorCard = view.findViewById<MaterialCardView>(R.id.communityErrorCard)
         val user = FirebaseAuth.getInstance().currentUser
+        val sharedPreferences = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
 
         // LAYOUT SETTINGS
         bottomNav?.visibility = View.VISIBLE
@@ -81,15 +86,25 @@ class CommunityFragment : Fragment() {
 
         // Use a coroutine scope to get all discussions
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+            // Show loading spinner while fetching data
+            loadingSpinner.visibility = View.VISIBLE
+            communityRecycler.visibility = View.GONE
+            communityErrorCard.visibility = View.GONE
+
             val discussionList = firestoreRepository.getAllDiscussions()
 
             if (discussionList.isNotEmpty()) {
-                // RecyclerView
+                // Hide loading spinner and show RecyclerView with data
+                loadingSpinner.visibility = View.GONE
+                communityRecycler.visibility = View.VISIBLE
+
                 val navController = NavHostFragment.findNavController(view.findFragment())
                 val adapter = CommunityItemAdapter(requireContext(), discussionList, navController)
                 communityRecycler.adapter = adapter
             } else {
-                Toast.makeText(context, "Failed to load discussions", Toast.LENGTH_SHORT).show()
+                // Hide loading spinner and show error message
+                loadingSpinner.visibility = View.GONE
+                communityErrorCard.visibility = View.VISIBLE
             }
         }
     }
