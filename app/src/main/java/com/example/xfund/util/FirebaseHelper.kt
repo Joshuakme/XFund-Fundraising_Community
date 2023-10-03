@@ -141,7 +141,7 @@ class FirebaseHelper {
                     val userId = currentUser.uid
                     val querySnapshot = firestore.collection("discussions")
                         .whereEqualTo("author", userId)
-                        //.orderBy("createdOn", Query.Direction.DESCENDING)
+                        .orderBy("createdOn", Query.Direction.DESCENDING)
                         .get()
                         .await()
 
@@ -152,6 +152,7 @@ class FirebaseHelper {
                     emptyList()
                 }
             } catch (e: Exception) {
+                Log.d("KENAPAAAA!!!!", e.toString())
                 emptyList() // Handle errors gracefully
             }
         }
