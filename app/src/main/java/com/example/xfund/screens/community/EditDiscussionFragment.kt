@@ -22,11 +22,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.xfund.R
-import com.example.xfund.databinding.FragmentDiscussionDetailBinding
 import com.example.xfund.databinding.FragmentEditDiscussionBinding
-import com.example.xfund.model.CommunityDiscussion
 import com.example.xfund.util.FirebaseHelper
-import com.example.xfund.util.LoginDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -203,7 +200,7 @@ class EditDiscussionFragment : Fragment() {
     private fun showDeleteDiscussionDialog(message: String?){
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.delete_dialog)
+        dialog.setContentView(R.layout.dialog_delete)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvMessage: TextView = dialog.findViewById(R.id.tvMessage)

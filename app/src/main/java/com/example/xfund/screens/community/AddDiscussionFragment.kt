@@ -22,6 +22,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -64,9 +65,7 @@ class AddDiscussionFragment : Fragment() {
 
 
         // Hide bottom nav when load this page
-        if (bottomNav != null) {
-            bottomNav.visibility = View.GONE
-        }
+        bottomNav?.visibility = View.GONE
 
         // Back button navigation
         backButton.setOnClickListener {
@@ -191,7 +190,7 @@ class AddDiscussionFragment : Fragment() {
     }
 
     private fun writeNewDiscussion(title: String, desc: String, tags: MutableList<String>) {
-        val user = Firebase.auth.currentUser
+        val user = FirebaseAuth.getInstance().currentUser
 
         var author: String = user?.uid ?: ""
 

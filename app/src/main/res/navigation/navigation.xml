@@ -244,6 +244,9 @@
                 android:name="tags"
                 app:argType="string[]" />
         </action>
+        <action
+            android:id="@+id/action_viewPostedCommunityFragment_to_addDiscussionFragment"
+            app:destination="@id/addDiscussionFragment" />
     </fragment>
     <fragment
         android:id="@+id/editDiscussionFragment"
