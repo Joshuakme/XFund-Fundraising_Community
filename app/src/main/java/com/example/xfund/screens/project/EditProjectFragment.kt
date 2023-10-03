@@ -114,6 +114,9 @@ class EditProjectFragment : Fragment() {
             bottomNav.visibility = View.GONE
         }
 
+        projectNameText.clearFocus()
+        projectDescText.clearFocus()
+
 
         //Navigation
         //Back Button

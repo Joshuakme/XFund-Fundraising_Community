@@ -110,6 +110,13 @@ class ProjectsFragment : Fragment(){
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Clear the search query when the fragment is resumed
+        binding.SearchBar.setQuery("", false)
+    }
+
     private fun filterList(query: String?) {
         if(query != null) {
             val filteredList = arrayListOf<Project>()

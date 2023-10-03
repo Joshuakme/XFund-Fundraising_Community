@@ -82,6 +82,12 @@ class AddProjectFragment : Fragment() {
         }
 
 
+        newCover.clearFocus()
+        newName.clearFocus()
+        newDescription.clearFocus()
+        newFundTarget.clearFocus()
+
+
         binding.backButton.setOnClickListener{
             findNavController().navigateUp()
         }
@@ -102,11 +108,19 @@ class AddProjectFragment : Fragment() {
             val hashDesc = newDescription.text.toString()
             val hashTarget = newFundTarget.text.toString().toInt()
 
+            fun generateRandomString(length: Int): String {
+                val allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                return (1..length)
+                    .map { allowedChars.random() }
+                    .joinToString("")
+            }
+
             uploadProjectImageToFirebaseStorage(projectUri, hashName)
 
             callBack = { imageUrl ->
 
                 val newProject = hashMapOf(
+                    "id" to generateRandomString(15),
                     "cover" to imageUrl,
                     "name" to hashName,
                     "description" to hashDesc,
@@ -121,7 +135,6 @@ class AddProjectFragment : Fragment() {
                 findNavController().navigateUp()
             }
         }
-
     }
 
 

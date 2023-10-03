@@ -78,12 +78,6 @@ class AdminProjectFragment : Fragment()
             }
         }
 
-        // Hide bottom nav when load this page
-        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
-        if (bottomNav != null) {
-            bottomNav.visibility = View.GONE
-        }
-
         // ELEMENTS IN FRAGMENT
         // Search Elements
         val searchBar : SearchView = binding.SearchBar
@@ -95,6 +89,7 @@ class AdminProjectFragment : Fragment()
         txtSearch.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
 
         searchBar.clearFocus()
+        searchBar.setQuery("", false)
         searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 filterListSubmit(query)
@@ -107,11 +102,24 @@ class AdminProjectFragment : Fragment()
             }
         })
 
+        // Show bottom nav when load this page
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav?.visibility = View.VISIBLE
+
+        binding.backButton.setOnClickListener{
+            findNavController().navigateUp()
+        }
 
         binding.projectAddButton.setOnClickListener{
             findNavController().navigate(R.id.action_adminProjectFragment_to_addProjectFragment)
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Clear the search query when the fragment is resumed
+        binding.SearchBar.setQuery("", false)
     }
 
     private fun filterList(query: String?) {

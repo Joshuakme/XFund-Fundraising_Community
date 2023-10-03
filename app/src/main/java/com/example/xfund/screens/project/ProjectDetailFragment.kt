@@ -122,7 +122,7 @@ class ProjectDetailFragment : Fragment() {
             val url = "https://www.youtube.com/watch?v=JZehdUU6VbQ"
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
-            intent.putExtra("Share this", url)
+            intent.putExtra(Intent.EXTRA_TEXT, url)
             val chooser = Intent.createChooser(intent, "Share using....")
             startActivity(chooser)
         }
