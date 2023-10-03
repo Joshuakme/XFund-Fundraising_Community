@@ -54,6 +54,7 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
             editor?.apply()
         }
 
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -81,7 +82,11 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
         val user = FirebaseAuth.getInstance().currentUser
 
         if (user != null) {
-            binding.WelcomeUserTxt.text = "Hi, " + user.displayName
+            if(user.displayName == "") {
+                binding.WelcomeUserTxt.text = "Hi, " + "Anonymous"
+            } else {
+                binding.WelcomeUserTxt.text = "Hi, " + user.displayName
+            }
 
         } else {
             // User is not signed in
@@ -117,7 +122,13 @@ class HomeFragment : Fragment(), ImageSliderAdapter.OnItemClickListener {
                 "Man raises money for Wildfish with seven marathons",
                 "https://ichef.bbci.co.uk/news/976/cpsprodpb/834C/production/_131221633_capture.jpg2.jpg.webp",
                 "https://www.bbc.com/news/uk-england-bristol-66881357"),
-            NewsModel("title 3", "desc 3", "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98", ""),
-            NewsModel("title 4", "desc 4", "https://firebasestorage.googleapis.com/v0/b/xfund-89b19.appspot.com/o/news%2Fnews1.jpg?alt=media&token=bc2ff48c-8f75-4736-b833-21e810008a98", ""))
+            NewsModel("Join this Fun Run to raise funds for special-needs kids",
+                "A charity fun run organized by Hua Xia International School in December aims to raise funds for the Orlin Special Needs School, supporting special-needs children. ",
+                "https://media.freemalaysiatoday.com/wp-content/uploads/2023/09/79fd7c7a-kids.jpg",
+                "https://www.freemalaysiatoday.com/category/leisure/2023/10/01/join-this-fun-run-to-raise-funds-for-special-needs-kids/"),
+            NewsModel("S’pore charity to raise funds for Libya flood victims",
+                "Local charity Rahmatan Lil Alamin Foundation (RLAF), in collaboration with the United Nations High Commissioner for Refugees (UNHCR), is calling for donations to support the needs of those affected by the floods in Libya.",
+                "https://static1.straitstimes.com.sg/s3fs-public/styles/large30x20/public/articles/2023/10/02/dw-derna-231002.jpg",
+                "https://www.straitstimes.com/singapore/s-pore-charity-to-raise-funds-for-libya-flood-victims"))
     }
 }
